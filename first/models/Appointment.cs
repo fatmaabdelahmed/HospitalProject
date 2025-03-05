@@ -29,11 +29,11 @@ namespace first.models
         public AppointmentStatus Status { get; set; } = AppointmentStatus.Scheduled; // Enum
 
         // العلاقات
-        public Patient Patient { get; set; } = null!;
-        public Doctor Doctor { get; set; } = null!;
+        public virtual Patient Patient { get; set; } = null!;
+        public virtual Doctor Doctor { get; set; } = null!;
 
         // العلاقة 1:1 مع Billing
-        public Billing? Billing { get; set; } // Nullable إذا كانت الفاتورة غير مطلوبة دائمًا
+        public virtual Billing? Billing { get; set; }
     }
 
     // تعريف Enum للحالة

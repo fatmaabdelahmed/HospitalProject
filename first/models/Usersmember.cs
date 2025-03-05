@@ -20,10 +20,16 @@ namespace first.models
         public string PasswordHash { get; set; } = string.Empty;
 
         [Required]
-        public string Role { get; set; } = string.Empty; // Admin, Doctor, Receptionist
+        public UserRole Role { get; set; }  // Admin, Doctor, Receptionist
 
         // العلاقة 1:1 مع Doctor
-        public Doctor? Doctor { get; set; }
+        public virtual Doctor? Doctor { get; set; }
+    }
+    public enum UserRole
+    {
+        Admin,
+        Doctor,
+        Receptionist
     }
 
 }

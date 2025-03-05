@@ -7,12 +7,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace first.models
 {
-    internal class HOSPITALDbContext : DbContext
+    public class HOSPITALDbContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=.;Database=hospitalManageDB;Trusted_Connection=True;TrustServerCertificate=True;");
+            optionsBuilder.UseLazyLoadingProxies().UseSqlServer("Server=.;Database=hospitalManageDB;Trusted_Connection=True;TrustServerCertificate=True;");
         }
+
+
 
         public virtual DbSet<Usersmember> Users { get; set; }
         public virtual DbSet<Doctor> Doctors { get; set; }
