@@ -17,10 +17,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Login\" />
-    <Folder Include="Doctor\" />
-    <Folder Include="Receptionist\" />
-  </ItemGroup>
-
 </Project>
