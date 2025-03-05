@@ -24,7 +24,7 @@ namespace first.models
         [Required]
         public decimal PaidAmount { get; set; }
 
-        [NotMapped] // لا يتم تخزينه في قاعدة البيانات لأنه محسوب
+        [NotMapped]
         public decimal OutstandingBalance => TotalAmount - PaidAmount;
 
         [Required]
@@ -33,8 +33,8 @@ namespace first.models
         public DateTime? PaymentDate { get; set; } // Nullable لأن الدفع قد لا يكون قد تم بعد
 
         // العلاقات
-        public Patient Patient { get; set; } = null!;
-        public Appointment? Appointment { get; set; } // Nullable عند الحاجة
+        public virtual Patient Patient { get; set; } = null!;
+        public virtual Appointment Appointment { get; set; } // Nullable عند الحاجة
     }
 
     // تعريف Enum لحالة الدفع

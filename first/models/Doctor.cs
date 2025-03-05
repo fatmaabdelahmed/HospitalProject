@@ -23,13 +23,19 @@ namespace first.models
         public string Schedule { get; set; } = string.Empty;
 
         // تحديد المفتاح الأجنبي بشكل واضح
-        public int? UsersmemberId { get; set; }
+        public int UsersmemberId { get; set; }
 
         [ForeignKey("UsersmemberId")]
-        public Usersmember? Usersmember { get; set; }
+        public virtual Usersmember? Usersmember { get; set; }
 
         // العلاقة M:N مع Patient عبر الجدول الوسيط
-        public List<DoctorPatient> DoctorPatients { get; set; } = new();
+        public virtual List<DoctorPatient> DoctorPatients { get; set; } = new();
+
+        // العلاقة 1:M مع Appointment
+        public virtual List<Appointment> Appointments { get; set; } = new();
+
+        // العلاقة 1:M مع MedicalRecord
+        public virtual List<MedicalRecord> MedicalRecords { get; set; } = new();
     }
 
 }

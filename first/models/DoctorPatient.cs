@@ -10,9 +10,6 @@ namespace first.models
 {
     public class DoctorPatient
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         [ForeignKey("Doctor")]
         public int DoctorId { get; set; }
@@ -22,7 +19,7 @@ namespace first.models
         public int PatientId { get; set; }
 
         // العلاقات
-        public Doctor Doctor { get; set; } = null!;
-        public Patient Patient { get; set; } = null!;
+        public virtual Doctor Doctor { get; set; } = null!;
+        public virtual Patient Patient { get; set; } = null!;
     }
 }
