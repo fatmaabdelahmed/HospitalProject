@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace first.models
+namespace first.Receptionist
 {
-    internal class fatma
+    internal class ReceptionistServices
     {
     }
 }

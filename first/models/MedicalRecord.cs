@@ -24,14 +24,16 @@ namespace first.models
 
         [Required]
         public string Diagnosis { get; set; } = string.Empty;
-
-        [Required]
-        public string Prescription { get; set; } = string.Empty;
+        public string? Prescription { get; set; } // جعلها اختيارية
 
         public string? TreatmentPlan { get; set; }
+        public string? LabResults { get; set; }
+
+        public string? Report { get; set; }
+
 
         [Required]
-        public DateTime RecordDate { get; set; }
+        public DateTime RecordDate { get; set; } = DateTime.Now; // تعيين قيمة افتراضية
 
         // العلاقات
         public virtual Patient Patient { get; set; } = null!;
