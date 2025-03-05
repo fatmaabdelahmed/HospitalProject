@@ -18,6 +18,9 @@ namespace first.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "9.0.2")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -53,13 +56,7 @@ namespace first.Migrations
 
             modelBuilder.Entity("first.models.Billing", b =>
                 {
-                    b.Property<int>("BillingId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BillingId"));
-
-                    b.Property<int?>("AppointmentId")
+                    b.Property<int>("AppointmentId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("PaidAmount")
@@ -77,11 +74,7 @@ namespace first.Migrations
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("BillingId");
-
-                    b.HasIndex("AppointmentId")
-                        .IsUnique()
-                        .HasFilter("[AppointmentId] IS NOT NULL");
+                    b.HasKey("AppointmentId");
 
                     b.HasIndex("PatientId");
 
@@ -112,14 +105,13 @@ namespace first.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UsersmemberId")
+                    b.Property<int>("UsersmemberId")
                         .HasColumnType("int");
 
                     b.HasKey("DoctorId");
 
                     b.HasIndex("UsersmemberId")
-                        .IsUnique()
-                        .HasFilter("[UsersmemberId] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Doctors");
                 });
@@ -162,15 +154,20 @@ namespace first.Migrations
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
+                    b.Property<string>("LabResults")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
 
                     b.Property<string>("Prescription")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("RecordDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Report")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TreatmentPlan")
                         .HasColumnType("nvarchar(max)");
@@ -192,16 +189,15 @@ namespace first.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PatientId"));
 
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
                     b.Property<string>("ContactInfo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
 
                     b.Property<string>("MedicalHistory")
                         .IsRequired()
@@ -228,9 +224,8 @@ namespace first.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -244,13 +239,13 @@ namespace first.Migrations
             modelBuilder.Entity("first.models.Appointment", b =>
                 {
                     b.HasOne("first.models.Doctor", "Doctor")
-                        .WithMany()
+                        .WithMany("Appointments")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("first.models.Patient", "Patient")
-                        .WithMany()
+                        .WithMany("Appointments")
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -264,10 +259,11 @@ namespace first.Migrations
                 {
                     b.HasOne("first.models.Appointment", "Appointment")
                         .WithOne("Billing")
-                        .HasForeignKey("first.models.Billing", "AppointmentId");
+                        .HasForeignKey("first.models.Billing", "AppointmentId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("first.models.Patient", "Patient")
-                        .WithMany()
+                        .WithMany("Billings")
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -281,7 +277,9 @@ namespace first.Migrations
                 {
                     b.HasOne("first.models.Usersmember", "Usersmember")
                         .WithOne("Doctor")
-                        .HasForeignKey("first.models.Doctor", "UsersmemberId");
+                        .HasForeignKey("first.models.Doctor", "UsersmemberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Usersmember");
                 });
@@ -295,7 +293,7 @@ namespace first.Migrations
                         .IsRequired();
 
                     b.HasOne("first.models.Patient", "Patient")
-                        .WithMany("DoctorPatients")
+                        .WithMany()
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -308,13 +306,13 @@ namespace first.Migrations
             modelBuilder.Entity("first.models.MedicalRecord", b =>
                 {
                     b.HasOne("first.models.Doctor", "Doctor")
-                        .WithMany()
+                        .WithMany("MedicalRecords")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("first.models.Patient", "Patient")
-                        .WithMany()
+                        .WithMany("MedicalRecords")
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -331,12 +329,20 @@ namespace first.Migrations
 
             modelBuilder.Entity("first.models.Doctor", b =>
                 {
+                    b.Navigation("Appointments");
+
                     b.Navigation("DoctorPatients");
+
+                    b.Navigation("MedicalRecords");
                 });
 
             modelBuilder.Entity("first.models.Patient", b =>
                 {
-                    b.Navigation("DoctorPatients");
+                    b.Navigation("Appointments");
+
+                    b.Navigation("Billings");
+
+                    b.Navigation("MedicalRecords");
                 });
 
             modelBuilder.Entity("first.models.Usersmember", b =>
