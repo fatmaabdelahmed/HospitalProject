@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using first.models;
 
@@ -11,9 +12,11 @@ using first.models;
 namespace first.Migrations
 {
     [DbContext(typeof(HOSPITALDbContext))]
-    partial class HOSPITALDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250305214845_FixBillingDeleteFinal")]
+    partial class FixBillingDeleteFinal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,6 +59,12 @@ namespace first.Migrations
 
             modelBuilder.Entity("first.models.Billing", b =>
                 {
+                    b.Property<int>("BillingId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BillingId"));
+
                     b.Property<int>("AppointmentId")
                         .HasColumnType("int");
 
@@ -74,7 +83,10 @@ namespace first.Migrations
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("AppointmentId");
+                    b.HasKey("BillingId");
+
+                    b.HasIndex("AppointmentId")
+                        .IsUnique();
 
                     b.HasIndex("PatientId");
 
@@ -260,7 +272,8 @@ namespace first.Migrations
                     b.HasOne("first.models.Appointment", "Appointment")
                         .WithOne("Billing")
                         .HasForeignKey("first.models.Billing", "AppointmentId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("first.models.Patient", "Patient")
                         .WithMany("Billings")

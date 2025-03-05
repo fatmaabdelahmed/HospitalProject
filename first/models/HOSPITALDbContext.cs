@@ -23,5 +23,21 @@ namespace first.models
         public virtual DbSet<Billing> Billings { get; set; }
         public virtual DbSet<MedicalRecord> MedicalRecords { get; set; }
         public virtual DbSet<DoctorPatient> DoctorPatients { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Billing>()
+      .HasKey(b => b.AppointmentId); // تعيين AppointmentId كمفتاح أساسي
+
+            modelBuilder.Entity<Billing>()
+                .HasOne(b => b.Appointment)
+                .WithOne(a => a.Billing)
+                .HasForeignKey<Billing>(b => b.AppointmentId)
+                .IsRequired(false) // الفاتورة مش شرط تكون موجودة لكل موعد
+                .OnDelete(DeleteBehavior.Restrict);
+        }
     }
-}
+    }
+  
+
+
+    

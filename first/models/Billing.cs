@@ -10,16 +10,13 @@ namespace first.models
 {
     public class Billing
     {
-        [Key]
-        public int BillingId { get; set; }
+
+        [Key, ForeignKey("Appointment")]
+        public int AppointmentId { get; set; }
 
         [Required]
         [ForeignKey("Patient")]
         public int PatientId { get; set; }
-
-        [Required]
-        [ForeignKey("Appointment")]
-        public int AppointmentId { get; set; } // Nullable إذا كانت بعض الفواتير غير مرتبطة بمواعيد
 
         [Required]
         public decimal TotalAmount { get; set; }
