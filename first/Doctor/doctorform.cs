@@ -48,7 +48,7 @@ namespace first.Doctor
                     break;
 
                 case 2: // Patients Tab
-                    load_doctor_appointments();
+                    get_medical_record();
                     break;
             }
         }
@@ -153,7 +153,7 @@ namespace first.Doctor
         {
             try
             {
-               
+
                 string query3 = @"
             SELECT d.Name, d.Schedule, d.Specialization, d.ContactInfo, u.PasswordHash 
             FROM Doctors d 
@@ -162,12 +162,12 @@ namespace first.Doctor
 
                 var parameters1 = new { DoctorId = d_id };
 
-               
+
                 var result = con.Query<doctor, Usersmember, doctor>(
                     query3,
                     (d, u) =>
                     {
-                        d.Usersmember = new Usersmember { PasswordHash = u.PasswordHash }; 
+                        d.Usersmember = new Usersmember { PasswordHash = u.PasswordHash };
                         return d;
                     },
                     parameters1,
@@ -196,7 +196,7 @@ namespace first.Doctor
                     return;
                 }
 
-              
+
                 if (txt_newpass_profile.Text != txt_conpass_profile.Text)
                 {
                     MessageBox.Show("Passwords do not match.");
@@ -204,10 +204,10 @@ namespace first.Doctor
                 }
 
                 // Validate that all required fields are filled
-                
-                
 
-                                    string updateQuery = @"
+
+
+                string updateQuery = @"
                         UPDATE Doctors 
                         SET Name = @Name, 
                             Schedule = @Schedule, 
@@ -219,32 +219,166 @@ namespace first.Doctor
                         SET PasswordHash = @PasswordHash, Username = @Name
                         WHERE UserId = (SELECT UsersmemberId FROM Doctors WHERE DoctorId = @DoctorId);";
 
-                    var parameters = new
-                    {
-                        Name = txt_name_profile.Text,
-                        Schedule = txt_sched_profile.Text,
-                        Specialization = txt_speci_profile.Text,
-                        ContactInfo = txt_con_profile.Text,
-                        PasswordHash = txt_newpass_profile.Text,
-                        DoctorId = d_id
-                    };
+                var parameters = new
+                {
+                    Name = txt_name_profile.Text,
+                    Schedule = txt_sched_profile.Text,
+                    Specialization = txt_speci_profile.Text,
+                    ContactInfo = txt_con_profile.Text,
+                    PasswordHash = txt_newpass_profile.Text,
+                    DoctorId = d_id
+                };
 
-                    con.Execute(updateQuery, parameters);
-                    MessageBox.Show("Profile updated successfully!");
+                con.Execute(updateQuery, parameters);
+                MessageBox.Show("Profile updated successfully!");
 
                 get_doctor_profile_data();
                 txt_oldpass_profile.Text = txt_newpass_profile.Text = txt_conpass_profile.Text = "";
             }
             catch (Exception ex)
             {
-               
+
                 MessageBox.Show($"An error occurred: {ex.Message}");
             }
         }
         private void btn_update_profile_Click(object sender, EventArgs e)
         {
             update_doctor_profile();
-           
+
+
+        }
+
+        //////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////medical record///////////////////////////////////////////////
+
+        private void get_all_patients()
+        {
+            string qurey4 = "select p.PatientId,p.Name from Patients p";
+            var patients = con.Query<Patient>(qurey4).ToList();
+            com_paiens_name_medrec.DataSource = patients;
+
+            com_paiens_name_medrec.ValueMember = "PatientId";
+            com_paiens_name_medrec.DisplayMember = "Name";
+
+        }
+
+        private void get_medical_record_by_doctor()
+        {
+            try
+            {
+                string query5 = "select * from MedicalRecords m where m.DoctorId =@DoctorId";
+                var prameters5 = new
+                {
+                    DoctorId = d_id
+                };
+                var medicalrecords = con.Query<MedicalRecord>(query5, prameters5).ToList();
+                dgv_medical_rec.DataSource = medicalrecords;
+                dgv_medical_rec.Columns["DoctorId"].Visible = false;
+                dgv_medical_rec.Columns["PatientId"].Visible = false;
+                dgv_medical_rec.Columns["doctor"].Visible = false;
+                dgv_medical_rec.Columns["RecordId"].Visible = false;
+                dgv_medical_rec.Columns["Patient"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+
+
+
+        }
+
+        private void get_medical_record()
+        {
+            get_all_patients();
+            get_medical_record_by_doctor();
+        }
+
+        int patientId;
+        private void com_paiens_name_medrec_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (com_paiens_name_medrec.SelectedValue == null)
+            {
+                MessageBox.Show("Please select a patient.");
+                return;
+            }
+
+            try
+            {
+                if (com_paiens_name_medrec.SelectedValue != null && int.TryParse(com_paiens_name_medrec.SelectedValue.ToString(), out  patientId))
+                {
+                    string query6 = "select * from MedicalRecords m where m.DoctorId =@DoctorId and m.PatientId=@PatientId";
+                    var prameters6 = new
+                    {
+                        PatientId = patientId,
+                        DoctorId = d_id
+                    };
+
+                    var medicalrecords = con.Query<MedicalRecord>(query6, prameters6).ToList();
+                    dgv_medical_rec.DataSource = medicalrecords;
+
+                    // Hide unnecessary columns
+                    dgv_medical_rec.Columns["DoctorId"].Visible = false;
+                    dgv_medical_rec.Columns["PatientId"].Visible = false;
+                    dgv_medical_rec.Columns["doctor"].Visible = false;
+                    dgv_medical_rec.Columns["RecordId"].Visible = false;
+                    dgv_medical_rec.Columns["Patient"].Visible = false;
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+
+        }
+        private void clear()
+        {
+            txt_treatment_medicrec.Text = "";
+            txt_presc_medicrec.Text = "";
+            txt_diag_medicrec.Text = "";
+        }
+
+        private void btn_add_medirec_Click(object sender, EventArgs e)
+        {
+            try {
+
+                string query7 = "INSERT INTO MedicalRecords (PatientId, DoctorId, Diagnosis, Prescription, TreatmentPlan, RecordDate)  VALUES (@PatientId, @DoctorId, @Diagnosis, @Prescription, @TreatmentHistory,GETDATE())";
+                var prameters7 = new
+                {
+                    PatientId = patientId,
+                    DoctorId = d_id,
+                    Diagnosis = txt_diag_medicrec.Text,
+                    Prescription = txt_presc_medicrec.Text,
+                    TreatmentHistory = txt_treatment_medicrec.Text,
+                };
+
+                con.Execute(query7, prameters7);
+
+                string query6 = "select * from MedicalRecords m where m.DoctorId =@DoctorId and m.PatientId=@PatientId";
+                var prameters6 = new
+                {
+                    PatientId = patientId,
+                    DoctorId = d_id
+                };
+
+                var medicalrecords = con.Query<MedicalRecord>(query6, prameters6).ToList();
+                dgv_medical_rec.DataSource = medicalrecords;
+
+                // Hide unnecessary columns
+                dgv_medical_rec.Columns["DoctorId"].Visible = false;
+                dgv_medical_rec.Columns["PatientId"].Visible = false;
+                dgv_medical_rec.Columns["doctor"].Visible = false;
+                dgv_medical_rec.Columns["RecordId"].Visible = false;
+                dgv_medical_rec.Columns["Patient"].Visible = false;
+                clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
 
         }
     }
