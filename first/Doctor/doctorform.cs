@@ -34,6 +34,7 @@ namespace first.Doctor
         private void doctorform_Load(object sender, EventArgs e)
         {
             get_doctor_profile_data();
+            HideTab();
         }
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -41,15 +42,20 @@ namespace first.Doctor
             {
                 case 0: // Doctor Info Tab
                     get_doctor_profile_data();
+                    HideTab();
+
                     break;
 
                 case 1: // Appointments Tab
                     load_doctor_appointments();
+                    HideTab();
                     break;
 
                 case 2: // Patients Tab
                     get_medical_record();
+                    HideTab();
                     break;
+               
             }
         }
 
@@ -100,55 +106,7 @@ namespace first.Doctor
 
 
         }
-        //private void update_doctor_profile()
-        //{
-        //    string query3 = "select d.Name ,d.Schedule ,d.Specialization,d.ContactInfo ,u.PasswordHash from Doctors d join Users u on u.UserId=d.UsersmemberId where DoctorId=@DoctorId";
-        //    var parameters1 = new { DoctorId = d_id };
-
-
-        //    var doctor = con.QueryFirstOrDefault<doctor, User, doctor>(query3, (doc, user) =>
-        //    {
-
-        //    }
-
-
-        //        , parameters1);
-        //    string oldpass =doctor.pas;
-        //    if (txt_oldpass_profile.Text != oldpass)
-        //    {
-        //        MessageBox.Show(" old Password is incorrect");
-        //        return;
-        //    }
-
-        //    if (txt_newpass_profile.Text != txt_conpass_profile.Text)
-        //    {
-        //        MessageBox.Show("Passwords do not match");
-        //        return;
-        //    }
-
-        //    if (string.IsNullOrWhiteSpace(txt_name_profile.Text) || string.IsNullOrWhiteSpace(txt_newpass_profile.Text) ||
-        //         string.IsNullOrWhiteSpace(txt_conpass_profile.Text))|| string.IsNullOrWhiteSpace(txt_newpass_profile.Text)
-        //    {
-        //        MessageBox.Show("All fields are required.");
-        //        return;
-        //    }
-
-        //    string query = @"UPDATE Doctors 
-        //             SET Name = @Name, 
-        //                 Schedule = @Schedule, 
-        //                 Specialization = @Specialization, 
-        //                 ContactInfo = @ContactInfo 
-        //             WHERE DoctorId = @DoctorId";
-
-        //    var parameters = new
-        //    {
-        //        Name = txt_name_profile.Text,
-        //        Schedule = txt_sched_profile.Text,
-        //        Specialization = txt_speci_profile.Text,
-        //        ContactInfo = txt_con_profile.Text,
-        //        DoctorId = d_id
-        //    };
-        //}
+       
         private void update_doctor_profile()
         {
             try
@@ -305,7 +263,7 @@ namespace first.Doctor
 
             try
             {
-                if (com_paiens_name_medrec.SelectedValue != null && int.TryParse(com_paiens_name_medrec.SelectedValue.ToString(), out  patientId))
+                if (com_paiens_name_medrec.SelectedValue != null && int.TryParse(com_paiens_name_medrec.SelectedValue.ToString(), out patientId))
                 {
                     string query6 = "select * from MedicalRecords m where m.DoctorId =@DoctorId and m.PatientId=@PatientId";
                     var prameters6 = new
@@ -339,13 +297,16 @@ namespace first.Doctor
             txt_treatment_medicrec.Text = "";
             txt_presc_medicrec.Text = "";
             txt_diag_medicrec.Text = "";
+            txt_report_medirec.Text = "";
+            txt_lab_res_medirec.Text = "";
         }
 
         private void btn_add_medirec_Click(object sender, EventArgs e)
         {
-            try {
+            try
+            {
 
-                string query7 = "INSERT INTO MedicalRecords (PatientId, DoctorId, Diagnosis, Prescription, TreatmentPlan, RecordDate)  VALUES (@PatientId, @DoctorId, @Diagnosis, @Prescription, @TreatmentHistory,GETDATE())";
+                string query7 = "INSERT INTO MedicalRecords (PatientId, DoctorId, Diagnosis, Prescription, TreatmentPlan, RecordDate,LabResults,Report)   VALUES (@PatientId, @DoctorId, @Diagnosis, @Prescription, @TreatmentHistory,GETDATE(),@labresult,@report)";
                 var prameters7 = new
                 {
                     PatientId = patientId,
@@ -353,8 +314,18 @@ namespace first.Doctor
                     Diagnosis = txt_diag_medicrec.Text,
                     Prescription = txt_presc_medicrec.Text,
                     TreatmentHistory = txt_treatment_medicrec.Text,
+                    labresult = txt_lab_res_medirec.Text,
+                    report = txt_report_medirec.Text,
                 };
+                if (string.IsNullOrWhiteSpace(txt_diag_medicrec.Text) ||
+                       string.IsNullOrWhiteSpace(txt_presc_medicrec.Text) ||
+                         string.IsNullOrWhiteSpace(txt_treatment_medicrec.Text))
 
+
+                {
+                    MessageBox.Show("All fields are required.");
+                    return;
+                }
                 con.Execute(query7, prameters7);
 
                 string query6 = "select * from MedicalRecords m where m.DoctorId =@DoctorId and m.PatientId=@PatientId";
@@ -381,5 +352,96 @@ namespace first.Doctor
             }
 
         }
+
+        private void btn_browse_result_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = "C:\\";
+                openFileDialog.Filter = "All Files (*.*)|*.*";
+                openFileDialog.FilterIndex = 1;
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Get the selected file path
+                    txt_lab_res_medirec.Text = openFileDialog.FileName;
+                }
+            }
+        }
+
+        private void btn_report_browse_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = "C:\\";
+                openFileDialog.Filter = "All Files (*.*)|*.*";
+                openFileDialog.FilterIndex = 1;
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Get the selected file path
+                    txt_report_medirec.Text = openFileDialog.FileName;
+                }
+            }
+
+        }
+
+        private void dgv_medical_rec_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                DataGridView dgv = (DataGridView)sender;
+                string columnName = dgv.Columns[e.ColumnIndex].Name;
+
+
+                if (columnName == "LabResults" || columnName == "Report")
+                {
+                    string filePath = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString();
+
+                    if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
+                    {
+                        try
+                        {
+                            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
+                            {
+                                FileName = filePath,
+                                UseShellExecute = true
+                            });
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Error opening file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("File not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+        private TabPage hiddenTab;
+
+        private void HideTab()
+        {
+            if (tabControl1.TabPages.Contains(tabPage4))
+            {
+                hiddenTab = tabPage4; // Store the reference
+                tabControl1.TabPages.Remove(tabPage4);
+            }
+        }
+
+        private void btn_allrec_Click(object sender, EventArgs e)
+        {
+            if (hiddenTab != null && !tabControl1.TabPages.Contains(tabPage4))
+            {
+                tabControl1.TabPages.Add(hiddenTab);
+                tabControl1.SelectedTab = hiddenTab; // Switch to it
+                hiddenTab = null; // Clear reference to prevent re-adding
+            }
+        }
+
     }
 }

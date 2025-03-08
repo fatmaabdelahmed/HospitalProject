@@ -47,26 +47,37 @@ namespace first.Doctor
             txt_speci_profile = new TextBox();
             txt_name_profile = new TextBox();
             tabPage2 = new TabPage();
+            comboBox1 = new ComboBox();
+            label13 = new Label();
             dgv_appoinments = new DataGridView();
             tabPage3 = new TabPage();
+            btn_report_browse = new Button();
+            btn_browse_result = new Button();
+            label12 = new Label();
+            label10 = new Label();
+            txt_report_medirec = new TextBox();
+            txt_lab_res_medirec = new TextBox();
             label11 = new Label();
             label9 = new Label();
             label8 = new Label();
             txt_treatment_medicrec = new TextBox();
             txt_presc_medicrec = new TextBox();
             txt_diag_medicrec = new TextBox();
-            button4 = new Button();
-            btn_delete_medirec = new Button();
-            btn_update_medirec = new Button();
+            btn_allrec = new Button();
             btn_add_medirec = new Button();
             dgv_medical_rec = new DataGridView();
             com_paiens_name_medrec = new ComboBox();
+            tabPage4 = new TabPage();
+            dataGridView1 = new DataGridView();
+            comboBox2 = new ComboBox();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_appoinments).BeginInit();
             tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_medical_rec).BeginInit();
+            tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -74,15 +85,18 @@ namespace first.Doctor
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
-            tabControl1.Location = new Point(2, 12);
+            tabControl1.Controls.Add(tabPage4);
+            tabControl1.ItemSize = new Size(100, 38);
+            tabControl1.Location = new Point(0, 2);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1522, 771);
+            tabControl1.Size = new Size(1525, 780);
             tabControl1.TabIndex = 0;
             tabControl1.SelectedIndexChanged += TabControl1_SelectedIndexChanged;
             // 
             // tabPage1
             // 
+            tabPage1.BackColor = Color.Transparent;
             tabPage1.Controls.Add(label7);
             tabPage1.Controls.Add(label6);
             tabPage1.Controls.Add(label5);
@@ -100,16 +114,14 @@ namespace first.Doctor
             tabPage1.Controls.Add(txt_name_profile);
             tabPage1.Location = new Point(8, 46);
             tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1506, 717);
+            tabPage1.Size = new Size(1509, 726);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "profile";
-            tabPage1.UseVisualStyleBackColor = true;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(96, 596);
+            label7.Location = new Point(93, 593);
             label7.Name = "label7";
             label7.Size = new Size(149, 32);
             label7.TabIndex = 14;
@@ -118,7 +130,7 @@ namespace first.Doctor
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(96, 524);
+            label6.Location = new Point(93, 521);
             label6.Name = "label6";
             label6.Size = new Size(111, 32);
             label6.TabIndex = 13;
@@ -127,7 +139,7 @@ namespace first.Doctor
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(96, 441);
+            label5.Location = new Point(93, 438);
             label5.Name = "label5";
             label5.Size = new Size(101, 32);
             label5.TabIndex = 12;
@@ -167,7 +179,7 @@ namespace first.Doctor
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(96, 365);
+            label4.Location = new Point(93, 362);
             label4.Name = "label4";
             label4.Size = new Size(108, 32);
             label4.TabIndex = 7;
@@ -176,7 +188,7 @@ namespace first.Doctor
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(96, 267);
+            label3.Location = new Point(93, 264);
             label3.Name = "label3";
             label3.Size = new Size(134, 32);
             label3.TabIndex = 6;
@@ -185,7 +197,7 @@ namespace first.Doctor
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(96, 182);
+            label2.Location = new Point(93, 179);
             label2.Name = "label2";
             label2.Size = new Size(157, 32);
             label2.TabIndex = 5;
@@ -194,7 +206,7 @@ namespace first.Doctor
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(96, 114);
+            label1.Location = new Point(93, 111);
             label1.Name = "label1";
             label1.Size = new Size(78, 32);
             label1.TabIndex = 4;
@@ -230,19 +242,38 @@ namespace first.Doctor
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(comboBox1);
+            tabPage2.Controls.Add(label13);
             tabPage2.Controls.Add(dgv_appoinments);
             tabPage2.Location = new Point(8, 46);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1506, 717);
+            tabPage2.Size = new Size(1509, 726);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "appoiments";
             tabPage2.UseVisualStyleBackColor = true;
             // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(195, 638);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(345, 40);
+            comboBox1.TabIndex = 2;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(55, 638);
+            label13.Name = "label13";
+            label13.Size = new Size(91, 32);
+            label13.TabIndex = 1;
+            label13.Text = "label13";
+            // 
             // dgv_appoinments
             // 
             dgv_appoinments.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_appoinments.Location = new Point(46, 44);
+            dgv_appoinments.Location = new Point(54, 50);
             dgv_appoinments.Name = "dgv_appoinments";
             dgv_appoinments.RowHeadersWidth = 82;
             dgv_appoinments.Size = new Size(1389, 523);
@@ -250,29 +281,85 @@ namespace first.Doctor
             // 
             // tabPage3
             // 
+            tabPage3.Controls.Add(btn_report_browse);
+            tabPage3.Controls.Add(btn_browse_result);
+            tabPage3.Controls.Add(label12);
+            tabPage3.Controls.Add(label10);
+            tabPage3.Controls.Add(txt_report_medirec);
+            tabPage3.Controls.Add(txt_lab_res_medirec);
             tabPage3.Controls.Add(label11);
             tabPage3.Controls.Add(label9);
             tabPage3.Controls.Add(label8);
             tabPage3.Controls.Add(txt_treatment_medicrec);
             tabPage3.Controls.Add(txt_presc_medicrec);
             tabPage3.Controls.Add(txt_diag_medicrec);
-            tabPage3.Controls.Add(button4);
-            tabPage3.Controls.Add(btn_delete_medirec);
-            tabPage3.Controls.Add(btn_update_medirec);
+            tabPage3.Controls.Add(btn_allrec);
             tabPage3.Controls.Add(btn_add_medirec);
             tabPage3.Controls.Add(dgv_medical_rec);
             tabPage3.Controls.Add(com_paiens_name_medrec);
             tabPage3.Location = new Point(8, 46);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(1506, 717);
+            tabPage3.Size = new Size(1509, 726);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "medical rec";
             tabPage3.UseVisualStyleBackColor = true;
             // 
+            // btn_report_browse
+            // 
+            btn_report_browse.Location = new Point(600, 466);
+            btn_report_browse.Name = "btn_report_browse";
+            btn_report_browse.Size = new Size(103, 46);
+            btn_report_browse.TabIndex = 22;
+            btn_report_browse.Text = "browes";
+            btn_report_browse.UseVisualStyleBackColor = true;
+            btn_report_browse.Click += btn_report_browse_Click;
+            // 
+            // btn_browse_result
+            // 
+            btn_browse_result.Location = new Point(586, 381);
+            btn_browse_result.Name = "btn_browse_result";
+            btn_browse_result.Size = new Size(103, 46);
+            btn_browse_result.TabIndex = 20;
+            btn_browse_result.Text = "browes";
+            btn_browse_result.UseVisualStyleBackColor = true;
+            btn_browse_result.Click += btn_browse_result_Click;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(105, 473);
+            label12.Name = "label12";
+            label12.Size = new Size(79, 32);
+            label12.TabIndex = 19;
+            label12.Text = "report";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(90, 395);
+            label10.Name = "label10";
+            label10.Size = new Size(112, 32);
+            label10.TabIndex = 18;
+            label10.Text = "lab result";
+            // 
+            // txt_report_medirec
+            // 
+            txt_report_medirec.Location = new Point(266, 466);
+            txt_report_medirec.Name = "txt_report_medirec";
+            txt_report_medirec.Size = new Size(314, 39);
+            txt_report_medirec.TabIndex = 17;
+            // 
+            // txt_lab_res_medirec
+            // 
+            txt_lab_res_medirec.Location = new Point(266, 379);
+            txt_lab_res_medirec.Name = "txt_lab_res_medirec";
+            txt_lab_res_medirec.Size = new Size(314, 39);
+            txt_lab_res_medirec.TabIndex = 16;
+            // 
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(76, 430);
+            label11.Location = new Point(65, 309);
             label11.Name = "label11";
             label11.Size = new Size(167, 32);
             label11.TabIndex = 15;
@@ -298,7 +385,7 @@ namespace first.Doctor
             // 
             // txt_treatment_medicrec
             // 
-            txt_treatment_medicrec.Location = new Point(281, 412);
+            txt_treatment_medicrec.Location = new Point(270, 291);
             txt_treatment_medicrec.Name = "txt_treatment_medicrec";
             txt_treatment_medicrec.Size = new Size(310, 39);
             txt_treatment_medicrec.TabIndex = 9;
@@ -317,32 +404,15 @@ namespace first.Doctor
             txt_diag_medicrec.Size = new Size(310, 39);
             txt_diag_medicrec.TabIndex = 6;
             // 
-            // button4
+            // btn_allrec
             // 
-            button4.Location = new Point(731, 61);
-            button4.Name = "button4";
-            button4.Size = new Size(150, 46);
-            button4.TabIndex = 5;
-            button4.Text = "allm_rec";
-            button4.UseVisualStyleBackColor = true;
-            // 
-            // btn_delete_medirec
-            // 
-            btn_delete_medirec.Location = new Point(1305, 646);
-            btn_delete_medirec.Name = "btn_delete_medirec";
-            btn_delete_medirec.Size = new Size(150, 46);
-            btn_delete_medirec.TabIndex = 4;
-            btn_delete_medirec.Text = "delete";
-            btn_delete_medirec.UseVisualStyleBackColor = true;
-            // 
-            // btn_update_medirec
-            // 
-            btn_update_medirec.Location = new Point(1105, 646);
-            btn_update_medirec.Name = "btn_update_medirec";
-            btn_update_medirec.Size = new Size(150, 46);
-            btn_update_medirec.TabIndex = 3;
-            btn_update_medirec.Text = "update";
-            btn_update_medirec.UseVisualStyleBackColor = true;
+            btn_allrec.Location = new Point(1189, 646);
+            btn_allrec.Name = "btn_allrec";
+            btn_allrec.Size = new Size(150, 46);
+            btn_allrec.TabIndex = 5;
+            btn_allrec.Text = "allm_rec";
+            btn_allrec.UseVisualStyleBackColor = true;
+            btn_allrec.Click += btn_allrec_Click;
             // 
             // btn_add_medirec
             // 
@@ -362,6 +432,7 @@ namespace first.Doctor
             dgv_medical_rec.RowHeadersWidth = 82;
             dgv_medical_rec.Size = new Size(681, 406);
             dgv_medical_rec.TabIndex = 1;
+            dgv_medical_rec.CellContentDoubleClick += dgv_medical_rec_CellContentDoubleClick;
             // 
             // com_paiens_name_medrec
             // 
@@ -371,6 +442,35 @@ namespace first.Doctor
             com_paiens_name_medrec.Size = new Size(423, 40);
             com_paiens_name_medrec.TabIndex = 0;
             com_paiens_name_medrec.SelectedValueChanged += com_paiens_name_medrec_SelectedValueChanged;
+            // 
+            // tabPage4
+            // 
+            tabPage4.Controls.Add(dataGridView1);
+            tabPage4.Controls.Add(comboBox2);
+            tabPage4.Location = new Point(8, 46);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Padding = new Padding(3);
+            tabPage4.Size = new Size(1509, 726);
+            tabPage4.TabIndex = 3;
+            tabPage4.Text = "tabPage4";
+            tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(402, 212);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 82;
+            dataGridView1.Size = new Size(681, 406);
+            dataGridView1.TabIndex = 3;
+            // 
+            // comboBox2
+            // 
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new Point(683, 108);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(423, 40);
+            comboBox2.TabIndex = 2;
             // 
             // doctorform
             // 
@@ -385,10 +485,13 @@ namespace first.Doctor
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
             tabPage2.ResumeLayout(false);
+            tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_appoinments).EndInit();
             tabPage3.ResumeLayout(false);
             tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_medical_rec).EndInit();
+            tabPage4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
@@ -409,12 +512,10 @@ namespace first.Doctor
         private TextBox txt_name_profile;
         private DataGridView dgv_appoinments;
         private TabPage tabPage3;
-        private Button btn_delete_medirec;
-        private Button btn_update_medirec;
         private Button btn_add_medirec;
         private DataGridView dgv_medical_rec;
         private ComboBox com_paiens_name_medrec;
-        private Button button4;
+        private Button btn_allrec;
         private Button btn_update_profile;
         private Label label7;
         private Label label6;
@@ -428,5 +529,16 @@ namespace first.Doctor
         private Label label11;
         private Label label9;
         private Label label8;
+        private ComboBox comboBox1;
+        private Label label13;
+        private Label label12;
+        private Label label10;
+        private TextBox txt_report_medirec;
+        private TextBox txt_lab_res_medirec;
+        private Button btn_browse_result;
+        private Button btn_report_browse;
+        private TabPage tabPage4;
+        private DataGridView dataGridView1;
+        private ComboBox comboBox2;
     }
 }
