@@ -211,9 +211,9 @@ namespace first.Doctor
 
         }
         #endregion
-        //////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////medical record///////////////////////////////////////////////
+
         #region medical record
+        #region get_data_profile
         private void get_all_patients()
         {
             string qurey4 = "select p.PatientId,p.Name from Patients p";
@@ -266,7 +266,7 @@ namespace first.Doctor
             get_all_patients();
             get_medical_record_by_doctor();
         }
-
+        #endregion
         int patientId;
         private void com_paiens_name_medrec_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -315,7 +315,7 @@ namespace first.Doctor
             txt_report_medirec.Text = "";
             txt_lab_res_medirec.Text = "";
         }
-
+        #region btn_profile
         private void btn_add_medirec_Click(object sender, EventArgs e)
         {
             try
@@ -403,6 +403,18 @@ namespace first.Doctor
 
         }
 
+        private void btn_allrec_Click(object sender, EventArgs e)
+        {
+            if (hiddenTab != null && !tabControl1.TabPages.Contains(tabPage4))
+            {
+                tabControl1.TabPages.Add(hiddenTab);
+                tabControl1.SelectedTab = hiddenTab;  
+                hiddenTab = null; 
+            }
+            get_all_doctors();
+        }
+
+        #endregion
         private void dgv_medical_rec_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
@@ -448,17 +460,7 @@ namespace first.Doctor
             }
         }
 
-        private void btn_allrec_Click(object sender, EventArgs e)
-        {
-            if (hiddenTab != null && !tabControl1.TabPages.Contains(tabPage4))
-            {
-                tabControl1.TabPages.Add(hiddenTab);
-                tabControl1.SelectedTab = hiddenTab; // Switch to it
-                hiddenTab = null; // Clear reference to prevent re-adding
-            }
-            get_all_doctors();
-        }
-
+      
         private void com_doctor_SelectedValueChanged(object sender, EventArgs e)
         {
             if (com_doctor.SelectedValue == null)
@@ -499,8 +501,7 @@ namespace first.Doctor
 
         }
         #endregion
-        ////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////appiontments///////////////////////////////////////////////////////
+       
         #region appiontments
         private void load_doctor_appointments()
         {
