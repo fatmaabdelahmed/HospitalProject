@@ -51,7 +51,7 @@ namespace first.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Appointments");
+                    b.ToTable("Appointments", (string)null);
                 });
 
             modelBuilder.Entity("first.models.Billing", b =>
@@ -78,7 +78,7 @@ namespace first.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Billings");
+                    b.ToTable("Billings", (string)null);
                 });
 
             modelBuilder.Entity("first.models.Doctor", b =>
@@ -113,7 +113,7 @@ namespace first.Migrations
                     b.HasIndex("UsersmemberId")
                         .IsUnique();
 
-                    b.ToTable("Doctors");
+                    b.ToTable("Doctors", (string)null);
                 });
 
             modelBuilder.Entity("first.models.DoctorPatient", b =>
@@ -136,7 +136,7 @@ namespace first.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("DoctorPatients");
+                    b.ToTable("DoctorPatients", (string)null);
                 });
 
             modelBuilder.Entity("first.models.MedicalRecord", b =>
@@ -178,7 +178,7 @@ namespace first.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("MedicalRecords");
+                    b.ToTable("MedicalRecords", (string)null);
                 });
 
             modelBuilder.Entity("first.models.Patient", b =>
@@ -209,7 +209,7 @@ namespace first.Migrations
 
                     b.HasKey("PatientId");
 
-                    b.ToTable("Patients");
+                    b.ToTable("Patients", (string)null);
                 });
 
             modelBuilder.Entity("first.models.Usersmember", b =>
@@ -233,7 +233,7 @@ namespace first.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("first.models.Appointment", b =>

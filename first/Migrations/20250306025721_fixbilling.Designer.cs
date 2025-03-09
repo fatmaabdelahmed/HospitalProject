@@ -12,8 +12,8 @@ using first.models;
 namespace first.Migrations
 {
     [DbContext(typeof(HOSPITALDbContext))]
-    [Migration("20250306024233_FixBilling")]
-    partial class FixBilling
+    [Migration("20250306025721_fixbilling")]
+    partial class fixbilling
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
