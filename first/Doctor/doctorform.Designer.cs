@@ -47,7 +47,8 @@ namespace first.Doctor
             txt_speci_profile = new TextBox();
             txt_name_profile = new TextBox();
             tabPage2 = new TabPage();
-            comboBox1 = new ComboBox();
+            btn_uppcoming = new Button();
+            com_status = new ComboBox();
             label13 = new Label();
             dgv_appoinments = new DataGridView();
             tabPage3 = new TabPage();
@@ -68,8 +69,9 @@ namespace first.Doctor
             dgv_medical_rec = new DataGridView();
             com_paiens_name_medrec = new ComboBox();
             tabPage4 = new TabPage();
-            dataGridView1 = new DataGridView();
-            comboBox2 = new ComboBox();
+            label14 = new Label();
+            dgv_get_all_medicalrecords = new DataGridView();
+            com_doctor = new ComboBox();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -77,7 +79,7 @@ namespace first.Doctor
             tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_medical_rec).BeginInit();
             tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgv_get_all_medicalrecords).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -242,7 +244,8 @@ namespace first.Doctor
             // 
             // tabPage2
             // 
-            tabPage2.Controls.Add(comboBox1);
+            tabPage2.Controls.Add(btn_uppcoming);
+            tabPage2.Controls.Add(com_status);
             tabPage2.Controls.Add(label13);
             tabPage2.Controls.Add(dgv_appoinments);
             tabPage2.Location = new Point(8, 46);
@@ -253,22 +256,33 @@ namespace first.Doctor
             tabPage2.Text = "appoiments";
             tabPage2.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // btn_uppcoming
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(195, 638);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(345, 40);
-            comboBox1.TabIndex = 2;
+            btn_uppcoming.Location = new Point(943, 631);
+            btn_uppcoming.Name = "btn_uppcoming";
+            btn_uppcoming.Size = new Size(150, 46);
+            btn_uppcoming.TabIndex = 3;
+            btn_uppcoming.Text = "upcoming";
+            btn_uppcoming.UseVisualStyleBackColor = true;
+            btn_uppcoming.Click += btn_uppcoming_Click;
+            // 
+            // com_status
+            // 
+            com_status.FormattingEnabled = true;
+            com_status.Location = new Point(195, 638);
+            com_status.Name = "com_status";
+            com_status.Size = new Size(345, 40);
+            com_status.TabIndex = 2;
+            com_status.SelectedValueChanged += com_status_SelectedValueChanged;
             // 
             // label13
             // 
             label13.AutoSize = true;
             label13.Location = new Point(55, 638);
             label13.Name = "label13";
-            label13.Size = new Size(91, 32);
+            label13.Size = new Size(76, 32);
             label13.TabIndex = 1;
-            label13.Text = "label13";
+            label13.Text = "status";
             // 
             // dgv_appoinments
             // 
@@ -278,6 +292,7 @@ namespace first.Doctor
             dgv_appoinments.RowHeadersWidth = 82;
             dgv_appoinments.Size = new Size(1389, 523);
             dgv_appoinments.TabIndex = 0;
+            dgv_appoinments.CellMouseDoubleClick += dgv_appoinments_CellMouseDoubleClick;
             // 
             // tabPage3
             // 
@@ -445,8 +460,9 @@ namespace first.Doctor
             // 
             // tabPage4
             // 
-            tabPage4.Controls.Add(dataGridView1);
-            tabPage4.Controls.Add(comboBox2);
+            tabPage4.Controls.Add(label14);
+            tabPage4.Controls.Add(dgv_get_all_medicalrecords);
+            tabPage4.Controls.Add(com_doctor);
             tabPage4.Location = new Point(8, 46);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new Padding(3);
@@ -455,22 +471,32 @@ namespace first.Doctor
             tabPage4.Text = "tabPage4";
             tabPage4.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // label14
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(402, 212);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 82;
-            dataGridView1.Size = new Size(681, 406);
-            dataGridView1.TabIndex = 3;
+            label14.AutoSize = true;
+            label14.Location = new Point(873, 88);
+            label14.Name = "label14";
+            label14.Size = new Size(83, 32);
+            label14.TabIndex = 5;
+            label14.Text = "doctor";
             // 
-            // comboBox2
+            // dgv_get_all_medicalrecords
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(683, 108);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(423, 40);
-            comboBox2.TabIndex = 2;
+            dgv_get_all_medicalrecords.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_get_all_medicalrecords.Location = new Point(132, 212);
+            dgv_get_all_medicalrecords.Name = "dgv_get_all_medicalrecords";
+            dgv_get_all_medicalrecords.RowHeadersWidth = 82;
+            dgv_get_all_medicalrecords.Size = new Size(1313, 447);
+            dgv_get_all_medicalrecords.TabIndex = 3;
+            // 
+            // com_doctor
+            // 
+            com_doctor.FormattingEnabled = true;
+            com_doctor.Location = new Point(1000, 81);
+            com_doctor.Name = "com_doctor";
+            com_doctor.Size = new Size(423, 40);
+            com_doctor.TabIndex = 2;
+            com_doctor.SelectedValueChanged += com_doctor_SelectedValueChanged;
             // 
             // doctorform
             // 
@@ -491,7 +517,8 @@ namespace first.Doctor
             tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_medical_rec).EndInit();
             tabPage4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgv_get_all_medicalrecords).EndInit();
             ResumeLayout(false);
         }
 
@@ -529,7 +556,7 @@ namespace first.Doctor
         private Label label11;
         private Label label9;
         private Label label8;
-        private ComboBox comboBox1;
+        private ComboBox com_status;
         private Label label13;
         private Label label12;
         private Label label10;
@@ -538,7 +565,9 @@ namespace first.Doctor
         private Button btn_browse_result;
         private Button btn_report_browse;
         private TabPage tabPage4;
-        private DataGridView dataGridView1;
-        private ComboBox comboBox2;
+        private DataGridView dgv_get_all_medicalrecords;
+        private ComboBox com_doctor;
+        private Label label14;
+        private Button btn_uppcoming;
     }
 }

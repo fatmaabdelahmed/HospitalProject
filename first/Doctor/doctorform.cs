@@ -10,8 +10,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dapper;
 using first.models;
+using first.Receptionist;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic.ApplicationServices;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace first.Doctor
@@ -48,6 +51,8 @@ namespace first.Doctor
 
                 case 1: // Appointments Tab
                     load_doctor_appointments();
+                    get_all_appointment_status();
+
                     HideTab();
                     break;
 
@@ -55,11 +60,11 @@ namespace first.Doctor
                     get_medical_record();
                     HideTab();
                     break;
-               
+
             }
         }
 
-
+        #region profile
         private void get_doctor_profile_data()
         {
 
@@ -86,27 +91,27 @@ namespace first.Doctor
                 MessageBox.Show("Doctor not found!");
             }
         }
-        private void load_doctor_appointments()
-        {
+        //private void load_doctor_appointments()
+        //{
 
-            string query1 = $"select a.AppointmentId,a.AppointmentDate,a.PatientId,a.Status,a.DoctorId, p.Name as PatientName from Appointments  a join Patients p on p.PatientId=a.PatientId where  a.DoctorId={d_id}";
-            var q1 = con.Query<Appointment, Patient, Appointment>(
-                query1,
-                (a, p) =>
-                {
-                    // a.Doctor = new doctor { Name = d.Name };
-                    a.Patient = new Patient { Name = p.Name };
-                    return a;
-                },
-                splitOn: "PatientName"
-            ).ToList();
+        //    string query1 = $"select a.AppointmentId,a.AppointmentDate,a.PatientId,a.Status,a.DoctorId, p.Name as PatientName from Appointments  a join Patients p on p.PatientId=a.PatientId where  a.DoctorId={d_id}";
+        //    var q1 = con.Query<Appointment, Patient, Appointment>(
+        //        query1,
+        //        (a, p) =>
+        //        {
+        //            // a.Doctor = new doctor { Name = d.Name };
+        //            a.Patient = new Patient { Name = p.Name };
+        //            return a;
+        //        },
+        //        splitOn: "PatientName"
+        //    ).ToList();
 
-            dgv_appoinments.DataSource = q1;
+        //    dgv_appoinments.DataSource = q1;
 
 
 
-        }
-       
+        //}
+
         private void update_doctor_profile()
         {
             try
@@ -205,10 +210,10 @@ namespace first.Doctor
 
 
         }
-
+        #endregion
         //////////////////////////////////////////////////////////////////////////////
         /////////////////////////////medical record///////////////////////////////////////////////
-
+        #region medical record
         private void get_all_patients()
         {
             string qurey4 = "select p.PatientId,p.Name from Patients p";
@@ -217,6 +222,16 @@ namespace first.Doctor
 
             com_paiens_name_medrec.ValueMember = "PatientId";
             com_paiens_name_medrec.DisplayMember = "Name";
+
+        }
+        private void get_all_doctors()
+        {
+            string qurey4 = "select d.DoctorId, d.Name from Doctors d";
+            var doctors = con.Query<doctor>(qurey4).ToList();
+            com_doctor.DataSource = doctors;
+
+            com_doctor.ValueMember = "DoctorId";
+            com_doctor.DisplayMember = "Name";
 
         }
 
@@ -441,7 +456,234 @@ namespace first.Doctor
                 tabControl1.SelectedTab = hiddenTab; // Switch to it
                 hiddenTab = null; // Clear reference to prevent re-adding
             }
+            get_all_doctors();
         }
+
+        private void com_doctor_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (com_doctor.SelectedValue == null)
+            {
+                MessageBox.Show("Please select a doctor.");
+                return;
+            }
+
+            try
+            {
+                if (com_doctor.SelectedValue != null && int.TryParse(com_doctor.SelectedValue.ToString(), out int docid))
+                {
+                    string query6 = "select * from MedicalRecords m where m.DoctorId =@DoctorId and m.PatientId=@PatientId";
+                    var prameters6 = new
+                    {
+                        PatientId = patientId,
+                        DoctorId = docid,
+                    };
+
+                    var medicalrecords = con.Query<MedicalRecord>(query6, prameters6).ToList();
+                    dgv_get_all_medicalrecords.DataSource = medicalrecords;
+
+                    // Hide unnecessary columns
+                    dgv_get_all_medicalrecords.Columns["DoctorId"].Visible = false;
+                    dgv_get_all_medicalrecords.Columns["PatientId"].Visible = false;
+                    dgv_get_all_medicalrecords.Columns["doctor"].Visible = false;
+                    dgv_get_all_medicalrecords.Columns["RecordId"].Visible = false;
+                    dgv_get_all_medicalrecords.Columns["Patient"].Visible = false;
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+
+        }
+        #endregion
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////appiontments///////////////////////////////////////////////////////
+        #region appiontments
+        private void load_doctor_appointments()
+        {
+
+            string query1 = $"select a.AppointmentId,a.AppointmentDate,a.PatientId,a.Status, p.Name as pationt,d.Name as doctor from Appointments  a join Patients p on p.PatientId=a.PatientId join Doctors d  on d.DoctorId =a.DoctorId where a.DoctorId={d_id}";
+
+
+            var appointments = con.Query(
+                query1).Select(a => new
+                {
+                    AppointmentId = a.AppointmentId,
+                    AppointmentDate = a.AppointmentDate,
+                    Status = ((AppointmentStatus)a.Status).ToString(),
+                    PatientId = a.PatientId,
+
+                    PatientName = (string)a.pationt,
+
+                }).ToList();
+
+            dgv_appoinments.DataSource = appointments;
+
+
+
+
+        }
+
+        private void btn_uppcoming_Click(object sender, EventArgs e)
+        {
+            string query1 = $"select a.AppointmentId,a.AppointmentDate,a.PatientId,a.Status, p.Name as pationt,d.Name as doctor from Appointments  a join Patients p on p.PatientId=a.PatientId join Doctors d  on d.DoctorId =a.DoctorId where a.DoctorId={d_id} and a.Status=0";
+
+            var appointments = con.Query(
+                query1).Select(a => new
+                {
+                    AppointmentId = a.AppointmentId,
+                    AppointmentDate = a.AppointmentDate,
+                    Status = ((AppointmentStatus)a.Status).ToString(),
+                    PatientId = a.PatientId,
+
+                    PatientName = (string)a.pationt,
+
+                }).ToList();
+
+            dgv_appoinments.DataSource = appointments;
+        }
+
+        //private void get_all_appointment_status()
+        //{
+        //    var statusList = Enum.GetValues(typeof(AppointmentStatus))
+        //        .Cast<AppointmentStatus>()
+        //        .Where(e => e != AppointmentStatus.Scheduled)
+        //        .Select(e => new
+        //        {
+        //            Value = (int)e,
+        //            Display = e.ToString()
+        //        })
+        //        .ToList();
+
+        //    com_status.DataSource = statusList;
+        //    com_status.ValueMember = "Value";
+        //    com_status.DisplayMember = "Display";
+        //}
+        //int appointmentId;
+        //private void dgv_appoinments_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        //{
+        //    if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+        //    {
+        //        // Get the clicked column name
+        //        string columnName = dgv_appoinments.Columns[e.ColumnIndex].Name;
+
+        //        // Check if the clicked column is "Status"
+        //        if (columnName == "Status")
+        //        {
+        //            int rowIndex = e.RowIndex;
+
+        //            // Get the Appointment ID from the "AppointmentId" column
+        //            appointmentId = Convert.ToInt32(dgv_appoinments.Rows[rowIndex].Cells["AppointmentId"].Value);
+
+
+        //        }
+        //    }
+        //    get_all_appointment_status();
+
+        //}
+
+
+        //private void com_status_SelectedValueChanged(object sender, EventArgs e)
+        //{
+        //    int new_status;
+        //    if (!int.TryParse(com_status.SelectedValue.ToString(), out new_status))
+        //    {
+        //        MessageBox.Show("Invalid status value.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        return;
+        //    }
+
+
+        //    string query = "UPDATE Appointments SET Status = @Statusv WHERE AppointmentId = @AppointmentId";
+
+
+
+        //    var prameters = new { Statusv = new_status, AppointmentId = appointmentId };
+        //    if (com_status.SelectedValue == null)
+        //    {
+        //        MessageBox.Show("Invalid status selection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        return;
+        //    }
+        //    con.Execute(query, prameters);
+        //    load_doctor_appointments();
+        //    MessageBox.Show("Appointment status updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        //}
+
+
+        private void get_all_appointment_status()
+        {
+            var statusList = Enum.GetValues(typeof(AppointmentStatus))
+                .Cast<AppointmentStatus>()
+                .Where(e => e != AppointmentStatus.Scheduled)
+                .Select(e => new
+                {
+                    Value = (int)e,
+                    Display = e.ToString()
+                })
+                .ToList();
+
+            com_status.DataSource = statusList;
+            com_status.ValueMember = "Value";
+            com_status.DisplayMember = "Display";
+        }
+
+        int appointmentId;
+
+        private void dgv_appoinments_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                // Get the clicked column name
+                string columnName = dgv_appoinments.Columns[e.ColumnIndex].Name;
+
+                // Check if the clicked column is "Status"
+                if (columnName == "Status")
+                {
+                    int rowIndex = e.RowIndex;
+
+                    // Get the Appointment ID from the "AppointmentId" column
+                    appointmentId = Convert.ToInt32(dgv_appoinments.Rows[rowIndex].Cells["AppointmentId"].Value);
+                }
+            }
+            //get_all_appointment_status();
+        }
+
+        private void com_status_SelectedValueChanged(object sender, EventArgs e)
+        {
+            //// Check if SelectedValue is null
+            //if (com_status.SelectedValue == null)
+            //{
+            //    MessageBox.Show("No status selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return;
+            //}
+
+            //// Try to parse SelectedValue to an integer
+            //int new_status;
+            //if (!int.TryParse(com_status.SelectedValue.ToString(), out new_status))
+            //{
+            //    MessageBox.Show("Invalid status value.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return;
+            //}
+
+            //// Define the SQL query
+            //string query = "UPDATE Appointments SET Status = @Statusv WHERE AppointmentId = @AppointmentId";
+
+            //// Define the parameters
+            //var parameters = new { Statusv = new_status, AppointmentId = appointmentId };
+
+            //// Execute the query
+            //con.Execute(query, parameters);
+
+            //// Reload the appointments
+            //load_doctor_appointments();
+
+            //// Show success message
+            //MessageBox.Show("Appointment status updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        #endregion
 
     }
 }
