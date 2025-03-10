@@ -26,7 +26,7 @@ namespace first.Doctor
         private readonly DbConnection con;
 
         int d_id;
-
+        private bool formLoaded = false;
         public doctorform(int doctor_id)
         {
             InitializeComponent();
@@ -34,10 +34,15 @@ namespace first.Doctor
             con = db.Database.GetDbConnection();
             d_id = doctor_id;
         }
+
+        #region form_load
         private void doctorform_Load(object sender, EventArgs e)
         {
             get_doctor_profile_data();
             HideTab();
+
+            get_all_appointment_status();
+            formLoaded = true;
         }
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -51,7 +56,7 @@ namespace first.Doctor
 
                 case 1: // Appointments Tab
                     load_doctor_appointments();
-                    get_all_appointment_status();
+                    // get_all_appointment_status();
 
                     HideTab();
                     break;
@@ -63,6 +68,8 @@ namespace first.Doctor
 
             }
         }
+
+        #endregion
 
         #region profile
         private void get_doctor_profile_data()
@@ -267,6 +274,7 @@ namespace first.Doctor
             get_medical_record_by_doctor();
         }
         #endregion
+        #region event_medicalrecord
         int patientId;
         private void com_paiens_name_medrec_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -315,6 +323,92 @@ namespace first.Doctor
             txt_report_medirec.Text = "";
             txt_lab_res_medirec.Text = "";
         }
+        private void dgv_medical_rec_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                DataGridView dgv = (DataGridView)sender;
+                string columnName = dgv.Columns[e.ColumnIndex].Name;
+
+
+                if (columnName == "LabResults" || columnName == "Report")
+                {
+                    string filePath = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString();
+
+                    if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
+                    {
+                        try
+                        {
+                            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
+                            {
+                                FileName = filePath,
+                                UseShellExecute = true
+                            });
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Error opening file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("File not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+        private TabPage hiddenTab;
+
+        private void HideTab()
+        {
+            if (tabControl1.TabPages.Contains(tabPage4))
+            {
+                hiddenTab = tabPage4; // Store the reference
+                tabControl1.TabPages.Remove(tabPage4);
+            }
+        }
+
+
+        private void com_doctor_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (com_doctor.SelectedValue == null)
+            {
+                MessageBox.Show("Please select a doctor.");
+                return;
+            }
+
+            try
+            {
+                if (com_doctor.SelectedValue != null && int.TryParse(com_doctor.SelectedValue.ToString(), out int docid))
+                {
+                    string query6 = "select * from MedicalRecords m where m.DoctorId =@DoctorId and m.PatientId=@PatientId";
+                    var prameters6 = new
+                    {
+                        PatientId = patientId,
+                        DoctorId = docid,
+                    };
+
+                    var medicalrecords = con.Query<MedicalRecord>(query6, prameters6).ToList();
+                    dgv_get_all_medicalrecords.DataSource = medicalrecords;
+
+                    // Hide unnecessary columns
+                    dgv_get_all_medicalrecords.Columns["DoctorId"].Visible = false;
+                    dgv_get_all_medicalrecords.Columns["PatientId"].Visible = false;
+                    dgv_get_all_medicalrecords.Columns["doctor"].Visible = false;
+                    dgv_get_all_medicalrecords.Columns["RecordId"].Visible = false;
+                    dgv_get_all_medicalrecords.Columns["Patient"].Visible = false;
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+
+        }
+        #endregion
         #region btn_profile
         private void btn_add_medirec_Click(object sender, EventArgs e)
         {
@@ -415,91 +509,7 @@ namespace first.Doctor
         }
 
         #endregion
-        private void dgv_medical_rec_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                DataGridView dgv = (DataGridView)sender;
-                string columnName = dgv.Columns[e.ColumnIndex].Name;
-
-
-                if (columnName == "LabResults" || columnName == "Report")
-                {
-                    string filePath = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString();
-
-                    if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
-                    {
-                        try
-                        {
-                            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
-                            {
-                                FileName = filePath,
-                                UseShellExecute = true
-                            });
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show($"Error opening file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("File not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-        }
-        private TabPage hiddenTab;
-
-        private void HideTab()
-        {
-            if (tabControl1.TabPages.Contains(tabPage4))
-            {
-                hiddenTab = tabPage4; // Store the reference
-                tabControl1.TabPages.Remove(tabPage4);
-            }
-        }
-
-      
-        private void com_doctor_SelectedValueChanged(object sender, EventArgs e)
-        {
-            if (com_doctor.SelectedValue == null)
-            {
-                MessageBox.Show("Please select a doctor.");
-                return;
-            }
-
-            try
-            {
-                if (com_doctor.SelectedValue != null && int.TryParse(com_doctor.SelectedValue.ToString(), out int docid))
-                {
-                    string query6 = "select * from MedicalRecords m where m.DoctorId =@DoctorId and m.PatientId=@PatientId";
-                    var prameters6 = new
-                    {
-                        PatientId = patientId,
-                        DoctorId = docid,
-                    };
-
-                    var medicalrecords = con.Query<MedicalRecord>(query6, prameters6).ToList();
-                    dgv_get_all_medicalrecords.DataSource = medicalrecords;
-
-                    // Hide unnecessary columns
-                    dgv_get_all_medicalrecords.Columns["DoctorId"].Visible = false;
-                    dgv_get_all_medicalrecords.Columns["PatientId"].Visible = false;
-                    dgv_get_all_medicalrecords.Columns["doctor"].Visible = false;
-                    dgv_get_all_medicalrecords.Columns["RecordId"].Visible = false;
-                    dgv_get_all_medicalrecords.Columns["Patient"].Visible = false;
-                }
-
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred: " + ex.Message);
-            }
-
-        }
+       
         #endregion
        
         #region appiontments
@@ -527,7 +537,7 @@ namespace first.Doctor
 
 
         }
-
+        #region btn_appointments
         private void btn_uppcoming_Click(object sender, EventArgs e)
         {
             string query1 = $"select a.AppointmentId,a.AppointmentDate,a.PatientId,a.Status, p.Name as pationt,d.Name as doctor from Appointments  a join Patients p on p.PatientId=a.PatientId join Doctors d  on d.DoctorId =a.DoctorId where a.DoctorId={d_id} and a.Status=0";
@@ -547,143 +557,104 @@ namespace first.Doctor
             dgv_appoinments.DataSource = appointments;
         }
 
-        //private void get_all_appointment_status()
-        //{
-        //    var statusList = Enum.GetValues(typeof(AppointmentStatus))
-        //        .Cast<AppointmentStatus>()
-        //        .Where(e => e != AppointmentStatus.Scheduled)
-        //        .Select(e => new
-        //        {
-        //            Value = (int)e,
-        //            Display = e.ToString()
-        //        })
-        //        .ToList();
 
-        //    com_status.DataSource = statusList;
-        //    com_status.ValueMember = "Value";
-        //    com_status.DisplayMember = "Display";
-        //}
-        //int appointmentId;
-        //private void dgv_appoinments_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        //{
-        //    if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-        //    {
-        //        // Get the clicked column name
-        //        string columnName = dgv_appoinments.Columns[e.ColumnIndex].Name;
+        #endregion
 
-        //        // Check if the clicked column is "Status"
-        //        if (columnName == "Status")
-        //        {
-        //            int rowIndex = e.RowIndex;
-
-        //            // Get the Appointment ID from the "AppointmentId" column
-        //            appointmentId = Convert.ToInt32(dgv_appoinments.Rows[rowIndex].Cells["AppointmentId"].Value);
-
-
-        //        }
-        //    }
-        //    get_all_appointment_status();
-
-        //}
-
-
-        //private void com_status_SelectedValueChanged(object sender, EventArgs e)
-        //{
-        //    int new_status;
-        //    if (!int.TryParse(com_status.SelectedValue.ToString(), out new_status))
-        //    {
-        //        MessageBox.Show("Invalid status value.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //        return;
-        //    }
-
-
-        //    string query = "UPDATE Appointments SET Status = @Statusv WHERE AppointmentId = @AppointmentId";
-
-
-
-        //    var prameters = new { Statusv = new_status, AppointmentId = appointmentId };
-        //    if (com_status.SelectedValue == null)
-        //    {
-        //        MessageBox.Show("Invalid status selection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //        return;
-        //    }
-        //    con.Execute(query, prameters);
-        //    load_doctor_appointments();
-        //    MessageBox.Show("Appointment status updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-        //}
-
+        #region Appointment Status Methods
 
         private void get_all_appointment_status()
         {
-            var statusList = Enum.GetValues(typeof(AppointmentStatus))
-                .Cast<AppointmentStatus>()
-                .Where(e => e != AppointmentStatus.Scheduled)
-                .Select(e => new
+            var statusList = new List<object>();
+            foreach (AppointmentStatus status in Enum.GetValues(typeof(AppointmentStatus)))
+            {
+                // Exclude "Scheduled" status
+                if (status != AppointmentStatus.Scheduled)
                 {
-                    Value = (int)e,
-                    Display = e.ToString()
-                })
-                .ToList();
+                    statusList.Add(new { Value = (int)status, Display = status.ToString() });
+                }
+            }
 
             com_status.DataSource = statusList;
             com_status.ValueMember = "Value";
             com_status.DisplayMember = "Display";
         }
 
-        int appointmentId;
+        #endregion
+
+
+        #region events_apointment
+        int appointmentId = -1;
 
         private void dgv_appoinments_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                // Get the clicked column name
                 string columnName = dgv_appoinments.Columns[e.ColumnIndex].Name;
 
-                // Check if the clicked column is "Status"
                 if (columnName == "Status")
                 {
                     int rowIndex = e.RowIndex;
 
-                    // Get the Appointment ID from the "AppointmentId" column
-                    appointmentId = Convert.ToInt32(dgv_appoinments.Rows[rowIndex].Cells["AppointmentId"].Value);
+                 
+                    var cellValue = dgv_appoinments.Rows[rowIndex].Cells["AppointmentId"].Value;
+                    if (cellValue != null && int.TryParse(cellValue.ToString(), out int id))
+                    {
+                        appointmentId = id;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid appointment selection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                 }
             }
-            //get_all_appointment_status();
         }
 
         private void com_status_SelectedValueChanged(object sender, EventArgs e)
         {
-            //// Check if SelectedValue is null
-            //if (com_status.SelectedValue == null)
-            //{
-            //    MessageBox.Show("No status selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //    return;
-            //}
+            if (formLoaded)
+            {
+                if (appointmentId == -1)
+                {
+                    MessageBox.Show("Please select an appointment before changing the status.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-            //// Try to parse SelectedValue to an integer
-            //int new_status;
-            //if (!int.TryParse(com_status.SelectedValue.ToString(), out new_status))
-            //{
-            //    MessageBox.Show("Invalid status value.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //    return;
-            //}
+                if (com_status.SelectedValue == null)
+                {
+                    MessageBox.Show("Invalid status selection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-            //// Define the SQL query
-            //string query = "UPDATE Appointments SET Status = @Statusv WHERE AppointmentId = @AppointmentId";
+                int new_status;
+                if (!int.TryParse(com_status.SelectedValue.ToString(), out new_status))
+                {
+                    MessageBox.Show("Invalid status value.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-            //// Define the parameters
-            //var parameters = new { Statusv = new_status, AppointmentId = appointmentId };
+                string query = "UPDATE Appointments SET Status = @Statusv WHERE AppointmentId = @AppointmentId";
 
-            //// Execute the query
-            //con.Execute(query, parameters);
+                try
+                {
+                    con.Execute(query, new { Statusv = new_status, AppointmentId = appointmentId });
+                    load_doctor_appointments();
+                    MessageBox.Show("Appointment status updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            //// Reload the appointments
-            //load_doctor_appointments();
-
-            //// Show success message
-            //MessageBox.Show("Appointment status updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    appointmentId = -1;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error updating appointment: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
+
+
+        #endregion
+
+
+
         #endregion
 
     }
