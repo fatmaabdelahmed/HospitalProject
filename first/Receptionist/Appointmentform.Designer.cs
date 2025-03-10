@@ -1,6 +1,6 @@
 ﻿namespace first.Receptionist
 {
-    partial class ReceptionistDashbordForm
+    partial class Appointmentform
     {
         /// <summary>
         /// Required designer variable.
@@ -28,14 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new Panel();
-            btn_profile = new Button();
-            btn_doc = new Button();
-            btn_patient = new Button();
-            btn_appoint = new Button();
-            panel2 = new Panel();
-            button5 = new Button();
-            label1 = new Label();
             panel3 = new Panel();
             txt_serch = new TextBox();
             btn_sear = new Button();
@@ -47,87 +39,9 @@
             cb_patie = new ComboBox();
             cb_doc = new ComboBox();
             dgv_appo = new DataGridView();
-            panel1.SuspendLayout();
-            panel2.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_appo).BeginInit();
             SuspendLayout();
-            // 
-            // panel1
-            // 
-            panel1.Controls.Add(btn_profile);
-            panel1.Controls.Add(btn_doc);
-            panel1.Controls.Add(btn_patient);
-            panel1.Controls.Add(btn_appoint);
-            panel1.Location = new Point(12, 88);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(201, 733);
-            panel1.TabIndex = 0;
-            // 
-            // btn_profile
-            // 
-            btn_profile.Location = new Point(19, 230);
-            btn_profile.Name = "btn_profile";
-            btn_profile.Size = new Size(160, 50);
-            btn_profile.TabIndex = 3;
-            btn_profile.Text = "Edit Profile";
-            btn_profile.UseVisualStyleBackColor = true;
-            // 
-            // btn_doc
-            // 
-            btn_doc.Location = new Point(19, 160);
-            btn_doc.Name = "btn_doc";
-            btn_doc.Size = new Size(160, 50);
-            btn_doc.TabIndex = 2;
-            btn_doc.Text = "bilings";
-            btn_doc.UseVisualStyleBackColor = true;
-            // 
-            // btn_patient
-            // 
-            btn_patient.Location = new Point(19, 93);
-            btn_patient.Name = "btn_patient";
-            btn_patient.Size = new Size(160, 50);
-            btn_patient.TabIndex = 1;
-            btn_patient.Text = "Patients";
-            btn_patient.UseVisualStyleBackColor = true;
-            btn_patient.Click += btn_patient_Click;
-            // 
-            // btn_appoint
-            // 
-            btn_appoint.Location = new Point(19, 26);
-            btn_appoint.Name = "btn_appoint";
-            btn_appoint.Size = new Size(160, 50);
-            btn_appoint.TabIndex = 0;
-            btn_appoint.Text = "Appointments";
-            btn_appoint.UseVisualStyleBackColor = true;
-            btn_appoint.Click += btn_appoint_Click;
-            // 
-            // panel2
-            // 
-            panel2.Controls.Add(button5);
-            panel2.Controls.Add(label1);
-            panel2.Location = new Point(12, 12);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(1289, 56);
-            panel2.TabIndex = 1;
-            // 
-            // button5
-            // 
-            button5.Location = new Point(1102, 3);
-            button5.Name = "button5";
-            button5.Size = new Size(160, 50);
-            button5.TabIndex = 4;
-            button5.Text = "LOG OUT";
-            button5.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(78, 19);
-            label1.Name = "label1";
-            label1.Size = new Size(50, 20);
-            label1.TabIndex = 0;
-            label1.Text = "label1";
             // 
             // panel3
             // 
@@ -141,10 +55,10 @@
             panel3.Controls.Add(cb_patie);
             panel3.Controls.Add(cb_doc);
             panel3.Controls.Add(dgv_appo);
-            panel3.Location = new Point(235, 88);
+            panel3.Location = new Point(56, 12);
             panel3.Name = "panel3";
             panel3.Size = new Size(1066, 733);
-            panel3.TabIndex = 2;
+            panel3.TabIndex = 3;
             // 
             // txt_serch
             // 
@@ -237,20 +151,15 @@
             dgv_appo.TabIndex = 0;
             dgv_appo.RowHeaderMouseDoubleClick += dgv_appo_RowHeaderMouseDoubleClick;
             // 
-            // ReceptionistDashbordForm
+            // Appointmentform
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1313, 833);
+            ClientSize = new Size(1179, 757);
             Controls.Add(panel3);
-            Controls.Add(panel2);
-            Controls.Add(panel1);
-            Name = "ReceptionistDashbordForm";
-            Text = "ReceptionistDashbordForm";
-            Load += ReceptionistDashbordForm_Load;
-            panel1.ResumeLayout(false);
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
+            Name = "Appointmentform";
+            Text = "Appointmentform";
+            Load += Appointmentform_Load;
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_appo).EndInit();
@@ -259,24 +168,16 @@
 
         #endregion
 
-        private Panel panel1;
-        private Button btn_patient;
-        private Button btn_appoint;
-        private Panel panel2;
         private Panel panel3;
-        private Button btn_profile;
-        private Button btn_doc;
-        private Button button5;
-        private Label label1;
-        private DataGridView dgv_appo;
-        private ComboBox cb_patie;
-        private ComboBox cb_doc;
-        private ComboBox cb_stat;
-        private DateTimePicker dtp_app;
+        private TextBox txt_serch;
         private Button btn_sear;
         private Button btn_delete;
         private Button btn_edit;
         private Button btn_add;
-        private TextBox txt_serch;
+        private ComboBox cb_stat;
+        private DateTimePicker dtp_app;
+        private ComboBox cb_patie;
+        private ComboBox cb_doc;
+        private DataGridView dgv_appo;
     }
 }

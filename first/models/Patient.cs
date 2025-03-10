@@ -38,7 +38,6 @@ namespace first.models
     public enum Gender
     {
         Male,
-        Female,
-        Other
+        Female
     }
 }

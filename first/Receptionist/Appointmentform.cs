@@ -2,29 +2,26 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dapper;
-using first.Doctor;
 using first.models;
 using Microsoft.Data.SqlClient;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace first.Receptionist
 {
-    public partial class ReceptionistDashbordForm : Form
+    public partial class Appointmentform : Form
     {
         IDbConnection con;
-        public ReceptionistDashbordForm()
+
+        public Appointmentform()
         {
             InitializeComponent();
             con = new SqlConnection("Server=.;Database=hospitalManageDB;Trusted_Connection=True;TrustServerCertificate=True;");
         }
-
         private void patientload()
         {
             var patientcb = con.Query<Patient>("select PatientId ,Name from Patients").ToList();
@@ -94,40 +91,25 @@ namespace first.Receptionist
             return true;
         }
 
-
-
-        private void ReceptionistDashbordForm_Load(object sender, EventArgs e)
+        private void Appointmentform_Load(object sender, EventArgs e)
         {
-
-
             docload();
             patientload();
             LoadStatusComboBox();
             loadappointment();
 
-
-
-
-
-
         }
         int appoint_id;
-        private void dgv_appo_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+
+        private void dgv_appo_ColumnHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-
-            cb_doc.SelectedValue = dgv_appo.SelectedRows[0].Cells["DoctorId"].Value;
-            cb_patie.SelectedValue = dgv_appo.SelectedRows[0].Cells["PatientId"].Value;
-            cb_stat.SelectedValue = (int)Enum.Parse(typeof(AppointmentStatus), dgv_appo.SelectedRows[0].Cells["Status"].Value.ToString());
-            dtp_app.Value = Convert.ToDateTime(dgv_appo.SelectedRows[0].Cells["AppointmentDate"].Value);
-
-            appoint_id = (int)dgv_appo.SelectedRows[0].Cells["AppointmentId"].Value;
-
 
 
         }
 
         private void btn_add_Click(object sender, EventArgs e)
         {
+
             int patientId = (int)cb_patie.SelectedValue;
             int doctorId = (int)cb_doc.SelectedValue;
             int status = (int)cb_stat.SelectedValue;
@@ -141,14 +123,11 @@ namespace first.Receptionist
             MessageBox.Show(" the appointment is added!", "success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             loadappointment();
 
-
-
-
-
         }
 
         private void btn_edit_Click(object sender, EventArgs e)
         {
+
             if (dgv_appo.SelectedRows.Count > 0)
             {
 
@@ -168,9 +147,10 @@ namespace first.Receptionist
                 int doctorId = (int)cb_doc.SelectedValue;
                 int status = (int)cb_stat.SelectedValue;
                 DateTime appointmentDate = dtp_app.Value;
-                DateTime currentAppointmentDate = con.QuerySingle<DateTime>(
+                DateTime currentAppointmentDate = con.QuerySingleOrDefault<DateTime>(
      "SELECT AppointmentDate FROM Appointments WHERE AppointmentId = @AppointmentId",
      new { AppointmentId = appoint_id });
+
 
                 if (currentAppointmentDate != appointmentDate && !IsValidAppointment(doctorId, appointmentDate, appoint_id))
                 {
@@ -198,6 +178,7 @@ namespace first.Receptionist
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
+
             if (dgv_appo.SelectedRows.Count > 0)
             {
                 var confirmResult = MessageBox.Show("Are you sure you want to delete this appointment?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -214,7 +195,6 @@ namespace first.Receptionist
             {
                 MessageBox.Show("select an row to delete", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
 
         }
 
@@ -241,42 +221,35 @@ namespace first.Receptionist
 
             // تنفيذ الاستعلام وتمرير القيم الصحيحة
             var searchResults = con.Query<Appointment>(
-            ReceptionistServices.SearchAppointmentsByDate,
-            new
-            {
-                AppointmentDate = appointmentDate ?? (DateTime?)null, // إذا لم يكن تاريخًا، اجعلها null
-                PatientName = string.IsNullOrWhiteSpace(patientName) ? null : patientName,
-                DoctorName = string.IsNullOrWhiteSpace(doctorName) ? null : doctorName
-            }
-        ).ToList();
+             ReceptionistServices.SearchAppointmentsByDate,
+             new
+             {
+                 AppointmentDate = appointmentDate ?? (DateTime?)null, // إذا لم يكن تاريخًا، اجعلها null
+                 PatientName = string.IsNullOrWhiteSpace(patientName) ? null : patientName,
+                 DoctorName = string.IsNullOrWhiteSpace(doctorName) ? null : doctorName
+             }
+         ).ToList();
+
 
             // عرض النتائج في DataGridView
             dgv_appo.DataSource = searchResults;
         }
 
-        private void btn_patient_Click(object sender, EventArgs e)
+        private void dgv_appo_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (!panel3.Controls.OfType<PatientManagementForm>().Any())
+            if (dgv_appo.SelectedRows.Count == 0)
             {
-                panel3.Controls.Clear();
-                PatientManagementForm form = new PatientManagementForm();
-                form.TopLevel = false;
-                form.Dock = DockStyle.Fill;
-                form.FormBorderStyle = FormBorderStyle.None;
-                panel3.Controls.Add(form);
-                form.Show();
+                MessageBox.Show("No row selected!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-        }
 
-        private void btn_appoint_Click(object sender, EventArgs e)
-        {
-            panel3.Controls.Clear();
-            Appointmentform form = new Appointmentform();
-            form.TopLevel = false;
-            form.Dock = DockStyle.Fill;
-            form.FormBorderStyle = FormBorderStyle.None;
-            panel3.Controls.Add(form);
-            form.Show();
+
+            cb_doc.SelectedValue = dgv_appo.SelectedRows[0].Cells["DoctorId"].Value;
+            cb_patie.SelectedValue = dgv_appo.SelectedRows[0].Cells["PatientId"].Value;
+            cb_stat.SelectedValue = (int)Enum.Parse(typeof(AppointmentStatus), dgv_appo.SelectedRows[0].Cells["Status"].Value.ToString());
+            dtp_app.Value = Convert.ToDateTime(dgv_appo.SelectedRows[0].Cells["AppointmentDate"].Value);
+
+            appoint_id = (int)dgv_appo.SelectedRows[0].Cells["AppointmentId"].Value;
 
         }
     }
