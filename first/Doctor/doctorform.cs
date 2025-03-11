@@ -22,7 +22,7 @@ namespace first.Doctor
 
     public partial class doctorform : Form
     {
-        //private readonly HOSPITALDbContext _context;
+       
         private readonly DbConnection con;
 
         int d_id;
@@ -218,6 +218,10 @@ namespace first.Doctor
 
         }
         #endregion
+
+
+
+
 
         #region medical record
         #region get_data_profile
@@ -502,16 +506,26 @@ namespace first.Doctor
             if (hiddenTab != null && !tabControl1.TabPages.Contains(tabPage4))
             {
                 tabControl1.TabPages.Add(hiddenTab);
-                tabControl1.SelectedTab = hiddenTab;  
-                hiddenTab = null; 
+                tabControl1.SelectedTab = hiddenTab;
+                hiddenTab = null;
             }
             get_all_doctors();
         }
 
+
+
+        private void btn_back_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 2;
+        }
         #endregion
-       
+
         #endregion
-       
+
+
+
+
+
         #region appiontments
         private void load_doctor_appointments()
         {
@@ -557,7 +571,10 @@ namespace first.Doctor
             dgv_appoinments.DataSource = appointments;
         }
 
-
+        private void btn_all_appintment_Click(object sender, EventArgs e)
+        {
+            load_doctor_appointments();
+        }
         #endregion
 
         #region Appointment Status Methods
@@ -595,7 +612,7 @@ namespace first.Doctor
                 {
                     int rowIndex = e.RowIndex;
 
-                 
+
                     var cellValue = dgv_appoinments.Rows[rowIndex].Cells["AppointmentId"].Value;
                     if (cellValue != null && int.TryParse(cellValue.ToString(), out int id))
                     {
@@ -657,5 +674,7 @@ namespace first.Doctor
 
         #endregion
 
+
+       
     }
 }

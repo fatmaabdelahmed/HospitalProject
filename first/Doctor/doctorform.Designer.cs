@@ -47,6 +47,7 @@ namespace first.Doctor
             txt_speci_profile = new TextBox();
             txt_name_profile = new TextBox();
             tabPage2 = new TabPage();
+            btn_all_appintment = new Button();
             btn_uppcoming = new Button();
             com_status = new ComboBox();
             label13 = new Label();
@@ -69,6 +70,7 @@ namespace first.Doctor
             dgv_medical_rec = new DataGridView();
             com_paiens_name_medrec = new ComboBox();
             tabPage4 = new TabPage();
+            btn_back = new Button();
             label14 = new Label();
             dgv_get_all_medicalrecords = new DataGridView();
             com_doctor = new ComboBox();
@@ -244,6 +246,7 @@ namespace first.Doctor
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(btn_all_appintment);
             tabPage2.Controls.Add(btn_uppcoming);
             tabPage2.Controls.Add(com_status);
             tabPage2.Controls.Add(label13);
@@ -256,9 +259,19 @@ namespace first.Doctor
             tabPage2.Text = "appoiments";
             tabPage2.UseVisualStyleBackColor = true;
             // 
+            // btn_all_appintment
+            // 
+            btn_all_appintment.Location = new Point(846, 638);
+            btn_all_appintment.Name = "btn_all_appintment";
+            btn_all_appintment.Size = new Size(150, 46);
+            btn_all_appintment.TabIndex = 4;
+            btn_all_appintment.Text = "all_appintment";
+            btn_all_appintment.UseVisualStyleBackColor = true;
+            btn_all_appintment.Click += btn_all_appintment_Click;
+            // 
             // btn_uppcoming
             // 
-            btn_uppcoming.Location = new Point(943, 631);
+            btn_uppcoming.Location = new Point(1174, 638);
             btn_uppcoming.Name = "btn_uppcoming";
             btn_uppcoming.Size = new Size(150, 46);
             btn_uppcoming.TabIndex = 3;
@@ -290,7 +303,7 @@ namespace first.Doctor
             dgv_appoinments.Location = new Point(54, 50);
             dgv_appoinments.Name = "dgv_appoinments";
             dgv_appoinments.RowHeadersWidth = 82;
-            dgv_appoinments.Size = new Size(1389, 523);
+            dgv_appoinments.Size = new Size(1104, 523);
             dgv_appoinments.TabIndex = 0;
             dgv_appoinments.CellMouseDoubleClick += dgv_appoinments_CellMouseDoubleClick;
             // 
@@ -460,6 +473,7 @@ namespace first.Doctor
             // 
             // tabPage4
             // 
+            tabPage4.Controls.Add(btn_back);
             tabPage4.Controls.Add(label14);
             tabPage4.Controls.Add(dgv_get_all_medicalrecords);
             tabPage4.Controls.Add(com_doctor);
@@ -468,8 +482,18 @@ namespace first.Doctor
             tabPage4.Padding = new Padding(3);
             tabPage4.Size = new Size(1509, 726);
             tabPage4.TabIndex = 3;
-            tabPage4.Text = "tabPage4";
+            tabPage4.Text = "all medical records";
             tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // btn_back
+            // 
+            btn_back.Location = new Point(76, 658);
+            btn_back.Name = "btn_back";
+            btn_back.Size = new Size(150, 46);
+            btn_back.TabIndex = 6;
+            btn_back.Text = "back";
+            btn_back.UseVisualStyleBackColor = true;
+            btn_back.Click += btn_back_Click;
             // 
             // label14
             // 
@@ -483,7 +507,7 @@ namespace first.Doctor
             // dgv_get_all_medicalrecords
             // 
             dgv_get_all_medicalrecords.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_get_all_medicalrecords.Location = new Point(132, 212);
+            dgv_get_all_medicalrecords.Location = new Point(143, 161);
             dgv_get_all_medicalrecords.Name = "dgv_get_all_medicalrecords";
             dgv_get_all_medicalrecords.RowHeadersWidth = 82;
             dgv_get_all_medicalrecords.Size = new Size(1313, 447);
@@ -569,5 +593,7 @@ namespace first.Doctor
         private ComboBox com_doctor;
         private Label label14;
         private Button btn_uppcoming;
+        private Button btn_back;
+        private Button btn_all_appintment;
     }
 }
