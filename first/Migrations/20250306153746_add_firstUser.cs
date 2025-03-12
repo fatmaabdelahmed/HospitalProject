@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace first.Migrations
 {
     /// <inheritdoc />
-    public partial class FixBilling : Migration
+    public partial class add_firstUser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -179,6 +179,11 @@ namespace first.Migrations
                         principalColumn: "PatientId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UserId", "PasswordHash", "Role", "Username" },
+                values: new object[] { 1, "123", 1, "fatma" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Appointments_DoctorId",

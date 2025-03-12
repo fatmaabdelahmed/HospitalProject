@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using first.models;
 
@@ -11,9 +12,11 @@ using first.models;
 namespace first.Migrations
 {
     [DbContext(typeof(HOSPITALDbContext))]
-    partial class HOSPITALDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250306153746_add_firstUser")]
+    partial class add_firstUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -240,7 +243,7 @@ namespace first.Migrations
                         {
                             UserId = 1,
                             PasswordHash = "123",
-                            Role = 0,
+                            Role = 1,
                             Username = "fatma"
                         });
                 });

@@ -12,8 +12,8 @@ using first.models;
 namespace first.Migrations
 {
     [DbContext(typeof(HOSPITALDbContext))]
-    [Migration("20250306024233_FixBilling")]
-    partial class FixBilling
+    [Migration("20250309063535_update-Admin")]
+    partial class updateAdmin
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -237,6 +237,15 @@ namespace first.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            PasswordHash = "123",
+                            Role = 0,
+                            Username = "fatma"
+                        });
                 });
 
             modelBuilder.Entity("first.models.Appointment", b =>
