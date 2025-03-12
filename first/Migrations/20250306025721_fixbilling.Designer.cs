@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using first.models;
 
@@ -11,9 +12,11 @@ using first.models;
 namespace first.Migrations
 {
     [DbContext(typeof(HOSPITALDbContext))]
-    partial class HOSPITALDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250306025721_fixbilling")]
+    partial class fixbilling
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,7 +54,7 @@ namespace first.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Appointments", (string)null);
+                    b.ToTable("Appointments");
                 });
 
             modelBuilder.Entity("first.models.Billing", b =>
@@ -78,7 +81,7 @@ namespace first.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Billings", (string)null);
+                    b.ToTable("Billings");
                 });
 
             modelBuilder.Entity("first.models.Doctor", b =>
@@ -113,7 +116,7 @@ namespace first.Migrations
                     b.HasIndex("UsersmemberId")
                         .IsUnique();
 
-                    b.ToTable("Doctors", (string)null);
+                    b.ToTable("Doctors");
                 });
 
             modelBuilder.Entity("first.models.DoctorPatient", b =>
@@ -136,7 +139,7 @@ namespace first.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("DoctorPatients", (string)null);
+                    b.ToTable("DoctorPatients");
                 });
 
             modelBuilder.Entity("first.models.MedicalRecord", b =>
@@ -178,7 +181,7 @@ namespace first.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("MedicalRecords", (string)null);
+                    b.ToTable("MedicalRecords");
                 });
 
             modelBuilder.Entity("first.models.Patient", b =>
@@ -209,7 +212,7 @@ namespace first.Migrations
 
                     b.HasKey("PatientId");
 
-                    b.ToTable("Patients", (string)null);
+                    b.ToTable("Patients");
                 });
 
             modelBuilder.Entity("first.models.Usersmember", b =>
@@ -233,20 +236,7 @@ namespace first.Migrations
 
                     b.HasKey("UserId");
 
-
-                //    b.ToTable("Users", (string)null);
-
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = 1,
-                            PasswordHash = "123",
-                            Role = 0,
-                            Username = "fatma"
-                        });
-
                 });
 
             modelBuilder.Entity("first.models.Appointment", b =>

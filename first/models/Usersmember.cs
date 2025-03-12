@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -17,6 +19,7 @@ namespace first.models
         public string Username { get; set; } = string.Empty;
 
         [Required]
+
         public string PasswordHash { get; set; } = string.Empty;
 
         [Required]
@@ -31,5 +34,8 @@ namespace first.models
         Doctor,
         Receptionist
     }
+
+    
+
 
 }
