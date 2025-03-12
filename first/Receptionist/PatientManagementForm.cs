@@ -123,22 +123,27 @@ namespace first.Receptionist
         }
 
         private void btn_sear_pat_Click(object sender, EventArgs e)
-        {
+        { 
 
             string info = txt_serchpat.Text.Trim();
             string name = txt_serchpat.Text.Trim();
+            int? id = null; // اجعل id قابلاً لأن يكون null
+
+            if (int.TryParse(txt_serchpat.Text, out int parsedId))
+            {
+                id = parsedId; // إذا كان الإدخال رقمًا، خزّنه في id
+            }
 
             var searchresult = con.Query<Patient>(ReceptionistServices.SearchPatientByName, new
             {
                 ContactInfo = info,
-                Name = name
-            });
+                Name = name,
+                PatientId = id // لا تحوّله إلى int إذا كان null
+            }).ToList();
+
             dgv_patient.DataSource = searchresult;
-
-
-
-
-
         }
     }
 }
+
+

@@ -72,6 +72,7 @@
             btn_profile.TabIndex = 3;
             btn_profile.Text = "Edit Profile";
             btn_profile.UseVisualStyleBackColor = true;
+            btn_profile.Click += btn_profile_Click;
             // 
             // btn_doc
             // 
@@ -81,6 +82,7 @@
             btn_doc.TabIndex = 2;
             btn_doc.Text = "bilings";
             btn_doc.UseVisualStyleBackColor = true;
+            btn_doc.Click += btn_doc_Click;
             // 
             // btn_patient
             // 

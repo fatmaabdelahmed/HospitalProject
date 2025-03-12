@@ -220,7 +220,7 @@ namespace first.Receptionist
             }
 
             // تنفيذ الاستعلام وتمرير القيم الصحيحة
-            var searchResults = con.Query<Appointment>(
+            var searchResults = con.Query<dynamic>(
              ReceptionistServices.SearchAppointmentsByDate,
              new
              {

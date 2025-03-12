@@ -96,14 +96,25 @@ namespace first.Receptionist
 
 
 
-        private void ReceptionistDashbordForm_Load(object sender, EventArgs e)
+        private async void  ReceptionistDashbordForm_Load(object sender, EventArgs e)
         {
-
+       
+          
 
             docload();
             patientload();
             LoadStatusComboBox();
             loadappointment();
+            try
+            {
+                await AppointmentReminder.StartReminderServiceAsync();
+             
+              //  MessageBox.Show("✅ تم تنفيذ StartReminderServiceAsync بنجاح");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"❌ خطأ أثناء تشغيل التذكيرات: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
 
 
@@ -240,15 +251,22 @@ namespace first.Receptionist
             }
 
             // تنفيذ الاستعلام وتمرير القيم الصحيحة
-            var searchResults = con.Query<Appointment>(
+            var searchResults = con.Query<dynamic>(
             ReceptionistServices.SearchAppointmentsByDate,
             new
             {
-                AppointmentDate = appointmentDate ?? (DateTime?)null, // إذا لم يكن تاريخًا، اجعلها null
-                PatientName = string.IsNullOrWhiteSpace(patientName) ? null : patientName,
-                DoctorName = string.IsNullOrWhiteSpace(doctorName) ? null : doctorName
+                AppointmentDate = appointmentDate,
+                PatientName = patientName,
+                DoctorName = doctorName
             }
-        ).ToList();
+        ).Select(a => new
+        {
+            AppointmentId = (int?)a.AppointmentId,  // `int?` يسمح بـ null
+            AppointmentDate = (DateTime?)a.AppointmentDate ?? DateTime.MinValue,
+            Status = ((AppointmentStatus)(int?)(a.Status ?? 0)).ToString(),
+            PatientName = a.PatientName?.ToString() ?? "Unknown",
+            DoctorName = a.DoctorName?.ToString() ?? "Unknown"
+        }).ToList();
 
             // عرض النتائج في DataGridView
             dgv_appo.DataSource = searchResults;
@@ -278,6 +296,30 @@ namespace first.Receptionist
             panel3.Controls.Add(form);
             form.Show();
 
+        }
+
+        private void btn_doc_Click(object sender, EventArgs e)
+        {
+            panel3.Controls.Clear();
+            BillingManagementForm form = new BillingManagementForm();
+            form.TopLevel = false;
+            form.Dock = DockStyle.Fill;
+            form.FormBorderStyle = FormBorderStyle.None;
+            panel3.Controls.Add(form);
+            form.Show();
+        }
+
+
+        private void btn_profile_Click(object sender, EventArgs e)
+        {
+            panel3.Controls.Clear();
+          
+            EditProfileForm form = new EditProfileForm(1002);
+            form.TopLevel = false;
+            form.Dock = DockStyle.Fill;
+            form.FormBorderStyle = FormBorderStyle.None;
+            panel3.Controls.Add(form);
+            form.Show();
         }
     }
 }

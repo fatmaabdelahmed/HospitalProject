@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
+
+
 
 namespace first.Receptionist
 {
@@ -58,7 +62,69 @@ namespace first.Receptionist
                 OR d.Name LIKE '%' + @DoctorName + '%';
         ";
 
+        //billing
+        public static string GetAllBills = @"
+    SELECT 
+        b.AppointmentId,
+        a.PatientId,
+        p.Name AS PatientName,
+        d.Name AS DoctorName,
+        b.TotalAmount,
+        b.PaidAmount,
+        (b.TotalAmount - b.PaidAmount) AS OutstandingBalance,
+        b.PaymentStatus,
+        b.PaymentDate
+    FROM Billings b
+    JOIN Appointments a ON b.AppointmentId = a.AppointmentId
+    JOIN Patients p ON a.PatientId = p.PatientId
+    JOIN Doctors d ON a.DoctorId = d.DoctorId;
+";
+
+
+
+        public static string AddBill = @"
+            INSERT INTO Billings (AppointmentId, PatientId, TotalAmount, PaidAmount, PaymentStatus, PaymentDate) 
+            VALUES (@AppointmentId, @PatientId, @TotalAmount, @PaidAmount, @PaymentStatus, @PaymentDate);
+        ";
+
+        public static string EditBill = @"
+            UPDATE Billings 
+            SET 
+                TotalAmount = @TotalAmount, 
+                PaidAmount = @PaidAmount, 
+                PaymentStatus = @PaymentStatus, 
+                PaymentDate = @PaymentDate
+            WHERE AppointmentId = @AppointmentId;
+        ";
+
+        // ✅ حذف فاتورة
+        public static string DeleteBill = @"
+            DELETE FROM Billings WHERE AppointmentId = @AppointmentId;
+        ";
+
+        // ✅ البحث عن الفواتير حسب اسم المريض أو الطبيب أو حالة الدفع
+        public static string SearchBills = @"
+            SELECT 
+                b.AppointmentId,
+                p.Name AS PatientName,
+                d.Name AS DoctorName,
+                b.TotalAmount,
+                b.PaidAmount,
+                (b.TotalAmount - b.PaidAmount) AS OutstandingBalance,
+                b.PaymentStatus,
+                b.PaymentDate
+            FROM Billings b
+            JOIN Appointments a ON b.AppointmentId = a.AppointmentId
+            JOIN Patients p ON a.PatientId = p.PatientId
+            JOIN Doctors d ON a.DoctorId = d.DoctorId
+            WHERE 
+                p.Name LIKE '%' + @PatientName + '%' 
+                OR d.Name LIKE '%' + @DoctorName + '%'
+                OR b.PaymentStatus = @PaymentStatus;
+        ";
+
         //patient
+
         public static string Getallpatient = @"
             SELECT 
                 PatientId, 
@@ -95,13 +161,13 @@ namespace first.Receptionist
                 PatientId, 
                 Name, 
                 DateOfBirth, 
-                Gender, 
+                Gender,
                 ContactInfo, 
                 MedicalHistory 
             FROM Patients
             WHERE 
                 Name LIKE '%' + @Name + '%' 
-                OR ContactInfo LIKE '%' + @ContactInfo + '%';
-        ";
+            OR ContactInfo = @ContactInfo OR (@PatientId IS NOT NULL AND PatientId = @PatientId);
+        "; 
     }
 }
