@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using first.Doctor;
 
 namespace first.models
 {
@@ -36,6 +37,11 @@ namespace first.models
 
         // العلاقة 1:M مع MedicalRecord
         public virtual List<MedicalRecord> MedicalRecords { get; set; } = new();
+
+        public static implicit operator Doctor(doctorform v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }
