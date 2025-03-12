@@ -36,8 +36,6 @@ namespace first.Receptionist
             dgv_billing.DataSource = bills;
         }
 
-
-
         private void BillingManagementForm_Load(object sender, EventArgs e)
         {
             loaddgv();
@@ -51,7 +49,6 @@ namespace first.Receptionist
         JOIN Patients p ON a.PatientId = p.PatientId
         JOIN Doctors d ON a.DoctorId = d.DoctorId;";
 
-            // جلب المواعيد مع بيانات المريض
             var appointments = con.Query(query).Select(a => new
             {
                 AppointmentId = (int)a.AppointmentId,
@@ -59,15 +56,11 @@ namespace first.Receptionist
                 AppointmentInfo = (string)a.AppointmentInfo
             }).ToList();
 
-            // تعيين المواعيد في الكمبو بوكس
             cb_appoint_billing.DataSource = appointments;
             cb_appoint_billing.DisplayMember = "AppointmentInfo";
             cb_appoint_billing.ValueMember = "AppointmentId";
-
-            // حفظ بيانات PatientId لكل AppointmentId داخل الـ Tag
             cb_appoint_billing.Tag = appointments.ToDictionary(a => a.AppointmentId, a => a.PatientId);
 
-            // تحميل حالات الدفع
             cb_status_pay.DataSource = Enum.GetValues(typeof(PaymentStatus))
                                          .Cast<PaymentStatus>()
                                          .Select(x => new { Value = (int)x, Text = x.ToString() })
@@ -82,36 +75,30 @@ namespace first.Receptionist
         {
             if (cb_appoint_billing.SelectedItem == null)
             {
-                MessageBox.Show("يرجى اختيار موعد قبل إضافة الفاتورة.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select an appointment before adding the bill.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (!decimal.TryParse(txt_total.Text, out decimal totalAmount) ||
                 !decimal.TryParse(txt_paid.Text, out decimal paidAmount))
             {
-                MessageBox.Show("يرجى إدخال قيم صحيحة للمبلغ الكلي والمبلغ المدفوع.", "خطأ في الإدخال", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter valid values for total amount and paid amount.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             int selectedAppointmentId = (int)cb_appoint_billing.SelectedValue;
             int patientId = ((Dictionary<int, int>)cb_appoint_billing.Tag)[selectedAppointmentId];
 
-            // ✅ التحقق مما إذا كانت الفاتورة موجودة مسبقًا
             var existingBill = con.QueryFirstOrDefault<Billing>(
                 "SELECT * FROM Billings WHERE AppointmentId = @AppointmentId",
                 new { AppointmentId = selectedAppointmentId });
 
             if (existingBill != null)
             {
-                // ✅ الفاتورة موجودة بالفعل → عرض رسالة وإعطاء خيار التعديل
-                var result = MessageBox.Show("هذه الفاتورة موجودة بالفعل، ", "تنبيه",
-                                             MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-
+                MessageBox.Show("This bill already exists.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                // ✅ لا توجد فاتورة سابقة → إدراج فاتورة جديدة
                 var Status = paidAmount >= totalAmount ? PaymentStatus.Paid : PaymentStatus.Pending;
 
                 var count = con.Execute(ReceptionistServices.AddBill, new
@@ -126,13 +113,13 @@ namespace first.Receptionist
 
                 if (count > 0)
                 {
-                    MessageBox.Show($"تمت إضافة الفاتورة بنجاح:\n\nالمبلغ الكلي: {totalAmount}\nالمبلغ المدفوع: {paidAmount}\nحالة الدفع: {Status}",
-                                    "عملية ناجحة", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Bill added successfully:\n\nTotal Amount: {totalAmount}\nPaid Amount: {paidAmount}\nPayment Status: {Status}",
+                                    "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     loaddgv();
                 }
                 else
                 {
-                    MessageBox.Show("فشل في إضافة الفاتورة، حاول مرة أخرى.", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Failed to add the bill, please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -142,7 +129,7 @@ namespace first.Receptionist
             if (!decimal.TryParse(txt_total.Text, out decimal totalAmount) ||
                 !decimal.TryParse(txt_paid.Text, out decimal paidAmount))
             {
-                MessageBox.Show("يرجى إدخال قيم صحيحة للمبلغ الكلي والمبلغ المدفوع.", "خطأ في الإدخال", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter valid values for total amount and paid amount.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -161,13 +148,13 @@ namespace first.Receptionist
 
             if (count > 0)
             {
-                MessageBox.Show($"تمت إضافة الفاتورة بنجاح:\n\nالمبلغ الكلي: {totalAmount}\nالمبلغ المدفوع: {paidAmount}\nحالة الدفع: {Status}",
-                                "عملية ناجحة", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Bill updated successfully:\n\nTotal Amount: {totalAmount}\nPaid Amount: {paidAmount}\nPayment Status: {Status}",
+                                "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 loaddgv();
             }
             else
             {
-                MessageBox.Show("فشل في إضافة الفاتورة، حاول مرة أخرى.", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Failed to update the bill, please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -183,7 +170,6 @@ namespace first.Receptionist
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
-
             con.Execute(ReceptionistServices.DeleteBill, new
             {
                 AppointmentId = appo

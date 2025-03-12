@@ -99,7 +99,6 @@ namespace first.Receptionist
         private async void  ReceptionistDashbordForm_Load(object sender, EventArgs e)
         {
        
-          
 
             docload();
             patientload();
@@ -109,7 +108,6 @@ namespace first.Receptionist
             {
                 await AppointmentReminder.StartReminderServiceAsync();
              
-              //  MessageBox.Show("✅ تم تنفيذ StartReminderServiceAsync بنجاح");
             }
             catch (Exception ex)
             {
