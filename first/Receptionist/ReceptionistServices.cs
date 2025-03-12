@@ -58,7 +58,7 @@ namespace first.Receptionist
                 OR d.Name LIKE '%' + @DoctorName + '%';
         ";
 
-        //  (Patients)
+        //patient
         public static string Getallpatient = @"
             SELECT 
                 PatientId, 
