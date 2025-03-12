@@ -71,6 +71,9 @@ namespace first.Doctor
 
         #endregion
 
+
+
+
         #region profile
         private void get_doctor_profile_data()
         {
@@ -159,7 +162,8 @@ namespace first.Doctor
                     MessageBox.Show("All fields are required.");
                     return;
                 }
-
+              
+                
                 if (txt_oldpass_profile.Text != result.FirstOrDefault().Usersmember.PasswordHash)
                 {
                     MessageBox.Show("Old password is incorrect.");
@@ -217,6 +221,9 @@ namespace first.Doctor
 
 
         }
+
+
+      
         #endregion
 
 
