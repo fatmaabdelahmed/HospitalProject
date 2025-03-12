@@ -312,7 +312,7 @@ namespace first.Receptionist
         {
             panel3.Controls.Clear();
           
-            EditProfileForm form = new EditProfileForm(1002);
+            EditProfileForm form = new EditProfileForm(1005);
             form.TopLevel = false;
             form.Dock = DockStyle.Fill;
             form.FormBorderStyle = FormBorderStyle.None;
