@@ -50,7 +50,6 @@ namespace first.Login
             if (rec != null)
             {
                 string role = rec.Role.ToString();
-                MessageBox.Show($"Login Success!\nRole: {role}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 clear();
 
                 if (role == "Admin")
@@ -67,13 +66,15 @@ namespace first.Login
                 //    this.Hide();
 
                 //}
-                //else if (role == "Reciptionest")
-                //{
-                //    ReciptionestForm reciptionestForm = new ReciptionestForm();
-                //    reciptionestForm.Show();
-                //    this.Hide();
+                else if (role == "Receptionist")
+                {
+                    MessageBox.Show($"Login Success!\nRole: {role}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                //}
+                    Receptionist.ReceptionistDashbordForm reciptionestForm = new Receptionist.ReceptionistDashbordForm();
+                    reciptionestForm.Show();
+                    this.Hide();
+
+                }
             }
             else
             {

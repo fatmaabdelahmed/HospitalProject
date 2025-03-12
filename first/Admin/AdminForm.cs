@@ -87,7 +87,7 @@ namespace first.Admin
 
             if (user.Role == UserRole.Doctor)
             {
-                Doctor doctor = new Doctor()
+                first.models.Doctor doctor = new first.models.Doctor()
                 {
                     UsersmemberId = user.UserId,
                     Name = user.Username
@@ -130,11 +130,11 @@ namespace first.Admin
 
             if (user.Role == UserRole.Doctor)
             {
-                Doctor doctor = db.Doctors.SingleOrDefault(d => d.UsersmemberId == user.UserId);
+                first.models.Doctor doctor = db.Doctors.SingleOrDefault(d => d.UsersmemberId == user.UserId);
 
                 if (doctor == null)
                 {
-                    doctor = new Doctor()
+                    doctor = new first.models.Doctor()
                     {
                         UsersmemberId = user.UserId,
                         Name = user.Username
@@ -197,9 +197,9 @@ namespace first.Admin
                 return;
             }
 
-         
 
-            Doctor doctor = new Doctor()
+
+            first.models.Doctor doctor = new first.models.Doctor()
             {
                 Name = txt_name.Text,
                 ContactInfo = txt_contactInfo.Text,
@@ -224,7 +224,7 @@ namespace first.Admin
         private void btn_update_doc_Click(object sender, EventArgs e)
         {
 
-            Doctor doctor = db.Doctors.SingleOrDefault(n => n.DoctorId == id);
+            first.models.Doctor doctor = db.Doctors.SingleOrDefault(n => n.DoctorId == id);
             if (doctor == null)
             {
                 MessageBox.Show("Please select a user to update.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -248,7 +248,7 @@ namespace first.Admin
 
         private void btn_delete_doc_Click(object sender, EventArgs e)
         {
-            Doctor doctor = db.Doctors.SingleOrDefault(n => n.DoctorId == id);
+            first.models.Doctor doctor = db.Doctors.SingleOrDefault(n => n.DoctorId == id);
             if (doctor == null)
             {
                 MessageBox.Show("Please select a user to delete.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -291,7 +291,7 @@ namespace first.Admin
         {
 
             id = (int)dgv_doctors.SelectedRows[0].Cells[0].Value;
-            Doctor doctor = db.Doctors.SingleOrDefault(n => n.DoctorId == id);
+            first.models.Doctor doctor = db.Doctors.SingleOrDefault(n => n.DoctorId == id);
             if (doctor != null)
             {
                 txt_name.Text = doctor.Name;
