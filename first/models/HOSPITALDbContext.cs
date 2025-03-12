@@ -34,7 +34,13 @@ namespace first.models
                 .HasForeignKey<Billing>(b => b.AppointmentId)
                 .IsRequired(false) // الفاتورة مش شرط تكون موجودة لكل موعد
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Usersmember>().HasData(
+               new Usersmember() { UserId = 1, Username = "fatma", PasswordHash = "123", Role = (UserRole)0 });
+
         }
+
+       
     }
     }
   
