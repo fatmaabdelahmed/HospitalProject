@@ -33,6 +33,12 @@ namespace first.models
 
         // العلاقة 1:M مع MedicalRecord
         public virtual List<MedicalRecord> MedicalRecords { get; set; } = new();
+
+        public override string ToString()
+        {
+            return $"name={Name}";
+        }
+
     }
 
     public enum Gender

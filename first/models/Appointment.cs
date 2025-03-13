@@ -34,6 +34,12 @@ namespace first.models
 
         // العلاقة 1:1 مع Billing
         public virtual Billing? Billing { get; set; }
+
+        public override string ToString()
+        {
+            return  $"n= {Patient.Name}" ;
+        }
+
     }
 
     // تعريف Enum للحالة
