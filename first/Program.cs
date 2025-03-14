@@ -30,10 +30,10 @@ namespace first
             Application.SetCompatibleTextRenderingDefault(false);
 
             // تشغيل WelcomePage عند بدء التطبيق
-            Application.Run(new QRcode());
+           // Application.Run(new QRcode());
 
 
-          //  Application.Run(new doctorform(2));
+           Application.Run(new doctorform(2));
 
         }
     }

@@ -36,6 +36,9 @@ namespace first.Doctor
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            pic_confirm_pass = new PictureBox();
+            pict_new_pass = new PictureBox();
+            pic_old_pass = new PictureBox();
             btn_logout = new Button();
             pictureBox1 = new PictureBox();
             label7 = new Label();
@@ -86,6 +89,9 @@ namespace first.Doctor
             com_doctor = new ComboBox();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pic_confirm_pass).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pict_new_pass).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pic_old_pass).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pic_bake_appintment).BeginInit();
@@ -117,6 +123,9 @@ namespace first.Doctor
             tabPage1.BackColor = Color.Transparent;
             tabPage1.BackgroundImage = (Image)resources.GetObject("tabPage1.BackgroundImage");
             tabPage1.BackgroundImageLayout = ImageLayout.Stretch;
+            tabPage1.Controls.Add(pic_confirm_pass);
+            tabPage1.Controls.Add(pict_new_pass);
+            tabPage1.Controls.Add(pic_old_pass);
             tabPage1.Controls.Add(btn_logout);
             tabPage1.Controls.Add(pictureBox1);
             tabPage1.Controls.Add(label7);
@@ -140,6 +149,39 @@ namespace first.Doctor
             tabPage1.TabIndex = 0;
             tabPage1.Text = "   Doctor Profile   ";
             // 
+            // pic_confirm_pass
+            // 
+            pic_confirm_pass.Image = (Image)resources.GetObject("pic_confirm_pass.Image");
+            pic_confirm_pass.Location = new Point(1354, 678);
+            pic_confirm_pass.Name = "pic_confirm_pass";
+            pic_confirm_pass.Size = new Size(30, 30);
+            pic_confirm_pass.SizeMode = PictureBoxSizeMode.StretchImage;
+            pic_confirm_pass.TabIndex = 50;
+            pic_confirm_pass.TabStop = false;
+            pic_confirm_pass.Click += pic_confirm_pass_Click;
+            // 
+            // pict_new_pass
+            // 
+            pict_new_pass.Image = (Image)resources.GetObject("pict_new_pass.Image");
+            pict_new_pass.Location = new Point(1354, 598);
+            pict_new_pass.Name = "pict_new_pass";
+            pict_new_pass.Size = new Size(30, 30);
+            pict_new_pass.SizeMode = PictureBoxSizeMode.StretchImage;
+            pict_new_pass.TabIndex = 49;
+            pict_new_pass.TabStop = false;
+            pict_new_pass.Click += pict_new_pass_Click;
+            // 
+            // pic_old_pass
+            // 
+            pic_old_pass.Image = (Image)resources.GetObject("pic_old_pass.Image");
+            pic_old_pass.Location = new Point(1354, 518);
+            pic_old_pass.Name = "pic_old_pass";
+            pic_old_pass.Size = new Size(30, 30);
+            pic_old_pass.SizeMode = PictureBoxSizeMode.StretchImage;
+            pic_old_pass.TabIndex = 48;
+            pic_old_pass.TabStop = false;
+            pic_old_pass.Click += pic_old_pass_Click;
+            // 
             // btn_logout
             // 
             btn_logout.BackColor = Color.FromArgb(42, 59, 141);
@@ -156,7 +198,7 @@ namespace first.Doctor
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(1103, 41);
+            pictureBox1.Location = new Point(1036, 42);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(101, 96);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -168,7 +210,7 @@ namespace first.Doctor
             label7.AutoSize = true;
             label7.Font = new Font("Tahoma", 10.875F);
             label7.ForeColor = Color.FromArgb(43, 57, 145);
-            label7.Location = new Point(931, 680);
+            label7.Location = new Point(815, 678);
             label7.Name = "label7";
             label7.Size = new Size(180, 35);
             label7.TabIndex = 45;
@@ -179,7 +221,7 @@ namespace first.Doctor
             label6.AutoSize = true;
             label6.Font = new Font("Tahoma", 10.875F);
             label6.ForeColor = Color.FromArgb(43, 57, 145);
-            label6.Location = new Point(931, 600);
+            label6.Location = new Point(815, 598);
             label6.Name = "label6";
             label6.Size = new Size(137, 35);
             label6.TabIndex = 44;
@@ -190,7 +232,7 @@ namespace first.Doctor
             label5.AutoSize = true;
             label5.Font = new Font("Tahoma", 10.875F);
             label5.ForeColor = Color.FromArgb(43, 57, 145);
-            label5.Location = new Point(931, 520);
+            label5.Location = new Point(815, 518);
             label5.Name = "label5";
             label5.Size = new Size(125, 35);
             label5.TabIndex = 43;
@@ -200,35 +242,38 @@ namespace first.Doctor
             // 
             txt_conpass_profile.Font = new Font("Tahoma", 10.875F);
             txt_conpass_profile.ForeColor = Color.FromArgb(43, 57, 145);
-            txt_conpass_profile.Location = new Point(1152, 675);
+            txt_conpass_profile.Location = new Point(1036, 673);
             txt_conpass_profile.Name = "txt_conpass_profile";
-            txt_conpass_profile.Size = new Size(285, 43);
+            txt_conpass_profile.Size = new Size(369, 43);
             txt_conpass_profile.TabIndex = 42;
+            txt_conpass_profile.UseSystemPasswordChar = true;
             // 
             // txt_newpass_profile
             // 
             txt_newpass_profile.Font = new Font("Tahoma", 10.875F);
             txt_newpass_profile.ForeColor = Color.FromArgb(43, 57, 145);
-            txt_newpass_profile.Location = new Point(1152, 594);
+            txt_newpass_profile.Location = new Point(1036, 592);
             txt_newpass_profile.Name = "txt_newpass_profile";
-            txt_newpass_profile.Size = new Size(285, 43);
+            txt_newpass_profile.Size = new Size(369, 43);
             txt_newpass_profile.TabIndex = 41;
+            txt_newpass_profile.UseSystemPasswordChar = true;
             // 
             // txt_oldpass_profile
             // 
             txt_oldpass_profile.Font = new Font("Tahoma", 10.875F);
             txt_oldpass_profile.ForeColor = Color.FromArgb(43, 57, 145);
-            txt_oldpass_profile.Location = new Point(1152, 513);
+            txt_oldpass_profile.Location = new Point(1036, 511);
             txt_oldpass_profile.Name = "txt_oldpass_profile";
-            txt_oldpass_profile.Size = new Size(279, 43);
+            txt_oldpass_profile.Size = new Size(363, 43);
             txt_oldpass_profile.TabIndex = 40;
+            txt_oldpass_profile.UseSystemPasswordChar = true;
             // 
             // btn_update_profile
             // 
             btn_update_profile.BackColor = Color.FromArgb(42, 59, 141);
             btn_update_profile.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btn_update_profile.ForeColor = Color.White;
-            btn_update_profile.Location = new Point(1067, 776);
+            btn_update_profile.Location = new Point(951, 774);
             btn_update_profile.Name = "btn_update_profile";
             btn_update_profile.Size = new Size(258, 76);
             btn_update_profile.TabIndex = 39;
@@ -241,7 +286,7 @@ namespace first.Doctor
             label4.AutoSize = true;
             label4.Font = new Font("Tahoma", 10.875F);
             label4.ForeColor = Color.FromArgb(43, 57, 145);
-            label4.Location = new Point(931, 440);
+            label4.Location = new Point(815, 438);
             label4.Name = "label4";
             label4.Size = new Size(129, 35);
             label4.TabIndex = 38;
@@ -252,7 +297,7 @@ namespace first.Doctor
             label3.AutoSize = true;
             label3.Font = new Font("Tahoma", 10.875F);
             label3.ForeColor = Color.FromArgb(43, 57, 145);
-            label3.Location = new Point(931, 360);
+            label3.Location = new Point(815, 358);
             label3.Name = "label3";
             label3.Size = new Size(160, 35);
             label3.TabIndex = 37;
@@ -263,7 +308,7 @@ namespace first.Doctor
             label2.AutoSize = true;
             label2.Font = new Font("Tahoma", 10.875F);
             label2.ForeColor = Color.FromArgb(43, 57, 145);
-            label2.Location = new Point(931, 280);
+            label2.Location = new Point(815, 278);
             label2.Name = "label2";
             label2.Size = new Size(188, 35);
             label2.TabIndex = 36;
@@ -274,7 +319,7 @@ namespace first.Doctor
             label1.AutoSize = true;
             label1.Font = new Font("Tahoma", 10.875F);
             label1.ForeColor = Color.FromArgb(43, 57, 145);
-            label1.Location = new Point(931, 200);
+            label1.Location = new Point(815, 198);
             label1.Name = "label1";
             label1.Size = new Size(88, 35);
             label1.TabIndex = 35;
@@ -284,36 +329,36 @@ namespace first.Doctor
             // 
             txt_sched_profile.Font = new Font("Tahoma", 10.875F);
             txt_sched_profile.ForeColor = Color.FromArgb(43, 57, 145);
-            txt_sched_profile.Location = new Point(1152, 432);
+            txt_sched_profile.Location = new Point(1036, 430);
             txt_sched_profile.Name = "txt_sched_profile";
-            txt_sched_profile.Size = new Size(279, 43);
+            txt_sched_profile.Size = new Size(363, 43);
             txt_sched_profile.TabIndex = 34;
             // 
             // txt_con_profile
             // 
             txt_con_profile.Font = new Font("Tahoma", 10.875F);
             txt_con_profile.ForeColor = Color.FromArgb(43, 57, 145);
-            txt_con_profile.Location = new Point(1152, 351);
+            txt_con_profile.Location = new Point(1036, 349);
             txt_con_profile.Name = "txt_con_profile";
-            txt_con_profile.Size = new Size(279, 43);
+            txt_con_profile.Size = new Size(363, 43);
             txt_con_profile.TabIndex = 33;
             // 
             // txt_speci_profile
             // 
             txt_speci_profile.Font = new Font("Tahoma", 10.875F);
             txt_speci_profile.ForeColor = Color.FromArgb(43, 57, 145);
-            txt_speci_profile.Location = new Point(1152, 270);
+            txt_speci_profile.Location = new Point(1036, 268);
             txt_speci_profile.Name = "txt_speci_profile";
-            txt_speci_profile.Size = new Size(279, 43);
+            txt_speci_profile.Size = new Size(363, 43);
             txt_speci_profile.TabIndex = 32;
             // 
             // txt_name_profile
             // 
             txt_name_profile.Font = new Font("Tahoma", 10.875F);
             txt_name_profile.ForeColor = Color.FromArgb(43, 57, 145);
-            txt_name_profile.Location = new Point(1152, 189);
+            txt_name_profile.Location = new Point(1036, 187);
             txt_name_profile.Name = "txt_name_profile";
-            txt_name_profile.Size = new Size(279, 43);
+            txt_name_profile.Size = new Size(363, 43);
             txt_name_profile.TabIndex = 31;
             // 
             // tabPage2
@@ -363,11 +408,11 @@ namespace first.Doctor
             btn_uppcoming.BackColor = Color.FromArgb(74, 124, 185);
             btn_uppcoming.Font = new Font("Segoe UI", 12F);
             btn_uppcoming.ForeColor = Color.White;
-            btn_uppcoming.Location = new Point(1138, 64);
+            btn_uppcoming.Location = new Point(1138, 96);
             btn_uppcoming.Name = "btn_uppcoming";
-            btn_uppcoming.Size = new Size(300, 106);
+            btn_uppcoming.Size = new Size(300, 74);
             btn_uppcoming.TabIndex = 7;
-            btn_uppcoming.Text = " Upcoming\r\nAppointments";
+            btn_uppcoming.Text = " Upcoming";
             btn_uppcoming.UseVisualStyleBackColor = false;
             btn_uppcoming.Click += btn_uppcoming_Click;
             // 
@@ -713,6 +758,9 @@ namespace first.Doctor
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pic_confirm_pass).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pict_new_pass).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pic_old_pass).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
@@ -783,5 +831,8 @@ namespace first.Doctor
         private Button btn_logout;
         private PictureBox pic_bake_appintment;
         private PictureBox pic_bake_medical_rec;
+        private PictureBox pic_confirm_pass;
+        private PictureBox pict_new_pass;
+        private PictureBox pic_old_pass;
     }
 }

@@ -696,8 +696,23 @@ namespace first.Doctor
             WelcomPage loginForm = new WelcomPage();
             loginForm.Show();
 
-            
+
             this.Close();
+        }
+
+        private void pic_old_pass_Click(object sender, EventArgs e)
+        {
+            txt_oldpass_profile.UseSystemPasswordChar = !txt_oldpass_profile.UseSystemPasswordChar;
+        }
+
+        private void pict_new_pass_Click(object sender, EventArgs e)
+        {
+            txt_newpass_profile.UseSystemPasswordChar = !txt_newpass_profile.UseSystemPasswordChar;
+        }
+
+        private void pic_confirm_pass_Click(object sender, EventArgs e)
+        {
+            txt_conpass_profile.UseSystemPasswordChar = !txt_conpass_profile.UseSystemPasswordChar;
         }
     }
 }
