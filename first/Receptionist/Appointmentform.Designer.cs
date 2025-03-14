@@ -155,7 +155,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1179, 757);
+            ClientSize = new Size(1313, 833);
             Controls.Add(panel3);
             Name = "Appointmentform";
             Text = "Appointmentform";

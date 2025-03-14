@@ -43,6 +43,8 @@
             label1 = new Label();
             com_patients = new ComboBox();
             dgv_patients = new DataGridView();
+            btn_logout = new Button();
+            btn_back = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_reports).BeginInit();
@@ -60,10 +62,11 @@
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
             tabControl1.Controls.Add(tabPage4);
-            tabControl1.Location = new Point(12, 36);
+            tabControl1.Location = new Point(-1, 22);
+            tabControl1.Margin = new Padding(2);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1474, 690);
+            tabControl1.Size = new Size(1318, 753);
             tabControl1.TabIndex = 0;
             tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
             // 
@@ -71,50 +74,55 @@
             // 
             tabPage1.Controls.Add(btn_patientNo_export);
             tabPage1.Controls.Add(dgv_reports);
-            tabPage1.Location = new Point(8, 46);
+            tabPage1.Location = new Point(4, 29);
+            tabPage1.Margin = new Padding(2);
             tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1458, 636);
+            tabPage1.Padding = new Padding(2);
+            tabPage1.Size = new Size(1310, 720);
             tabPage1.TabIndex = 0;
             tabPage1.Text = " Number of patients per department  ";
             tabPage1.UseVisualStyleBackColor = true;
             // 
             // btn_patientNo_export
             // 
-            btn_patientNo_export.Location = new Point(1078, 450);
+            btn_patientNo_export.Location = new Point(663, 281);
+            btn_patientNo_export.Margin = new Padding(2);
             btn_patientNo_export.Name = "btn_patientNo_export";
-            btn_patientNo_export.Size = new Size(192, 77);
+            btn_patientNo_export.Size = new Size(174, 43);
             btn_patientNo_export.TabIndex = 2;
-            btn_patientNo_export.Text = "export to\r\n exel";
+            btn_patientNo_export.Text = "export to exel";
             btn_patientNo_export.UseVisualStyleBackColor = true;
             btn_patientNo_export.Click += btn_patientNo_export_Click;
             // 
             // dgv_reports
             // 
             dgv_reports.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_reports.Location = new Point(26, 50);
+            dgv_reports.Location = new Point(16, 31);
+            dgv_reports.Margin = new Padding(2);
             dgv_reports.Name = "dgv_reports";
             dgv_reports.RowHeadersWidth = 82;
-            dgv_reports.Size = new Size(567, 546);
+            dgv_reports.Size = new Size(550, 346);
             dgv_reports.TabIndex = 1;
             // 
             // tabPage2
             // 
             tabPage2.Controls.Add(btn_appoinment_export);
             tabPage2.Controls.Add(dgv_appointment_schedules);
-            tabPage2.Location = new Point(8, 46);
+            tabPage2.Location = new Point(4, 29);
+            tabPage2.Margin = new Padding(2);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1458, 636);
+            tabPage2.Padding = new Padding(2);
+            tabPage2.Size = new Size(1310, 720);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Appointment schedules  ";
             tabPage2.UseVisualStyleBackColor = true;
             // 
             // btn_appoinment_export
             // 
-            btn_appoinment_export.Location = new Point(1035, 560);
+            btn_appoinment_export.Location = new Point(637, 350);
+            btn_appoinment_export.Margin = new Padding(2);
             btn_appoinment_export.Name = "btn_appoinment_export";
-            btn_appoinment_export.Size = new Size(325, 46);
+            btn_appoinment_export.Size = new Size(174, 43);
             btn_appoinment_export.TabIndex = 1;
             btn_appoinment_export.Text = "export to exel";
             btn_appoinment_export.UseVisualStyleBackColor = true;
@@ -123,28 +131,31 @@
             // dgv_appointment_schedules
             // 
             dgv_appointment_schedules.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_appointment_schedules.Location = new Point(25, 48);
+            dgv_appointment_schedules.Location = new Point(15, 30);
+            dgv_appointment_schedules.Margin = new Padding(2);
             dgv_appointment_schedules.Name = "dgv_appointment_schedules";
             dgv_appointment_schedules.RowHeadersWidth = 82;
-            dgv_appointment_schedules.Size = new Size(1410, 473);
+            dgv_appointment_schedules.Size = new Size(868, 296);
             dgv_appointment_schedules.TabIndex = 0;
             // 
             // tabPage3
             // 
             tabPage3.Controls.Add(btn_billing);
             tabPage3.Controls.Add(dgv_billing);
-            tabPage3.Location = new Point(8, 46);
+            tabPage3.Location = new Point(4, 29);
+            tabPage3.Margin = new Padding(2);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(1458, 636);
+            tabPage3.Size = new Size(1310, 720);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Outstanding payments  ";
             tabPage3.UseVisualStyleBackColor = true;
             // 
             // btn_billing
             // 
-            btn_billing.Location = new Point(1035, 533);
+            btn_billing.Location = new Point(637, 333);
+            btn_billing.Margin = new Padding(2);
             btn_billing.Name = "btn_billing";
-            btn_billing.Size = new Size(282, 46);
+            btn_billing.Size = new Size(174, 43);
             btn_billing.TabIndex = 1;
             btn_billing.Text = "expot to exel";
             btn_billing.UseVisualStyleBackColor = true;
@@ -153,10 +164,11 @@
             // dgv_billing
             // 
             dgv_billing.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_billing.Location = new Point(42, 49);
+            dgv_billing.Location = new Point(26, 31);
+            dgv_billing.Margin = new Padding(2);
             dgv_billing.Name = "dgv_billing";
             dgv_billing.RowHeadersWidth = 82;
-            dgv_billing.Size = new Size(1355, 430);
+            dgv_billing.Size = new Size(834, 269);
             dgv_billing.TabIndex = 0;
             // 
             // tabPage4
@@ -165,18 +177,20 @@
             tabPage4.Controls.Add(label1);
             tabPage4.Controls.Add(com_patients);
             tabPage4.Controls.Add(dgv_patients);
-            tabPage4.Location = new Point(8, 46);
+            tabPage4.Location = new Point(4, 29);
+            tabPage4.Margin = new Padding(2);
             tabPage4.Name = "tabPage4";
-            tabPage4.Size = new Size(1458, 636);
+            tabPage4.Size = new Size(1310, 720);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Patient visit history  ";
             tabPage4.UseVisualStyleBackColor = true;
             // 
             // btn_patient_visit_history
             // 
-            btn_patient_visit_history.Location = new Point(1040, 566);
+            btn_patient_visit_history.Location = new Point(640, 354);
+            btn_patient_visit_history.Margin = new Padding(2);
             btn_patient_visit_history.Name = "btn_patient_visit_history";
-            btn_patient_visit_history.Size = new Size(282, 46);
+            btn_patient_visit_history.Size = new Size(174, 43);
             btn_patient_visit_history.TabIndex = 3;
             btn_patient_visit_history.Text = "expot to exel";
             btn_patient_visit_history.UseVisualStyleBackColor = true;
@@ -185,36 +199,64 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(789, 75);
+            label1.Location = new Point(486, 47);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(99, 32);
+            label1.Size = new Size(62, 20);
             label1.TabIndex = 2;
             label1.Text = "patients";
             // 
             // com_patients
             // 
             com_patients.FormattingEnabled = true;
-            com_patients.Location = new Point(948, 68);
+            com_patients.Location = new Point(583, 42);
+            com_patients.Margin = new Padding(2);
             com_patients.Name = "com_patients";
-            com_patients.Size = new Size(405, 40);
+            com_patients.Size = new Size(251, 28);
             com_patients.TabIndex = 1;
             com_patients.SelectedIndexChanged += com_patients_SelectedIndexChanged;
             // 
             // dgv_patients
             // 
             dgv_patients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_patients.Location = new Point(72, 131);
+            dgv_patients.Location = new Point(44, 82);
+            dgv_patients.Margin = new Padding(2);
             dgv_patients.Name = "dgv_patients";
             dgv_patients.RowHeadersWidth = 82;
-            dgv_patients.Size = new Size(1307, 418);
+            dgv_patients.Size = new Size(804, 261);
             dgv_patients.TabIndex = 0;
+            // 
+            // btn_logout
+            // 
+            btn_logout.Location = new Point(1128, 779);
+            btn_logout.Margin = new Padding(2);
+            btn_logout.Name = "btn_logout";
+            btn_logout.Size = new Size(174, 43);
+            btn_logout.TabIndex = 4;
+            btn_logout.Text = "Log out";
+            btn_logout.UseVisualStyleBackColor = true;
+            btn_logout.Click += btn_logout_Click;
+            // 
+            // btn_back
+            // 
+            btn_back.Location = new Point(11, 779);
+            btn_back.Margin = new Padding(2);
+            btn_back.Name = "btn_back";
+            btn_back.Size = new Size(174, 43);
+            btn_back.TabIndex = 5;
+            btn_back.Text = "Back to Dashboard";
+            btn_back.UseVisualStyleBackColor = true;
+            btn_back.Click += btn_back_Click;
             // 
             // reports
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1548, 738);
+            ClientSize = new Size(1313, 833);
+            Controls.Add(btn_back);
+            Controls.Add(btn_logout);
             Controls.Add(tabControl1);
+            Margin = new Padding(2);
             Name = "reports";
             Text = "reports";
             Load += reports_Load;
@@ -248,5 +290,7 @@
         private Button btn_appoinment_export;
         private Button btn_billing;
         private Button btn_patient_visit_history;
+        private Button btn_logout;
+        private Button btn_back;
     }
 }
