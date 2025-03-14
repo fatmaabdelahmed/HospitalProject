@@ -51,13 +51,39 @@ namespace first.Reports
                 if (patient != null)
                 {
                     
-                    return $"ID: {patient.PatientId}, Name: {patient.Name},  DOB: {patient.DateOfBirth.Date}, medical record : {patient.MedicalHistory},  contact info: {patient.ContactInfo}";
+                    return $"ID: {patient.PatientId}," + " \n" +
+                        $" Name: {patient.Name},  "+ " \n" +
+                        $"DOB: {patient.DateOfBirth.ToString("dd-MM-yyyy")}" + " \n" +
+                        $" medical record : {patient.MedicalHistory}, " + " \n" +
+                        $" contact info: {patient.ContactInfo}";
                 }
             }
             return null;
         }
 
-         
+
+        //private void GenerateQRCode(string data)
+        //{
+        //    using (QRCodeGenerator qrGenerator = new QRCodeGenerator())
+        //    {
+        //        // Generate QR code data
+        //        QRCodeData qrCodeData = qrGenerator.CreateQrCode(data, QRCodeGenerator.ECCLevel.Q);
+        //        using (QRCoder.QRCode qrCode = new QRCoder.QRCode(qrCodeData))
+        //        {
+        //            // Create a QR code image with a fixed size of 70x70 pixels
+        //            int fixedSize = 700; // Desired size in pixels
+        //            Bitmap qrCodeImage = qrCode.GetGraphic(5); // Adjust pixelsPerModule to control the size
+
+        //            // Resize the QR code to 70x70 pixels
+        //            Bitmap resizedQrCode = new Bitmap(qrCodeImage, new Size(fixedSize, fixedSize));
+
+        //            // Display the resized QR code in the PictureBox
+        //            pictureBoxQRCode.Image = resizedQrCode;
+        //        }
+        //    }
+        //}
+
+
         private void GenerateQRCode(string data)
         {
             using (QRCodeGenerator qrGenerator = new QRCodeGenerator())
@@ -66,12 +92,11 @@ namespace first.Reports
                 QRCodeData qrCodeData = qrGenerator.CreateQrCode(data, QRCodeGenerator.ECCLevel.Q);
                 using (QRCoder.QRCode qrCode = new QRCoder.QRCode(qrCodeData))
                 {
-                    // Create a QR code image with a fixed size of 70x70 pixels
-                    int fixedSize = 700; // Desired size in pixels
-                    Bitmap qrCodeImage = qrCode.GetGraphic(5); // Adjust pixelsPerModule to control the size
+                    // Generate QR code with proper scaling to 70x70 pixels
+                    Bitmap qrCodeImage = qrCode.GetGraphic(10, Color.Black, Color.White, true);
 
-                    // Resize the QR code to 70x70 pixels
-                    Bitmap resizedQrCode = new Bitmap(qrCodeImage, new Size(fixedSize, fixedSize));
+                    // Resize to ensure it is exactly 70x70 pixels
+                    Bitmap resizedQrCode = new Bitmap(qrCodeImage, new Size(600, 600));
 
                     // Display the resized QR code in the PictureBox
                     pictureBoxQRCode.Image = resizedQrCode;
@@ -80,4 +105,4 @@ namespace first.Reports
         }
 
     }
-    }
+}

@@ -24,16 +24,16 @@ namespace first
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            Application.Run(new ReceptionistDashbordForm());
+           // Application.Run(new ReceptionistDashbordForm());
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             // تشغيل WelcomePage عند بدء التطبيق
-            Application.Run(new WelcomPage());
-
-
             Application.Run(new QRcode());
+
+
+          //  Application.Run(new doctorform(2));
 
         }
     }

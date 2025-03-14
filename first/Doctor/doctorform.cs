@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dapper;
 using first.models;
+
+using first.Login;
 using first.Receptionist;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -17,12 +19,13 @@ using Microsoft.VisualBasic.ApplicationServices;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
+
 namespace first.Doctor
 {
 
     public partial class doctorform : Form
     {
-       
+
         private readonly DbConnection con;
 
         int d_id;
@@ -162,8 +165,8 @@ namespace first.Doctor
                     MessageBox.Show("All fields are required.");
                     return;
                 }
-              
-                
+
+
                 if (txt_oldpass_profile.Text != result.FirstOrDefault().Usersmember.PasswordHash)
                 {
                     MessageBox.Show("Old password is incorrect.");
@@ -223,7 +226,7 @@ namespace first.Doctor
         }
 
 
-      
+
         #endregion
 
 
@@ -682,6 +685,19 @@ namespace first.Doctor
         #endregion
 
 
-       
+
+        private void pic_bake_medical_rec_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 0;
+        }
+
+        private void btn_logout_Click(object sender, EventArgs e)
+        {
+            WelcomPage loginForm = new WelcomPage();
+            loginForm.Show();
+
+            
+            this.Close();
+        }
     }
 }
