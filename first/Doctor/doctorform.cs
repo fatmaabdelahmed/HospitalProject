@@ -685,6 +685,7 @@ namespace first.Doctor
         #endregion
 
 
+        #region gui
 
         private void pic_bake_medical_rec_Click(object sender, EventArgs e)
         {
@@ -714,5 +715,7 @@ namespace first.Doctor
         {
             txt_conpass_profile.UseSystemPasswordChar = !txt_conpass_profile.UseSystemPasswordChar;
         }
+
+        #endregion
     }
 }

@@ -15,17 +15,18 @@ namespace first.Reports
     public partial class QRcode : Form
     {
         private readonly DbConnection con;
-
-        public QRcode()
+        int PatientID;
+        public QRcode(int id )
         {
             InitializeComponent();
             HOSPITALDbContext db = new HOSPITALDbContext();
             con = db.Database.GetDbConnection();
+            PatientID = id;
         }
 
         private void btnGenerateQR_Click(object sender, EventArgs e)
         {
-            int patientID = 1;
+            int patientID = PatientID;
             
                 var patientData = GetPatientData(patientID);
                 if (patientData != null)
@@ -95,8 +96,8 @@ namespace first.Reports
                     // Generate QR code with proper scaling to 70x70 pixels
                     Bitmap qrCodeImage = qrCode.GetGraphic(10, Color.Black, Color.White, true);
 
-                    // Resize to ensure it is exactly 70x70 pixels
-                    Bitmap resizedQrCode = new Bitmap(qrCodeImage, new Size(600, 600));
+                    // Resize to ensure it is exactly 70x70  pixels
+                    Bitmap resizedQrCode = new Bitmap(qrCodeImage, new Size(523, 589));
 
                     // Display the resized QR code in the PictureBox
                     pictureBoxQRCode.Image = resizedQrCode;

@@ -34,6 +34,14 @@ namespace first.Doctor
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             pic_confirm_pass = new PictureBox();
@@ -184,7 +192,7 @@ namespace first.Doctor
             // 
             // btn_logout
             // 
-            btn_logout.BackColor = Color.FromArgb(42, 59, 141);
+            btn_logout.BackColor = Color.FromArgb(0, 80, 161);
             btn_logout.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btn_logout.ForeColor = Color.White;
             btn_logout.Location = new Point(32, 26);
@@ -270,7 +278,7 @@ namespace first.Doctor
             // 
             // btn_update_profile
             // 
-            btn_update_profile.BackColor = Color.FromArgb(42, 59, 141);
+            btn_update_profile.BackColor = Color.FromArgb(0, 80, 161);
             btn_update_profile.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btn_update_profile.ForeColor = Color.White;
             btn_update_profile.Location = new Point(951, 774);
@@ -392,7 +400,7 @@ namespace first.Doctor
             // 
             // btn_all_appintment
             // 
-            btn_all_appintment.BackColor = Color.FromArgb(74, 124, 185);
+            btn_all_appintment.BackColor = Color.FromArgb(0, 80, 161);
             btn_all_appintment.Font = new Font("Segoe UI", 12F);
             btn_all_appintment.ForeColor = Color.White;
             btn_all_appintment.Location = new Point(1138, 211);
@@ -405,7 +413,7 @@ namespace first.Doctor
             // 
             // btn_uppcoming
             // 
-            btn_uppcoming.BackColor = Color.FromArgb(74, 124, 185);
+            btn_uppcoming.BackColor = Color.FromArgb(0, 80, 161);
             btn_uppcoming.Font = new Font("Segoe UI", 12F);
             btn_uppcoming.ForeColor = Color.White;
             btn_uppcoming.Location = new Point(1138, 96);
@@ -441,20 +449,42 @@ namespace first.Doctor
             // 
             // dgv_appoinments
             // 
-            dataGridViewCellStyle1.ForeColor = Color.Black;
+            dataGridViewCellStyle1.ForeColor = Color.FromArgb(0, 53, 134);
             dgv_appoinments.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dgv_appoinments.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_appoinments.BackgroundColor = Color.White;
+            dgv_appoinments.BorderStyle = BorderStyle.None;
+            dgv_appoinments.CellBorderStyle = DataGridViewCellBorderStyle.Sunken;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = Color.Black;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(0, 53, 134);
+            dataGridViewCellStyle2.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.White;
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgv_appoinments.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgv_appoinments.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dgv_appoinments.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Window;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(0, 53, 134);
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dgv_appoinments.DefaultCellStyle = dataGridViewCellStyle3;
+            dgv_appoinments.EnableHeadersVisualStyles = false;
+            dgv_appoinments.GridColor = Color.White;
             dgv_appoinments.Location = new Point(192, 471);
             dgv_appoinments.Name = "dgv_appoinments";
-            dgv_appoinments.RowHeadersWidth = 82;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Control;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle4.ForeColor = Color.FromArgb(0, 53, 134);
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            dgv_appoinments.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dgv_appoinments.RowHeadersVisible = false;
+            dgv_appoinments.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
             dgv_appoinments.Size = new Size(1078, 453);
             dgv_appoinments.TabIndex = 0;
             dgv_appoinments.CellMouseDoubleClick += dgv_appoinments_CellMouseDoubleClick;
@@ -662,12 +692,42 @@ namespace first.Doctor
             // 
             // dgv_medical_rec
             // 
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(0, 53, 134);
-            dgv_medical_rec.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.ForeColor = Color.FromArgb(0, 53, 134);
+            dgv_medical_rec.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dgv_medical_rec.BackgroundColor = Color.White;
+            dgv_medical_rec.BorderStyle = BorderStyle.None;
+            dgv_medical_rec.CellBorderStyle = DataGridViewCellBorderStyle.Sunken;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.FromArgb(0, 53, 134);
+            dataGridViewCellStyle6.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle6.ForeColor = Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
+            dgv_medical_rec.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             dgv_medical_rec.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = SystemColors.Window;
+            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle7.ForeColor = Color.FromArgb(0, 53, 134);
+            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.False;
+            dgv_medical_rec.DefaultCellStyle = dataGridViewCellStyle7;
+            dgv_medical_rec.EnableHeadersVisualStyles = false;
+            dgv_medical_rec.GridColor = Color.White;
             dgv_medical_rec.Location = new Point(745, 459);
             dgv_medical_rec.Name = "dgv_medical_rec";
-            dgv_medical_rec.RowHeadersWidth = 82;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = SystemColors.Control;
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle8.ForeColor = Color.FromArgb(0, 53, 134);
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
+            dgv_medical_rec.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dgv_medical_rec.RowHeadersVisible = false;
+            dgv_medical_rec.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             dgv_medical_rec.Size = new Size(681, 365);
             dgv_medical_rec.TabIndex = 1;
             dgv_medical_rec.CellContentDoubleClick += dgv_medical_rec_CellContentDoubleClick;
@@ -724,13 +784,44 @@ namespace first.Doctor
             // 
             // dgv_get_all_medicalrecords
             // 
-            dataGridViewCellStyle4.ForeColor = Color.FromArgb(0, 53, 134);
-            dgv_get_all_medicalrecords.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle9.ForeColor = Color.FromArgb(0, 53, 134);
+            dgv_get_all_medicalrecords.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
+            dgv_get_all_medicalrecords.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgv_get_all_medicalrecords.BackgroundColor = Color.White;
+            dgv_get_all_medicalrecords.BorderStyle = BorderStyle.None;
+            dgv_get_all_medicalrecords.CellBorderStyle = DataGridViewCellBorderStyle.Sunken;
+            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = Color.FromArgb(0, 53, 134);
+            dataGridViewCellStyle10.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle10.ForeColor = Color.White;
+            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.True;
+            dgv_get_all_medicalrecords.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             dgv_get_all_medicalrecords.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_get_all_medicalrecords.Location = new Point(75, 542);
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = SystemColors.Window;
+            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle11.ForeColor = Color.FromArgb(0, 53, 134);
+            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.False;
+            dgv_get_all_medicalrecords.DefaultCellStyle = dataGridViewCellStyle11;
+            dgv_get_all_medicalrecords.EnableHeadersVisualStyles = false;
+            dgv_get_all_medicalrecords.GridColor = Color.White;
+            dgv_get_all_medicalrecords.Location = new Point(97, 509);
             dgv_get_all_medicalrecords.Name = "dgv_get_all_medicalrecords";
-            dgv_get_all_medicalrecords.RowHeadersWidth = 82;
-            dgv_get_all_medicalrecords.Size = new Size(1322, 381);
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = SystemColors.Control;
+            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle12.ForeColor = Color.FromArgb(0, 53, 134);
+            dataGridViewCellStyle12.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.True;
+            dgv_get_all_medicalrecords.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dgv_get_all_medicalrecords.RowHeadersVisible = false;
+            dgv_get_all_medicalrecords.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
+            dgv_get_all_medicalrecords.Size = new Size(1272, 381);
             dgv_get_all_medicalrecords.TabIndex = 3;
             dgv_get_all_medicalrecords.CellContentDoubleClick += dgv_medical_rec_CellContentDoubleClick;
             // 
