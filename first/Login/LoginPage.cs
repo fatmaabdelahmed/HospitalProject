@@ -59,21 +59,21 @@ namespace first.Login
                     this.Hide();
 
                 }
-                //else if (role == "Doctor")
-                //{
-                //    DoctorForm doctorForm = new DoctorForm();
-                //    doctorForm.Show();
-                //    this.Hide();
+                else if (role == "Doctor")
+                {
+                  Doctor.doctorform doctorForm = new Doctor.doctorform(rec.UserId);
+                    doctorForm.Show();
+                    this.Hide();
 
-                //}
+                }
                 else if (role == "Receptionist")
                 {
                     MessageBox.Show($"Login Success!\nRole: {role}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    Receptionist.ReceptionistDashbordForm reciptionestForm = new Receptionist.ReceptionistDashbordForm();
-                    reciptionestForm.Show();
+                    // تمرير الـ UserId إلى الفورم الجديد
+                    Receptionist.ReceptionistDashbordForm receptionistForm = new Receptionist.ReceptionistDashbordForm(rec.UserId,rec.Username);
+                    receptionistForm.Show();
                     this.Hide();
-
                 }
             }
             else

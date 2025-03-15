@@ -19,8 +19,12 @@ namespace first.Receptionist
     public partial class ReceptionistDashbordForm : Form
     {
         IDbConnection con;
-        public ReceptionistDashbordForm()
+        private int receptionistId;
+        private string username;
+        public ReceptionistDashbordForm(int userId, string user)
         {
+            receptionistId = userId;
+            username = user;
             InitializeComponent();
             con = new SqlConnection("Server=.;Database=hospitalManageDB;Trusted_Connection=True;TrustServerCertificate=True;");
         }
@@ -40,7 +44,10 @@ namespace first.Receptionist
             cb_doc.DisplayMember = "Name";
             cb_doc.ValueMember = "DoctorId";
 
+
+
         }
+
         private void LoadStatusComboBox()
         {
             cb_stat.DataSource = Enum.GetValues(typeof(AppointmentStatus))
@@ -67,6 +74,7 @@ namespace first.Receptionist
          }).ToList();
 
             dgv_appo.DataSource = appointments;
+            lbl_name.Text = username;
         }
 
         private bool IsValidAppointment(int doctorId, DateTime appointmentDate, int? currentAppointmentId = null)
@@ -96,18 +104,18 @@ namespace first.Receptionist
 
 
 
-        private async void  ReceptionistDashbordForm_Load(object sender, EventArgs e)
+        private async void ReceptionistDashbordForm_Load(object sender, EventArgs e)
         {
-       
 
             docload();
             patientload();
             LoadStatusComboBox();
             loadappointment();
+
             try
             {
                 await AppointmentReminder.StartReminderServiceAsync();
-             
+
             }
             catch (Exception ex)
             {
@@ -311,13 +319,25 @@ namespace first.Receptionist
         private void btn_profile_Click(object sender, EventArgs e)
         {
             panel3.Controls.Clear();
-          
-            EditProfileForm form = new EditProfileForm(1005);
+
+            EditProfileForm form = new EditProfileForm(receptionistId);
             form.TopLevel = false;
             form.Dock = DockStyle.Fill;
             form.FormBorderStyle = FormBorderStyle.None;
             panel3.Controls.Add(form);
             form.Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure ?!", "confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                this.Close();
+                Login.LoginPage login = new Login.LoginPage();
+                login.Show();
+            }
         }
     }
 }
