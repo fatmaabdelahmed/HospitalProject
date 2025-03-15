@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditProfileForm));
             txt_username = new TextBox();
             txt_old = new TextBox();
             txt_new = new TextBox();
@@ -37,87 +38,129 @@
             label3 = new Label();
             label4 = new Label();
             btn_edidpro = new Button();
+            pictureBox1 = new PictureBox();
+            pictureBox2 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // txt_username
             // 
-            txt_username.Location = new Point(418, 91);
+            txt_username.ForeColor = Color.FromArgb(64, 116, 192);
+            txt_username.Location = new Point(898, 130);
             txt_username.Name = "txt_username";
-            txt_username.Size = new Size(125, 27);
+            txt_username.Size = new Size(173, 27);
             txt_username.TabIndex = 0;
             // 
             // txt_old
             // 
-            txt_old.Location = new Point(418, 154);
+            txt_old.ForeColor = Color.FromArgb(64, 116, 192);
+            txt_old.Location = new Point(898, 203);
             txt_old.Name = "txt_old";
-            txt_old.Size = new Size(125, 27);
+            txt_old.Size = new Size(173, 27);
             txt_old.TabIndex = 1;
             // 
             // txt_new
             // 
-            txt_new.Location = new Point(418, 244);
+            txt_new.ForeColor = Color.FromArgb(64, 116, 192);
+            txt_new.Location = new Point(898, 279);
             txt_new.Name = "txt_new";
-            txt_new.Size = new Size(125, 27);
+            txt_new.Size = new Size(173, 27);
             txt_new.TabIndex = 2;
             // 
             // txt_confirm
             // 
-            txt_confirm.Location = new Point(418, 312);
+            txt_confirm.ForeColor = Color.FromArgb(64, 116, 192);
+            txt_confirm.Location = new Point(898, 358);
             txt_confirm.Name = "txt_confirm";
-            txt_confirm.Size = new Size(125, 27);
+            txt_confirm.Size = new Size(173, 27);
             txt_confirm.TabIndex = 3;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(274, 97);
+            label1.Font = new Font("Tahoma", 12F, FontStyle.Bold);
+            label1.ForeColor = Color.FromArgb(64, 116, 192);
+            label1.Location = new Point(670, 133);
             label1.Name = "label1";
-            label1.Size = new Size(73, 20);
+            label1.Size = new Size(110, 24);
             label1.TabIndex = 4;
             label1.Text = "username";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(284, 161);
+            label2.Font = new Font("Tahoma", 12F, FontStyle.Bold);
+            label2.ForeColor = Color.FromArgb(64, 116, 192);
+            label2.Location = new Point(670, 206);
             label2.Name = "label2";
-            label2.Size = new Size(97, 20);
+            label2.Size = new Size(144, 24);
             label2.TabIndex = 5;
             label2.Text = "old passward";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(284, 251);
+            label3.Font = new Font("Tahoma", 12F, FontStyle.Bold);
+            label3.ForeColor = Color.FromArgb(64, 116, 192);
+            label3.Location = new Point(670, 278);
             label3.Name = "label3";
-            label3.Size = new Size(103, 20);
+            label3.Size = new Size(156, 24);
             label3.TabIndex = 6;
             label3.Text = "new password";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(284, 319);
+            label4.Font = new Font("Tahoma", 12F, FontStyle.Bold);
+            label4.ForeColor = Color.FromArgb(64, 116, 192);
+            label4.Location = new Point(670, 358);
             label4.Name = "label4";
-            label4.Size = new Size(127, 20);
+            label4.Size = new Size(191, 24);
             label4.TabIndex = 7;
             label4.Text = "confirm password";
             // 
             // btn_edidpro
             // 
-            btn_edidpro.Location = new Point(449, 453);
+            btn_edidpro.BackColor = Color.FromArgb(64, 116, 192);
+            btn_edidpro.Font = new Font("Tahoma", 12F, FontStyle.Bold);
+            btn_edidpro.ForeColor = Color.White;
+            btn_edidpro.Location = new Point(781, 475);
             btn_edidpro.Name = "btn_edidpro";
-            btn_edidpro.Size = new Size(94, 29);
+            btn_edidpro.Size = new Size(207, 50);
             btn_edidpro.TabIndex = 8;
             btn_edidpro.Text = "save";
-            btn_edidpro.UseVisualStyleBackColor = true;
+            btn_edidpro.UseVisualStyleBackColor = false;
             btn_edidpro.Click += btn_edidpro_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(-13, -4);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(667, 696);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 9;
+            pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(835, 27);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(87, 62);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 10;
+            pictureBox2.TabStop = false;
             // 
             // EditProfileForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1048, 686);
+            BackColor = Color.White;
+            ClientSize = new Size(1083, 669);
+            Controls.Add(pictureBox2);
+            Controls.Add(pictureBox1);
             Controls.Add(btn_edidpro);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -130,6 +173,8 @@
             Name = "EditProfileForm";
             Text = "EditProfileForm";
             Load += EditProfileForm_Load;
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -145,5 +190,7 @@
         private Label label3;
         private Label label4;
         private Button btn_edidpro;
+        private PictureBox pictureBox1;
+        private PictureBox pictureBox2;
     }
 }
