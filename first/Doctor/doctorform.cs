@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dapper;
 using first.models;
+
+using first.Login;
 using first.Receptionist;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -17,12 +19,13 @@ using Microsoft.VisualBasic.ApplicationServices;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
+
 namespace first.Doctor
 {
 
     public partial class doctorform : Form
     {
-       
+
         private readonly DbConnection con;
 
         int d_id;
@@ -70,6 +73,9 @@ namespace first.Doctor
         }
 
         #endregion
+
+
+
 
         #region profile
         private void get_doctor_profile_data()
@@ -160,6 +166,7 @@ namespace first.Doctor
                     return;
                 }
 
+
                 if (txt_oldpass_profile.Text != result.FirstOrDefault().Usersmember.PasswordHash)
                 {
                     MessageBox.Show("Old password is incorrect.");
@@ -217,6 +224,9 @@ namespace first.Doctor
 
 
         }
+
+
+
         #endregion
 
 
@@ -654,6 +664,8 @@ namespace first.Doctor
 
                 try
                 {
+                    ///MessageBox.Show($"Selected Value: {com_status.SelectedValue}");
+
                     con.Execute(query, new { Statusv = new_status, AppointmentId = appointmentId });
                     load_doctor_appointments();
                     MessageBox.Show("Appointment status updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -675,6 +687,37 @@ namespace first.Doctor
         #endregion
 
 
-       
+        #region gui
+
+        private void pic_bake_medical_rec_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 0;
+        }
+
+        private void btn_logout_Click(object sender, EventArgs e)
+        {
+            LoginPage loginForm = new LoginPage();
+            loginForm.Show();
+
+
+            this.Hide();
+        }
+
+        private void pic_old_pass_Click(object sender, EventArgs e)
+        {
+            txt_oldpass_profile.UseSystemPasswordChar = !txt_oldpass_profile.UseSystemPasswordChar;
+        }
+
+        private void pict_new_pass_Click(object sender, EventArgs e)
+        {
+            txt_newpass_profile.UseSystemPasswordChar = !txt_newpass_profile.UseSystemPasswordChar;
+        }
+
+        private void pic_confirm_pass_Click(object sender, EventArgs e)
+        {
+            txt_conpass_profile.UseSystemPasswordChar = !txt_conpass_profile.UseSystemPasswordChar;
+        }
+
+        #endregion
     }
 }

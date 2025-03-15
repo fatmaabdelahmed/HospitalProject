@@ -28,39 +28,62 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QRcode));
             pictureBoxQRCode = new PictureBox();
             button1 = new Button();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBoxQRCode).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // pictureBoxQRCode
             // 
-            pictureBoxQRCode.Location = new Point(31, 86);
+            pictureBoxQRCode.BackColor = Color.FromArgb(230, 240, 241);
+            pictureBoxQRCode.Location = new Point(684, 101);
             pictureBoxQRCode.Name = "pictureBoxQRCode";
-            pictureBoxQRCode.Size = new Size(758, 737);
+            pictureBoxQRCode.Size = new Size(523, 589);
             pictureBoxQRCode.TabIndex = 0;
             pictureBoxQRCode.TabStop = false;
             // 
             // button1
             // 
-            button1.Location = new Point(814, 142);
+            button1.BackColor = Color.FromArgb(230, 240, 241);
+            button1.Font = new Font("Tahoma", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button1.ForeColor = Color.DarkBlue;
+            button1.Location = new Point(38, 648);
             button1.Name = "button1";
-            button1.Size = new Size(150, 46);
+            button1.Size = new Size(276, 65);
             button1.TabIndex = 1;
-            button1.Text = "generat";
-            button1.UseVisualStyleBackColor = true;
+            button1.Text = "Generat QR";
+            button1.UseVisualStyleBackColor = false;
             button1.Click += btnGenerateQR_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackColor = Color.Transparent;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(26, 21);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(90, 80);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 2;
+            pictureBox1.TabStop = false;
             // 
             // QRcode
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1138, 862);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(1296, 831);
+            Controls.Add(pictureBox1);
             Controls.Add(button1);
             Controls.Add(pictureBoxQRCode);
+            DoubleBuffered = true;
             Name = "QRcode";
             Text = "QRcode";
             ((System.ComponentModel.ISupportInitialize)pictureBoxQRCode).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -68,5 +91,6 @@
 
         private PictureBox pictureBoxQRCode;
         private Button button1;
+        private PictureBox pictureBox1;
     }
 }
