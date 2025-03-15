@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using first.models;
+using Microsoft.EntityFrameworkCore;
 
 namespace first.models
 {
@@ -20,9 +21,11 @@ namespace first.models
         public int PatientId { get; set; }
 
         [Required]
+        [Precision(18, 2)]
         public decimal TotalAmount { get; set; }
 
         [Required]
+        [Precision(18, 2)]
         public decimal PaidAmount { get; set; }
 
         [NotMapped]

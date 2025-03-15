@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace first.Migrations
 {
     /// <inheritdoc />
-    public partial class fixbilling : Migration
+    public partial class dataseed : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -158,8 +160,8 @@ namespace first.Migrations
                 {
                     AppointmentId = table.Column<int>(type: "int", nullable: false),
                     PatientId = table.Column<int>(type: "int", nullable: false),
-                    TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PaidAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    TotalAmount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    PaidAmount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     PaymentStatus = table.Column<int>(type: "int", nullable: false),
                     PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -178,6 +180,64 @@ namespace first.Migrations
                         principalTable: "Patients",
                         principalColumn: "PatientId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Patients",
+                columns: new[] { "PatientId", "ContactInfo", "DateOfBirth", "Gender", "MedicalHistory", "Name" },
+                values: new object[,]
+                {
+                    { 1, "john.doe@example.com", new DateTime(1990, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "No known allergies. Previous surgery in 2015.", "John Doe" },
+                    { 2, "jane.smith@example.com", new DateTime(1985, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Diabetic. Takes insulin daily.", "Jane Smith" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UserId", "PasswordHash", "Role", "Username" },
+                values: new object[,]
+                {
+                    { 1, "123", 0, "admin" },
+                    { 2, "123", 1, "dr.ahmed" },
+                    { 3, "123", 2, "reception1" },
+                    { 4, "123", 1, "dr.sara" },
+                    { 5, "123", 1, "dr.james" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Doctors",
+                columns: new[] { "DoctorId", "ContactInfo", "Name", "Schedule", "Specialization", "UsersmemberId" },
+                values: new object[,]
+                {
+                    { 1, "123-456-7890", "Dr. Ahmed", "Mon-Fri, 9 AM - 5 PM", "Cardiology", 2 },
+                    { 2, "987-654-3210", "Dr. Sara", "Tue-Sat, 10 AM - 6 PM", "Dermatology", 4 },
+                    { 3, "555-123-7890", "Dr. James", "Mon-Sat, 8 AM - 4 PM", "Orthopedics", 5 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Appointments",
+                columns: new[] { "AppointmentId", "AppointmentDate", "DoctorId", "PatientId", "Status" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2025, 3, 16, 10, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, 0 },
+                    { 2, new DateTime(2025, 3, 18, 14, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, 0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "MedicalRecords",
+                columns: new[] { "RecordId", "Diagnosis", "DoctorId", "LabResults", "PatientId", "Prescription", "RecordDate", "Report", "TreatmentPlan" },
+                values: new object[,]
+                {
+                    { 1, "Hypertension", 1, "BP: 140/90", 1, "Lisinopril 10mg", new DateTime(2025, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Follow up in 2 weeks", "Monitor BP" },
+                    { 2, "Skin Allergy", 2, "Patch test positive", 2, "Antihistamines", new DateTime(2025, 3, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Recheck in 1 month", "Avoid allergens" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Billings",
+                columns: new[] { "AppointmentId", "PaidAmount", "PatientId", "PaymentDate", "PaymentStatus", "TotalAmount" },
+                values: new object[,]
+                {
+                    { 1, 50.00m, 1, null, 0, 200.00m },
+                    { 2, 300.00m, 2, new DateTime(2025, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 300.00m }
                 });
 
             migrationBuilder.CreateIndex(
