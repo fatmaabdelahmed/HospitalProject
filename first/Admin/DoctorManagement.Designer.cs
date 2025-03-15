@@ -208,7 +208,7 @@
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgv_doctors.DefaultCellStyle = dataGridViewCellStyle2;
             dgv_doctors.EnableHeadersVisualStyles = false;
-            dgv_doctors.Location = new Point(90, 186);
+            dgv_doctors.Location = new Point(62, 186);
             dgv_doctors.Name = "dgv_doctors";
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = SystemColors.Control;
@@ -219,7 +219,7 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
             dgv_doctors.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgv_doctors.RowHeadersWidth = 51;
-            dgv_doctors.Size = new Size(631, 214);
+            dgv_doctors.Size = new Size(681, 214);
             dgv_doctors.TabIndex = 37;
             dgv_doctors.RowHeaderMouseDoubleClick += dgv_doctors_RowHeaderMouseDoubleClick;
             // 
