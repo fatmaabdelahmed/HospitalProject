@@ -23,15 +23,20 @@ namespace first
             ApplicationConfiguration.Initialize();
 
 
+           // Application.Run(new ReceptionistDashbordForm());
+
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
           //  Application.Run(new ReceptionistDashbordForm());
             // تشغيل WelcomePage عند بدء التطبيق
-            Application.Run(new WelcomPage());
+            //Application.Run(new QRcode(2));
+            //Application.Run(new reports());
 
        
 
         //    Application.Run(new QRcode());
+
 
 
         }
