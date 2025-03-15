@@ -1,4 +1,5 @@
-﻿using first.Login;
+﻿using first.Doctor;
+using first.Login;
 using first.models;
 using first.Reports;
 using System;
@@ -154,6 +155,25 @@ namespace first.Admin
             UserManagement userManagement = new UserManagement();
             userManagement.Show();
             this.Hide();
+        }
+
+        private void dgv_doctors_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            id = (int)dgv_doctors.SelectedRows[0].Cells[0].Value;
+            models.Doctor doctor = db.Doctors.SingleOrDefault(n => n.DoctorId == id);
+            if (doctor != null)
+            {
+                txt_name.Text = doctor.Name;
+                txt_contactInfo.Text = doctor.ContactInfo;
+                txt_schedule.Text = doctor.Schedule;
+                txt_dept.Text = doctor.Specialization;
+
+            }
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

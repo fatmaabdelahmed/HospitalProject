@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(reports));
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            pictureBox1 = new PictureBox();
             btn_patientNo_export = new Button();
             dgv_reports = new DataGridView();
             tabPage2 = new TabPage();
@@ -47,6 +49,7 @@
             btn_back = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgv_reports).BeginInit();
             tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_appointment_schedules).BeginInit();
@@ -72,6 +75,7 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(pictureBox1);
             tabPage1.Controls.Add(btn_patientNo_export);
             tabPage1.Controls.Add(dgv_reports);
             tabPage1.Location = new Point(4, 29);
@@ -83,9 +87,19 @@
             tabPage1.Text = " Number of patients per department  ";
             tabPage1.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
+            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox1.Location = new Point(664, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(641, 723);
+            pictureBox1.TabIndex = 3;
+            pictureBox1.TabStop = false;
+            // 
             // btn_patientNo_export
             // 
-            btn_patientNo_export.Location = new Point(663, 281);
+            btn_patientNo_export.Location = new Point(392, 415);
             btn_patientNo_export.Margin = new Padding(2);
             btn_patientNo_export.Name = "btn_patientNo_export";
             btn_patientNo_export.Size = new Size(174, 43);
@@ -228,10 +242,10 @@
             // 
             // btn_logout
             // 
-            btn_logout.Location = new Point(1128, 779);
+            btn_logout.Location = new Point(1062, 779);
             btn_logout.Margin = new Padding(2);
             btn_logout.Name = "btn_logout";
-            btn_logout.Size = new Size(174, 43);
+            btn_logout.Size = new Size(240, 45);
             btn_logout.TabIndex = 4;
             btn_logout.Text = "Log out";
             btn_logout.UseVisualStyleBackColor = true;
@@ -242,7 +256,7 @@
             btn_back.Location = new Point(11, 779);
             btn_back.Margin = new Padding(2);
             btn_back.Name = "btn_back";
-            btn_back.Size = new Size(174, 43);
+            btn_back.Size = new Size(240, 45);
             btn_back.TabIndex = 5;
             btn_back.Text = "Back to Dashboard";
             btn_back.UseVisualStyleBackColor = true;
@@ -252,16 +266,18 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.GradientInactiveCaption;
             ClientSize = new Size(1313, 833);
             Controls.Add(btn_back);
             Controls.Add(btn_logout);
             Controls.Add(tabControl1);
             Margin = new Padding(2);
             Name = "reports";
-            Text = "reports";
+            Text = " ";
             Load += reports_Load;
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgv_reports).EndInit();
             tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgv_appointment_schedules).EndInit();
@@ -292,5 +308,6 @@
         private Button btn_patient_visit_history;
         private Button btn_logout;
         private Button btn_back;
+        private PictureBox pictureBox1;
     }
 }

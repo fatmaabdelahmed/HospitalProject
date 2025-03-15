@@ -42,7 +42,7 @@
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Bookman Old Style", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.CornflowerBlue;
+            label1.ForeColor = Color.FromArgb(64, 116, 192);
             label1.Location = new Point(112, 89);
             label1.Name = "label1";
             label1.Size = new Size(386, 64);
@@ -54,7 +54,7 @@
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.CornflowerBlue;
+            label2.ForeColor = Color.FromArgb(64, 116, 192);
             label2.Location = new Point(430, 675);
             label2.Name = "label2";
             label2.Size = new Size(515, 25);
@@ -63,13 +63,13 @@
             // 
             // btn_login
             // 
-            btn_login.BackColor = Color.LightSteelBlue;
+            btn_login.BackColor = Color.FromArgb(64, 116, 192);
             btn_login.FlatStyle = FlatStyle.Flat;
             btn_login.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_login.ForeColor = Color.White;
             btn_login.Location = new Point(60, 747);
             btn_login.Name = "btn_login";
-            btn_login.Size = new Size(174, 43);
+            btn_login.Size = new Size(240, 45);
             btn_login.TabIndex = 4;
             btn_login.Text = "Login";
             btn_login.UseVisualStyleBackColor = false;
@@ -89,7 +89,7 @@
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
-            label4.ForeColor = Color.CornflowerBlue;
+            label4.ForeColor = Color.FromArgb(64, 116, 192);
             label4.Location = new Point(112, 55);
             label4.Name = "label4";
             label4.Size = new Size(188, 20);

@@ -42,18 +42,19 @@
             // txt_username
             // 
             txt_username.BorderStyle = BorderStyle.FixedSingle;
+            txt_username.ForeColor = Color.FromArgb(64, 116, 192);
             txt_username.Location = new Point(120, 303);
             txt_username.Multiline = true;
             txt_username.Name = "txt_username";
             txt_username.PlaceholderText = "User Name";
             txt_username.Size = new Size(240, 40);
             txt_username.TabIndex = 0;
-            txt_username.UseWaitCursor = true;
             txt_username.TextChanged += txt_username_TextChanged;
             // 
             // txt_password
             // 
             txt_password.BorderStyle = BorderStyle.FixedSingle;
+            txt_password.ForeColor = Color.FromArgb(64, 116, 192);
             txt_password.Location = new Point(120, 369);
             txt_password.Multiline = true;
             txt_password.Name = "txt_password";
@@ -67,7 +68,7 @@
             btn_login.BackColor = Color.White;
             btn_login.FlatStyle = FlatStyle.Flat;
             btn_login.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
-            btn_login.ForeColor = Color.LightSteelBlue;
+            btn_login.ForeColor = Color.FromArgb(104, 157, 215);
             btn_login.Location = new Point(120, 550);
             btn_login.Name = "btn_login";
             btn_login.Size = new Size(240, 45);
@@ -111,7 +112,7 @@
             // 
             // panel2
             // 
-            panel2.BackColor = Color.LightSteelBlue;
+            panel2.BackColor = Color.FromArgb(104, 157, 215);
             panel2.Controls.Add(txt_username);
             panel2.Controls.Add(txt_password);
             panel2.Controls.Add(showPasswordCheckBox);

@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DoctorManagement));
             label7 = new Label();
             txt_schedule = new TextBox();
@@ -54,84 +57,94 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label7.Location = new Point(944, 524);
+            label7.Font = new Font("Tahoma", 12F);
+            label7.ForeColor = Color.FromArgb(64, 116, 192);
+            label7.Location = new Point(919, 514);
             label7.Name = "label7";
-            label7.Size = new Size(71, 20);
+            label7.Size = new Size(90, 24);
             label7.TabIndex = 48;
             label7.Text = "Schedule";
+            label7.Click += label7_Click;
             // 
             // txt_schedule
             // 
             txt_schedule.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_schedule.Location = new Point(1065, 519);
+            txt_schedule.ForeColor = Color.FromArgb(64, 116, 192);
+            txt_schedule.Location = new Point(1073, 509);
             txt_schedule.Name = "txt_schedule";
-            txt_schedule.Size = new Size(148, 30);
+            txt_schedule.Size = new Size(205, 30);
             txt_schedule.TabIndex = 47;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label6.Location = new Point(944, 422);
+            label6.Font = new Font("Tahoma", 12F);
+            label6.ForeColor = Color.FromArgb(64, 116, 192);
+            label6.Location = new Point(919, 412);
             label6.Name = "label6";
-            label6.Size = new Size(96, 20);
+            label6.Size = new Size(119, 24);
             label6.TabIndex = 46;
             label6.Text = "Contact Info";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label5.Location = new Point(902, 305);
+            label5.Font = new Font("Tahoma", 12F);
+            label5.ForeColor = Color.FromArgb(64, 116, 192);
+            label5.Location = new Point(919, 295);
             label5.Name = "label5";
-            label5.Size = new Size(104, 20);
+            label5.Size = new Size(132, 24);
             label5.TabIndex = 45;
             label5.Text = "Specialization";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label4.Location = new Point(902, 196);
+            label4.Font = new Font("Tahoma", 12F);
+            label4.ForeColor = Color.FromArgb(64, 116, 192);
+            label4.Location = new Point(919, 186);
             label4.Name = "label4";
-            label4.Size = new Size(51, 20);
+            label4.Size = new Size(62, 24);
             label4.TabIndex = 44;
             label4.Text = "Name";
             // 
             // txt_contactInfo
             // 
             txt_contactInfo.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_contactInfo.Location = new Point(1065, 417);
+            txt_contactInfo.ForeColor = Color.FromArgb(64, 116, 192);
+            txt_contactInfo.Location = new Point(1073, 407);
             txt_contactInfo.Name = "txt_contactInfo";
-            txt_contactInfo.Size = new Size(148, 30);
+            txt_contactInfo.Size = new Size(205, 30);
             txt_contactInfo.TabIndex = 43;
             // 
             // txt_name
             // 
             txt_name.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_name.Location = new Point(1065, 196);
+            txt_name.ForeColor = Color.FromArgb(64, 116, 192);
+            txt_name.Location = new Point(1073, 186);
             txt_name.Name = "txt_name";
-            txt_name.Size = new Size(148, 30);
+            txt_name.Size = new Size(205, 30);
             txt_name.TabIndex = 42;
             // 
             // txt_dept
             // 
             txt_dept.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txt_dept.Location = new Point(1065, 305);
+            txt_dept.ForeColor = Color.FromArgb(64, 116, 192);
+            txt_dept.Location = new Point(1073, 295);
             txt_dept.Name = "txt_dept";
-            txt_dept.Size = new Size(148, 30);
+            txt_dept.Size = new Size(205, 30);
             txt_dept.TabIndex = 41;
             // 
             // btn_add_doc
             // 
-            btn_add_doc.BackColor = Color.LightGray;
+            btn_add_doc.BackColor = Color.FromArgb(64, 116, 192);
             btn_add_doc.Cursor = Cursors.Hand;
             btn_add_doc.FlatAppearance.BorderColor = Color.MidnightBlue;
             btn_add_doc.FlatAppearance.MouseOverBackColor = Color.FromArgb(42, 42, 158);
             btn_add_doc.FlatStyle = FlatStyle.Flat;
             btn_add_doc.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn_add_doc.Location = new Point(74, 524);
+            btn_add_doc.ForeColor = Color.White;
+            btn_add_doc.Location = new Point(44, 524);
             btn_add_doc.Name = "btn_add_doc";
             btn_add_doc.Size = new Size(195, 46);
             btn_add_doc.TabIndex = 38;
@@ -141,12 +154,13 @@
             // 
             // btn_update_doc
             // 
-            btn_update_doc.BackColor = Color.DarkGray;
+            btn_update_doc.BackColor = Color.FromArgb(64, 116, 192);
             btn_update_doc.FlatAppearance.BorderColor = Color.MidnightBlue;
             btn_update_doc.FlatAppearance.MouseOverBackColor = Color.FromArgb(42, 42, 158);
             btn_update_doc.FlatStyle = FlatStyle.Flat;
             btn_update_doc.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn_update_doc.Location = new Point(336, 524);
+            btn_update_doc.ForeColor = Color.White;
+            btn_update_doc.Location = new Point(319, 524);
             btn_update_doc.Name = "btn_update_doc";
             btn_update_doc.Size = new Size(195, 46);
             btn_update_doc.TabIndex = 39;
@@ -156,13 +170,14 @@
             // 
             // btn_delete_doc
             // 
-            btn_delete_doc.BackColor = Color.DimGray;
+            btn_delete_doc.BackColor = Color.FromArgb(64, 116, 192);
             btn_delete_doc.Cursor = Cursors.Hand;
             btn_delete_doc.FlatAppearance.BorderColor = Color.MidnightBlue;
             btn_delete_doc.FlatAppearance.MouseOverBackColor = Color.FromArgb(42, 42, 158);
             btn_delete_doc.FlatStyle = FlatStyle.Flat;
             btn_delete_doc.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn_delete_doc.Location = new Point(622, 524);
+            btn_delete_doc.ForeColor = Color.White;
+            btn_delete_doc.Location = new Point(592, 524);
             btn_delete_doc.Name = "btn_delete_doc";
             btn_delete_doc.Size = new Size(195, 46);
             btn_delete_doc.TabIndex = 40;
@@ -172,13 +187,41 @@
             // 
             // dgv_doctors
             // 
+            dgv_doctors.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
             dgv_doctors.BackgroundColor = Color.White;
+            dgv_doctors.CellBorderStyle = DataGridViewCellBorderStyle.Sunken;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(46, 92, 154);
+            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8.25F);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgv_doctors.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgv_doctors.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_doctors.Location = new Point(63, 186);
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(64, 116, 192);
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dgv_doctors.DefaultCellStyle = dataGridViewCellStyle2;
+            dgv_doctors.EnableHeadersVisualStyles = false;
+            dgv_doctors.Location = new Point(90, 186);
             dgv_doctors.Name = "dgv_doctors";
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(46, 92, 154);
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dgv_doctors.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgv_doctors.RowHeadersWidth = 51;
-            dgv_doctors.Size = new Size(803, 216);
+            dgv_doctors.Size = new Size(631, 214);
             dgv_doctors.TabIndex = 37;
+            dgv_doctors.RowHeaderMouseDoubleClick += dgv_doctors_RowHeaderMouseDoubleClick;
             // 
             // pc_prev
             // 
@@ -197,7 +240,7 @@
             pc_next.BackColor = Color.Transparent;
             pc_next.BackgroundImage = (Image)resources.GetObject("pc_next.BackgroundImage");
             pc_next.BackgroundImageLayout = ImageLayout.Zoom;
-            pc_next.Location = new Point(50, 12);
+            pc_next.Location = new Point(1269, 12);
             pc_next.Name = "pc_next";
             pc_next.Size = new Size(32, 27);
             pc_next.TabIndex = 49;
@@ -206,25 +249,30 @@
             // 
             // btn_reports
             // 
+            btn_reports.BackColor = Color.FromArgb(64, 116, 192);
+            btn_reports.FlatStyle = FlatStyle.Flat;
+            btn_reports.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
+            btn_reports.ForeColor = Color.White;
             btn_reports.Location = new Point(12, 775);
             btn_reports.Name = "btn_reports";
-            btn_reports.Size = new Size(195, 46);
+            btn_reports.Size = new Size(240, 45);
             btn_reports.TabIndex = 52;
             btn_reports.Text = "Reports ";
-            btn_reports.UseVisualStyleBackColor = true;
+            btn_reports.UseVisualStyleBackColor = false;
             btn_reports.Click += btn_reports_Click;
             // 
             // btn_logout
             // 
-            btn_logout.BackColor = Color.DimGray;
+            btn_logout.BackColor = Color.FromArgb(64, 116, 192);
             btn_logout.Cursor = Cursors.Hand;
             btn_logout.FlatAppearance.BorderColor = Color.MidnightBlue;
             btn_logout.FlatAppearance.MouseOverBackColor = Color.FromArgb(42, 42, 158);
             btn_logout.FlatStyle = FlatStyle.Flat;
             btn_logout.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn_logout.Location = new Point(1106, 775);
+            btn_logout.ForeColor = Color.White;
+            btn_logout.Location = new Point(1061, 775);
             btn_logout.Name = "btn_logout";
-            btn_logout.Size = new Size(195, 46);
+            btn_logout.Size = new Size(240, 45);
             btn_logout.TabIndex = 51;
             btn_logout.Text = "Log out";
             btn_logout.UseVisualStyleBackColor = false;
@@ -233,23 +281,21 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.BorderStyle = BorderStyle.Fixed3D;
             label1.FlatStyle = FlatStyle.Popup;
             label1.Font = new Font("Bookman Old Style", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            label1.ForeColor = Color.FromArgb(0, 0, 64);
-            label1.Location = new Point(417, 21);
+            label1.ForeColor = Color.FromArgb(64, 116, 192);
+            label1.Location = new Point(453, 21);
             label1.Name = "label1";
-            label1.Size = new Size(378, 42);
+            label1.Size = new Size(376, 40);
             label1.TabIndex = 53;
             label1.Text = "Doctor Management";
             label1.TextAlign = ContentAlignment.MiddleCenter;
-            label1.Visible = false;
             // 
             // DoctorManagement
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.GradientInactiveCaption;
+            BackColor = Color.White;
             ClientSize = new Size(1313, 833);
             Controls.Add(label1);
             Controls.Add(btn_reports);
@@ -268,6 +314,7 @@
             Controls.Add(btn_update_doc);
             Controls.Add(btn_delete_doc);
             Controls.Add(dgv_doctors);
+            ForeColor = Color.FromArgb(64, 116, 192);
             Name = "DoctorManagement";
             Text = "DoctorManagement";
             Load += DoctorManagement_Load;
