@@ -146,9 +146,17 @@ namespace first.Receptionist
 
         private void btn_qr_Click(object sender, EventArgs e)
         {
-            Reports.QRcode form = new Reports.QRcode(patid);
+            if (dgv_patient.SelectedRows.Count > 0)
+            {
+                Reports.QRcode form = new Reports.QRcode(patid);
 
-            form.Show();
+                form.Show();
+            }
+            else 
+            {
+                MessageBox.Show("plaese select patient to scan !", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
         }
     }
 }
