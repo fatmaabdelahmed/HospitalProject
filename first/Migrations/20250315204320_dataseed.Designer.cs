@@ -12,8 +12,8 @@ using first.models;
 namespace first.Migrations
 {
     [DbContext(typeof(HOSPITALDbContext))]
-    [Migration("20250309063535_update-Admin")]
-    partial class updateAdmin
+    [Migration("20250315204320_dataseed")]
+    partial class dataseed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,6 +55,24 @@ namespace first.Migrations
                     b.HasIndex("PatientId");
 
                     b.ToTable("Appointments");
+
+                    b.HasData(
+                        new
+                        {
+                            AppointmentId = 1,
+                            AppointmentDate = new DateTime(2025, 3, 16, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 1,
+                            PatientId = 1,
+                            Status = 0
+                        },
+                        new
+                        {
+                            AppointmentId = 2,
+                            AppointmentDate = new DateTime(2025, 3, 18, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 2,
+                            PatientId = 2,
+                            Status = 0
+                        });
                 });
 
             modelBuilder.Entity("first.models.Billing", b =>
@@ -63,6 +81,7 @@ namespace first.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("PaidAmount")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("PatientId")
@@ -75,6 +94,7 @@ namespace first.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("TotalAmount")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("AppointmentId");
@@ -82,6 +102,25 @@ namespace first.Migrations
                     b.HasIndex("PatientId");
 
                     b.ToTable("Billings");
+
+                    b.HasData(
+                        new
+                        {
+                            AppointmentId = 1,
+                            PaidAmount = 50.00m,
+                            PatientId = 1,
+                            PaymentStatus = 0,
+                            TotalAmount = 200.00m
+                        },
+                        new
+                        {
+                            AppointmentId = 2,
+                            PaidAmount = 300.00m,
+                            PatientId = 2,
+                            PaymentDate = new DateTime(2025, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentStatus = 1,
+                            TotalAmount = 300.00m
+                        });
                 });
 
             modelBuilder.Entity("first.models.Doctor", b =>
@@ -117,6 +156,35 @@ namespace first.Migrations
                         .IsUnique();
 
                     b.ToTable("Doctors");
+
+                    b.HasData(
+                        new
+                        {
+                            DoctorId = 1,
+                            ContactInfo = "123-456-7890",
+                            Name = "Dr. Ahmed",
+                            Schedule = "Mon-Fri, 9 AM - 5 PM",
+                            Specialization = "Cardiology",
+                            UsersmemberId = 2
+                        },
+                        new
+                        {
+                            DoctorId = 2,
+                            ContactInfo = "987-654-3210",
+                            Name = "Dr. Sara",
+                            Schedule = "Tue-Sat, 10 AM - 6 PM",
+                            Specialization = "Dermatology",
+                            UsersmemberId = 4
+                        },
+                        new
+                        {
+                            DoctorId = 3,
+                            ContactInfo = "555-123-7890",
+                            Name = "Dr. James",
+                            Schedule = "Mon-Sat, 8 AM - 4 PM",
+                            Specialization = "Orthopedics",
+                            UsersmemberId = 5
+                        });
                 });
 
             modelBuilder.Entity("first.models.DoctorPatient", b =>
@@ -182,6 +250,32 @@ namespace first.Migrations
                     b.HasIndex("PatientId");
 
                     b.ToTable("MedicalRecords");
+
+                    b.HasData(
+                        new
+                        {
+                            RecordId = 1,
+                            Diagnosis = "Hypertension",
+                            DoctorId = 1,
+                            LabResults = "BP: 140/90",
+                            PatientId = 1,
+                            Prescription = "Lisinopril 10mg",
+                            RecordDate = new DateTime(2025, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Report = "Follow up in 2 weeks",
+                            TreatmentPlan = "Monitor BP"
+                        },
+                        new
+                        {
+                            RecordId = 2,
+                            Diagnosis = "Skin Allergy",
+                            DoctorId = 2,
+                            LabResults = "Patch test positive",
+                            PatientId = 2,
+                            Prescription = "Antihistamines",
+                            RecordDate = new DateTime(2025, 3, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Report = "Recheck in 1 month",
+                            TreatmentPlan = "Avoid allergens"
+                        });
                 });
 
             modelBuilder.Entity("first.models.Patient", b =>
@@ -213,6 +307,26 @@ namespace first.Migrations
                     b.HasKey("PatientId");
 
                     b.ToTable("Patients");
+
+                    b.HasData(
+                        new
+                        {
+                            PatientId = 1,
+                            ContactInfo = "john.doe@example.com",
+                            DateOfBirth = new DateTime(1990, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Gender = 0,
+                            MedicalHistory = "No known allergies. Previous surgery in 2015.",
+                            Name = "John Doe"
+                        },
+                        new
+                        {
+                            PatientId = 2,
+                            ContactInfo = "jane.smith@example.com",
+                            DateOfBirth = new DateTime(1985, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Gender = 1,
+                            MedicalHistory = "Diabetic. Takes insulin daily.",
+                            Name = "Jane Smith"
+                        });
                 });
 
             modelBuilder.Entity("first.models.Usersmember", b =>
@@ -244,7 +358,35 @@ namespace first.Migrations
                             UserId = 1,
                             PasswordHash = "123",
                             Role = 0,
-                            Username = "fatma"
+                            Username = "admin"
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            PasswordHash = "123",
+                            Role = 1,
+                            Username = "dr.ahmed"
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            PasswordHash = "123",
+                            Role = 2,
+                            Username = "reception1"
+                        },
+                        new
+                        {
+                            UserId = 4,
+                            PasswordHash = "123",
+                            Role = 1,
+                            Username = "dr.sara"
+                        },
+                        new
+                        {
+                            UserId = 5,
+                            PasswordHash = "123",
+                            Role = 1,
+                            Username = "dr.james"
                         });
                 });
 

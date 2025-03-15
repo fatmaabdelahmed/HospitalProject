@@ -58,7 +58,7 @@ namespace first.Login
 
                 if (role == "Admin")
                 {
-                    AdminForm adminForm = new AdminForm();
+                  Admin.AdminForm adminForm = new Admin.AdminForm();
                     adminForm.Show();
                     this.Hide();
                 }
@@ -91,7 +91,6 @@ namespace first.Login
                 {
                     MessageBox.Show($"Login Success!\nRole: {role}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    // تمرير الـ UserId إلى الفورم الجديد
                     ReceptionistDashbordForm receptionistForm = new ReceptionistDashbordForm(rec.UserId, rec.Username);
 
                     receptionistForm.Show();
