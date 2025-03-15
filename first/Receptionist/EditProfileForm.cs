@@ -38,7 +38,7 @@ namespace first.Receptionist
             {
                 txt_username.Text = user.Username;
             }
-          
+
         }
 
 
@@ -82,9 +82,22 @@ namespace first.Receptionist
             MessageBox.Show("Profile updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-       
+        private void pic_old_pass_Click(object sender, EventArgs e)
+        {
+            txt_old.UseSystemPasswordChar = !txt_old.UseSystemPasswordChar;
 
-        
+        }
 
+        private void pict_new_pass_Click(object sender, EventArgs e)
+        {
+            txt_new.UseSystemPasswordChar = !txt_new.UseSystemPasswordChar;
+
+        }
+
+        private void pic_confirm_pass_Click(object sender, EventArgs e)
+        {
+            txt_confirm.UseSystemPasswordChar = !txt_confirm.UseSystemPasswordChar;
+
+        }
     }
 }

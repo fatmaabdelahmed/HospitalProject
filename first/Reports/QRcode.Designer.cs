@@ -39,9 +39,10 @@
             // pictureBoxQRCode
             // 
             pictureBoxQRCode.BackColor = Color.FromArgb(230, 240, 241);
-            pictureBoxQRCode.Location = new Point(684, 101);
+            pictureBoxQRCode.Location = new Point(421, 63);
+            pictureBoxQRCode.Margin = new Padding(2, 2, 2, 2);
             pictureBoxQRCode.Name = "pictureBoxQRCode";
-            pictureBoxQRCode.Size = new Size(523, 589);
+            pictureBoxQRCode.Size = new Size(322, 368);
             pictureBoxQRCode.TabIndex = 0;
             pictureBoxQRCode.TabStop = false;
             // 
@@ -50,9 +51,10 @@
             button1.BackColor = Color.FromArgb(230, 240, 241);
             button1.Font = new Font("Tahoma", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
             button1.ForeColor = Color.DarkBlue;
-            button1.Location = new Point(38, 648);
+            button1.Location = new Point(23, 405);
+            button1.Margin = new Padding(2, 2, 2, 2);
             button1.Name = "button1";
-            button1.Size = new Size(276, 65);
+            button1.Size = new Size(170, 41);
             button1.TabIndex = 1;
             button1.Text = "Generat QR";
             button1.UseVisualStyleBackColor = false;
@@ -62,24 +64,27 @@
             // 
             pictureBox1.BackColor = Color.Transparent;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(26, 21);
+            pictureBox1.Location = new Point(16, 13);
+            pictureBox1.Margin = new Padding(2, 2, 2, 2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(90, 80);
+            pictureBox1.Size = new Size(55, 50);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
             // 
             // QRcode
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1296, 831);
+            ClientSize = new Size(798, 519);
             Controls.Add(pictureBox1);
             Controls.Add(button1);
             Controls.Add(pictureBoxQRCode);
             DoubleBuffered = true;
+            Margin = new Padding(2, 2, 2, 2);
             Name = "QRcode";
             Text = "QRcode";
             ((System.ComponentModel.ISupportInitialize)pictureBoxQRCode).EndInit();

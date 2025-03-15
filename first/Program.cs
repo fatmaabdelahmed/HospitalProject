@@ -28,6 +28,7 @@ namespace first
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new WelcomPage());
           //  Application.Run(new ReceptionistDashbordForm());
             // تشغيل WelcomePage عند بدء التطبيق
             //Application.Run(new QRcode(2));

@@ -16,11 +16,10 @@ namespace first.Reports
     {
         private readonly DbConnection con;
 
-        private int _id;
+        private int PatientID;
         public QRcode(int id)
 
         {
-            _id = id;
             InitializeComponent();
             HOSPITALDbContext db = new HOSPITALDbContext();
             con = db.Database.GetDbConnection();
@@ -30,33 +29,33 @@ namespace first.Reports
         private void btnGenerateQR_Click(object sender, EventArgs e)
         {
             int patientID = PatientID;
-            
-                var patientData = GetPatientData(patientID);
-                if (patientData != null)
-                {
-                    GenerateQRCode(patientData);
-                }
-                else
-                {
-                    MessageBox.Show("Patient not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            
-           
+
+            var patientData = GetPatientData(patientID);
+            if (patientData != null)
+            {
+                GenerateQRCode(patientData);
+            }
+            else
+            {
+                MessageBox.Show("Patient not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
         }
 
         private string GetPatientData(int patientID)
         {
-            
+
             {
-               
+
                 var query = "SELECT * FROM  Patients p    WHERE p.PatientId = @PatientID";
                 var patient = con.QueryFirstOrDefault<Patient>(query, new { PatientID = patientID });
 
                 if (patient != null)
                 {
-                    
+
                     return $"ID: {patient.PatientId}," + " \n" +
-                        $" Name: {patient.Name},  "+ " \n" +
+                        $" Name: {patient.Name},  " + " \n" +
                         $"DOB: {patient.DateOfBirth.ToString("dd-MM-yyyy")}" + " \n" +
                         $" medical record : {patient.MedicalHistory}, " + " \n" +
                         $" contact info: {patient.ContactInfo}";
@@ -100,7 +99,7 @@ namespace first.Reports
                     Bitmap qrCodeImage = qrCode.GetGraphic(10, Color.Black, Color.White, true);
 
                     // Resize to ensure it is exactly 70x70  pixels
-                    Bitmap resizedQrCode = new Bitmap(qrCodeImage, new Size(523, 589));
+                    Bitmap resizedQrCode = new Bitmap(qrCodeImage, new Size(322, 368));
 
                     // Display the resized QR code in the PictureBox
                     pictureBoxQRCode.Image = resizedQrCode;
@@ -108,5 +107,9 @@ namespace first.Reports
             }
         }
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
