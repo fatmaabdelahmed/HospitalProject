@@ -664,6 +664,8 @@ namespace first.Doctor
 
                 try
                 {
+                    ///MessageBox.Show($"Selected Value: {com_status.SelectedValue}");
+
                     con.Execute(query, new { Statusv = new_status, AppointmentId = appointmentId });
                     load_doctor_appointments();
                     MessageBox.Show("Appointment status updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -694,11 +696,11 @@ namespace first.Doctor
 
         private void btn_logout_Click(object sender, EventArgs e)
         {
-            WelcomPage loginForm = new WelcomPage();
+            LoginPage loginForm = new LoginPage();
             loginForm.Show();
 
 
-            this.Close();
+            this.Hide();
         }
 
         private void pic_old_pass_Click(object sender, EventArgs e)

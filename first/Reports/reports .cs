@@ -25,6 +25,8 @@ using OfficeOpenXml;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
+using first.Admin;
+using first.Login;
 
 
 namespace first.Reports
@@ -38,7 +40,7 @@ namespace first.Reports
             InitializeComponent();
             HOSPITALDbContext db = new HOSPITALDbContext();
             con = db.Database.GetDbConnection();
-           
+
         }
         #region form_load
         private void reports_Load(object sender, EventArgs e)
@@ -290,7 +292,7 @@ namespace first.Reports
         // Generate the outstanding payments report
         private void GenerateOutstandingPaymentsReport()
         {
-            
+
             string q = @"
               select
                     b.AppointmentId,  b.TotalAmount,  b.PaidAmount,  b.PaymentStatus,
@@ -301,7 +303,7 @@ namespace first.Reports
                 join   Patients p ON p.PatientId = b.PatientId
                where  b.TotalAmount - b.PaidAmount != 0;";
 
-            
+
             var OutstandingPayment = con.Query(q)
                 .Select(a => new
                 {
@@ -316,7 +318,7 @@ namespace first.Reports
                 })
                 .ToList();
 
-            
+
             dgv_billing.AutoGenerateColumns = true;
             dgv_billing.DataSource = OutstandingPayment;
         }
@@ -446,5 +448,21 @@ namespace first.Reports
 
 
 
+        private void btn_back_Click(object sender, EventArgs e)
+        {
+            AdminForm adminForm = new AdminForm();
+            adminForm.Show();
+            this.Hide();
+        }
+
+        private void btn_logout_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to Log out?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                LoginPage loginPage = new LoginPage();
+                loginPage.Show();
+                this.Hide();
+            }
+        }
     }
 }

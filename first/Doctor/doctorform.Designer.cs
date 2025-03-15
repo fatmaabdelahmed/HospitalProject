@@ -65,13 +65,15 @@ namespace first.Doctor
             txt_speci_profile = new TextBox();
             txt_name_profile = new TextBox();
             tabPage2 = new TabPage();
+            pictureBox5 = new PictureBox();
+            com_status = new ComboBox();
             pic_bake_appintment = new PictureBox();
             btn_all_appintment = new Button();
             btn_uppcoming = new Button();
-            com_status = new ComboBox();
             label13 = new Label();
             dgv_appoinments = new DataGridView();
             tabPage3 = new TabPage();
+            pictureBox3 = new PictureBox();
             pic_bake_medical_rec = new PictureBox();
             label15 = new Label();
             btn_report_browse = new Button();
@@ -91,6 +93,7 @@ namespace first.Doctor
             dgv_medical_rec = new DataGridView();
             com_paiens_name_medrec = new ComboBox();
             tabPage4 = new TabPage();
+            pictureBox4 = new PictureBox();
             pictureBox2 = new PictureBox();
             label14 = new Label();
             dgv_get_all_medicalrecords = new DataGridView();
@@ -102,12 +105,15 @@ namespace first.Doctor
             ((System.ComponentModel.ISupportInitialize)pic_old_pass).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pic_bake_appintment).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgv_appoinments).BeginInit();
             tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pic_bake_medical_rec).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgv_medical_rec).BeginInit();
             tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgv_get_all_medicalrecords).BeginInit();
             SuspendLayout();
@@ -371,12 +377,13 @@ namespace first.Doctor
             // 
             // tabPage2
             // 
-            tabPage2.BackgroundImage = Properties.Resources.Screenshot_2025_03_13_173946;
+            tabPage2.BackColor = Color.White;
             tabPage2.BackgroundImageLayout = ImageLayout.Stretch;
+            tabPage2.Controls.Add(pictureBox5);
+            tabPage2.Controls.Add(com_status);
             tabPage2.Controls.Add(pic_bake_appintment);
             tabPage2.Controls.Add(btn_all_appintment);
             tabPage2.Controls.Add(btn_uppcoming);
-            tabPage2.Controls.Add(com_status);
             tabPage2.Controls.Add(label13);
             tabPage2.Controls.Add(dgv_appoinments);
             tabPage2.Location = new Point(8, 46);
@@ -385,7 +392,27 @@ namespace first.Doctor
             tabPage2.Size = new Size(1471, 952);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "   Appoiments   ";
-            tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox5
+            // 
+            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
+            pictureBox5.Location = new Point(654, 62);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(249, 234);
+            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox5.TabIndex = 11;
+            pictureBox5.TabStop = false;
+            // 
+            // com_status
+            // 
+            com_status.Font = new Font("Tahoma", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            com_status.ForeColor = Color.FromArgb(48, 93, 150);
+            com_status.FormattingEnabled = true;
+            com_status.Location = new Point(167, 300);
+            com_status.Name = "com_status";
+            com_status.Size = new Size(391, 43);
+            com_status.TabIndex = 10;
+            com_status.SelectedIndexChanged += com_status_SelectedValueChanged;
             // 
             // pic_bake_appintment
             // 
@@ -400,7 +427,7 @@ namespace first.Doctor
             // 
             // btn_all_appintment
             // 
-            btn_all_appintment.BackColor = Color.FromArgb(0, 80, 161);
+            btn_all_appintment.BackColor = Color.FromArgb(0, 53, 134);
             btn_all_appintment.Font = new Font("Segoe UI", 12F);
             btn_all_appintment.ForeColor = Color.White;
             btn_all_appintment.Location = new Point(1138, 211);
@@ -413,7 +440,7 @@ namespace first.Doctor
             // 
             // btn_uppcoming
             // 
-            btn_uppcoming.BackColor = Color.FromArgb(0, 80, 161);
+            btn_uppcoming.BackColor = Color.FromArgb(0, 53, 134);
             btn_uppcoming.Font = new Font("Segoe UI", 12F);
             btn_uppcoming.ForeColor = Color.White;
             btn_uppcoming.Location = new Point(1138, 96);
@@ -424,24 +451,12 @@ namespace first.Doctor
             btn_uppcoming.UseVisualStyleBackColor = false;
             btn_uppcoming.Click += btn_uppcoming_Click;
             // 
-            // com_status
-            // 
-            com_status.Font = new Font("Tahoma", 12F);
-            com_status.ForeColor = Color.FromArgb(48, 93, 150);
-            com_status.FormattingEnabled = true;
-            com_status.Location = new Point(201, 285);
-            com_status.Name = "com_status";
-            com_status.Size = new Size(345, 47);
-            com_status.TabIndex = 6;
-            com_status.SelectedIndexChanged += com_status_SelectedValueChanged;
-            com_status.Click += com_status_SelectedValueChanged;
-            // 
             // label13
             // 
             label13.AutoSize = true;
             label13.Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label13.ForeColor = Color.FromArgb(48, 93, 150);
-            label13.Location = new Point(36, 285);
+            label13.Location = new Point(23, 297);
             label13.Name = "label13";
             label13.Size = new Size(118, 39);
             label13.TabIndex = 5;
@@ -451,6 +466,7 @@ namespace first.Doctor
             // 
             dataGridViewCellStyle1.ForeColor = Color.FromArgb(0, 53, 134);
             dgv_appoinments.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dgv_appoinments.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
             dgv_appoinments.BackgroundColor = Color.White;
             dgv_appoinments.BorderStyle = BorderStyle.None;
             dgv_appoinments.CellBorderStyle = DataGridViewCellBorderStyle.Sunken;
@@ -473,7 +489,7 @@ namespace first.Doctor
             dgv_appoinments.DefaultCellStyle = dataGridViewCellStyle3;
             dgv_appoinments.EnableHeadersVisualStyles = false;
             dgv_appoinments.GridColor = Color.White;
-            dgv_appoinments.Location = new Point(192, 471);
+            dgv_appoinments.Location = new Point(183, 422);
             dgv_appoinments.Name = "dgv_appoinments";
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = SystemColors.Control;
@@ -485,14 +501,16 @@ namespace first.Doctor
             dgv_appoinments.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             dgv_appoinments.RowHeadersVisible = false;
             dgv_appoinments.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
-            dgv_appoinments.Size = new Size(1078, 453);
+            dgv_appoinments.Size = new Size(1091, 453);
             dgv_appoinments.TabIndex = 0;
+            dgv_appoinments.CellMouseClick += dgv_appoinments_CellMouseDoubleClick;
             dgv_appoinments.CellMouseDoubleClick += dgv_appoinments_CellMouseDoubleClick;
             // 
             // tabPage3
             // 
-            tabPage3.BackgroundImage = Properties.Resources._4990224;
+            tabPage3.BackColor = Color.White;
             tabPage3.BackgroundImageLayout = ImageLayout.Stretch;
+            tabPage3.Controls.Add(pictureBox3);
             tabPage3.Controls.Add(pic_bake_medical_rec);
             tabPage3.Controls.Add(label15);
             tabPage3.Controls.Add(btn_report_browse);
@@ -516,7 +534,16 @@ namespace first.Doctor
             tabPage3.Size = new Size(1471, 952);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "   Medical Records   ";
-            tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
+            pictureBox3.Location = new Point(498, 72);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(224, 195);
+            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox3.TabIndex = 25;
+            pictureBox3.TabStop = false;
             // 
             // pic_bake_medical_rec
             // 
@@ -542,9 +569,9 @@ namespace first.Doctor
             // 
             // btn_report_browse
             // 
-            btn_report_browse.BackColor = Color.FromArgb(26, 114, 188);
+            btn_report_browse.BackColor = Color.FromArgb(0, 80, 161);
             btn_report_browse.ForeColor = Color.White;
-            btn_report_browse.Location = new Point(620, 638);
+            btn_report_browse.Location = new Point(619, 722);
             btn_report_browse.Name = "btn_report_browse";
             btn_report_browse.Size = new Size(103, 46);
             btn_report_browse.TabIndex = 22;
@@ -554,9 +581,9 @@ namespace first.Doctor
             // 
             // btn_browse_result
             // 
-            btn_browse_result.BackColor = Color.FromArgb(26, 114, 188);
+            btn_browse_result.BackColor = Color.FromArgb(0, 80, 161);
             btn_browse_result.ForeColor = Color.White;
-            btn_browse_result.Location = new Point(620, 551);
+            btn_browse_result.Location = new Point(619, 635);
             btn_browse_result.Name = "btn_browse_result";
             btn_browse_result.Size = new Size(103, 46);
             btn_browse_result.TabIndex = 20;
@@ -569,7 +596,7 @@ namespace first.Doctor
             label12.AutoSize = true;
             label12.Font = new Font("Tahoma", 10.875F);
             label12.ForeColor = Color.MediumBlue;
-            label12.Location = new Point(18, 629);
+            label12.Location = new Point(17, 713);
             label12.Name = "label12";
             label12.Size = new Size(100, 35);
             label12.TabIndex = 19;
@@ -580,7 +607,7 @@ namespace first.Doctor
             label10.AutoSize = true;
             label10.Font = new Font("Tahoma", 10.875F);
             label10.ForeColor = Color.MediumBlue;
-            label10.Location = new Point(18, 551);
+            label10.Location = new Point(17, 635);
             label10.Name = "label10";
             label10.Size = new Size(141, 35);
             label10.TabIndex = 18;
@@ -590,7 +617,7 @@ namespace first.Doctor
             // 
             txt_report_medirec.Font = new Font("Tahoma", 10.875F);
             txt_report_medirec.ForeColor = Color.FromArgb(0, 81, 161);
-            txt_report_medirec.Location = new Point(245, 638);
+            txt_report_medirec.Location = new Point(244, 722);
             txt_report_medirec.Name = "txt_report_medirec";
             txt_report_medirec.Size = new Size(339, 43);
             txt_report_medirec.TabIndex = 17;
@@ -599,7 +626,7 @@ namespace first.Doctor
             // 
             txt_lab_res_medirec.Font = new Font("Tahoma", 10.875F);
             txt_lab_res_medirec.ForeColor = Color.FromArgb(0, 81, 161);
-            txt_lab_res_medirec.Location = new Point(245, 548);
+            txt_lab_res_medirec.Location = new Point(244, 632);
             txt_lab_res_medirec.Name = "txt_lab_res_medirec";
             txt_lab_res_medirec.Size = new Size(339, 43);
             txt_lab_res_medirec.TabIndex = 16;
@@ -609,7 +636,7 @@ namespace first.Doctor
             label11.AutoSize = true;
             label11.Font = new Font("Tahoma", 10.875F);
             label11.ForeColor = Color.MediumBlue;
-            label11.Location = new Point(18, 461);
+            label11.Location = new Point(17, 545);
             label11.Name = "label11";
             label11.Size = new Size(210, 35);
             label11.TabIndex = 15;
@@ -620,7 +647,7 @@ namespace first.Doctor
             label9.AutoSize = true;
             label9.Font = new Font("Tahoma", 10.875F);
             label9.ForeColor = Color.MediumBlue;
-            label9.Location = new Point(18, 362);
+            label9.Location = new Point(17, 446);
             label9.Name = "label9";
             label9.Size = new Size(164, 35);
             label9.TabIndex = 13;
@@ -631,7 +658,7 @@ namespace first.Doctor
             label8.AutoSize = true;
             label8.Font = new Font("Tahoma", 10.875F);
             label8.ForeColor = Color.MediumBlue;
-            label8.Location = new Point(18, 278);
+            label8.Location = new Point(17, 362);
             label8.Name = "label8";
             label8.Size = new Size(138, 35);
             label8.TabIndex = 12;
@@ -641,7 +668,7 @@ namespace first.Doctor
             // 
             txt_treatment_medicrec.Font = new Font("Tahoma", 10.875F);
             txt_treatment_medicrec.ForeColor = Color.FromArgb(0, 81, 161);
-            txt_treatment_medicrec.Location = new Point(245, 458);
+            txt_treatment_medicrec.Location = new Point(244, 542);
             txt_treatment_medicrec.Name = "txt_treatment_medicrec";
             txt_treatment_medicrec.Size = new Size(335, 43);
             txt_treatment_medicrec.TabIndex = 9;
@@ -650,7 +677,7 @@ namespace first.Doctor
             // 
             txt_presc_medicrec.Font = new Font("Tahoma", 10.875F);
             txt_presc_medicrec.ForeColor = Color.FromArgb(0, 81, 161);
-            txt_presc_medicrec.Location = new Point(245, 368);
+            txt_presc_medicrec.Location = new Point(244, 452);
             txt_presc_medicrec.Name = "txt_presc_medicrec";
             txt_presc_medicrec.Size = new Size(335, 43);
             txt_presc_medicrec.TabIndex = 7;
@@ -659,7 +686,7 @@ namespace first.Doctor
             // 
             txt_diag_medicrec.Font = new Font("Tahoma", 10.875F);
             txt_diag_medicrec.ForeColor = Color.FromArgb(0, 81, 161);
-            txt_diag_medicrec.Location = new Point(245, 278);
+            txt_diag_medicrec.Location = new Point(244, 362);
             txt_diag_medicrec.Name = "txt_diag_medicrec";
             txt_diag_medicrec.Size = new Size(335, 43);
             txt_diag_medicrec.TabIndex = 6;
@@ -669,7 +696,7 @@ namespace first.Doctor
             btn_allrec.BackColor = Color.FromArgb(0, 80, 161);
             btn_allrec.Font = new Font("Segoe UI", 10.875F);
             btn_allrec.ForeColor = Color.White;
-            btn_allrec.Location = new Point(82, 866);
+            btn_allrec.Location = new Point(1080, 828);
             btn_allrec.Name = "btn_allrec";
             btn_allrec.Size = new Size(314, 74);
             btn_allrec.TabIndex = 5;
@@ -682,7 +709,7 @@ namespace first.Doctor
             btn_add_medirec.BackColor = Color.FromArgb(0, 81, 161);
             btn_add_medirec.Font = new Font("Segoe UI", 10.875F);
             btn_add_medirec.ForeColor = Color.White;
-            btn_add_medirec.Location = new Point(1086, 866);
+            btn_add_medirec.Location = new Point(161, 837);
             btn_add_medirec.Name = "btn_add_medirec";
             btn_add_medirec.Size = new Size(190, 65);
             btn_add_medirec.TabIndex = 2;
@@ -694,6 +721,7 @@ namespace first.Doctor
             // 
             dataGridViewCellStyle5.ForeColor = Color.FromArgb(0, 53, 134);
             dgv_medical_rec.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dgv_medical_rec.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
             dgv_medical_rec.BackgroundColor = Color.White;
             dgv_medical_rec.BorderStyle = BorderStyle.None;
             dgv_medical_rec.CellBorderStyle = DataGridViewCellBorderStyle.Sunken;
@@ -716,7 +744,7 @@ namespace first.Doctor
             dgv_medical_rec.DefaultCellStyle = dataGridViewCellStyle7;
             dgv_medical_rec.EnableHeadersVisualStyles = false;
             dgv_medical_rec.GridColor = Color.White;
-            dgv_medical_rec.Location = new Point(745, 459);
+            dgv_medical_rec.Location = new Point(756, 327);
             dgv_medical_rec.Name = "dgv_medical_rec";
             dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle8.BackColor = SystemColors.Control;
@@ -746,8 +774,9 @@ namespace first.Doctor
             // 
             // tabPage4
             // 
-            tabPage4.BackgroundImage = (Image)resources.GetObject("tabPage4.BackgroundImage");
+            tabPage4.BackColor = Color.White;
             tabPage4.BackgroundImageLayout = ImageLayout.Stretch;
+            tabPage4.Controls.Add(pictureBox4);
             tabPage4.Controls.Add(pictureBox2);
             tabPage4.Controls.Add(label14);
             tabPage4.Controls.Add(dgv_get_all_medicalrecords);
@@ -758,7 +787,16 @@ namespace first.Doctor
             tabPage4.Size = new Size(1471, 952);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "   All Medical Records   ";
-            tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox4
+            // 
+            pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
+            pictureBox4.Location = new Point(245, 96);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(260, 234);
+            pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox4.TabIndex = 27;
+            pictureBox4.TabStop = false;
             // 
             // pictureBox2
             // 
@@ -776,7 +814,7 @@ namespace first.Doctor
             label14.AutoSize = true;
             label14.Font = new Font("Tahoma", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label14.ForeColor = Color.FromArgb(0, 53, 134);
-            label14.Location = new Point(873, 88);
+            label14.Location = new Point(858, 160);
             label14.Name = "label14";
             label14.Size = new Size(100, 35);
             label14.TabIndex = 5;
@@ -787,6 +825,7 @@ namespace first.Doctor
             dataGridViewCellStyle9.ForeColor = Color.FromArgb(0, 53, 134);
             dgv_get_all_medicalrecords.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
             dgv_get_all_medicalrecords.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgv_get_all_medicalrecords.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
             dgv_get_all_medicalrecords.BackgroundColor = Color.White;
             dgv_get_all_medicalrecords.BorderStyle = BorderStyle.None;
             dgv_get_all_medicalrecords.CellBorderStyle = DataGridViewCellBorderStyle.Sunken;
@@ -809,7 +848,7 @@ namespace first.Doctor
             dgv_get_all_medicalrecords.DefaultCellStyle = dataGridViewCellStyle11;
             dgv_get_all_medicalrecords.EnableHeadersVisualStyles = false;
             dgv_get_all_medicalrecords.GridColor = Color.White;
-            dgv_get_all_medicalrecords.Location = new Point(97, 509);
+            dgv_get_all_medicalrecords.Location = new Point(129, 424);
             dgv_get_all_medicalrecords.Name = "dgv_get_all_medicalrecords";
             dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle12.BackColor = SystemColors.Control;
@@ -821,7 +860,7 @@ namespace first.Doctor
             dgv_get_all_medicalrecords.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             dgv_get_all_medicalrecords.RowHeadersVisible = false;
             dgv_get_all_medicalrecords.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            dgv_get_all_medicalrecords.Size = new Size(1272, 381);
+            dgv_get_all_medicalrecords.Size = new Size(1233, 441);
             dgv_get_all_medicalrecords.TabIndex = 3;
             dgv_get_all_medicalrecords.CellContentDoubleClick += dgv_medical_rec_CellContentDoubleClick;
             // 
@@ -830,7 +869,7 @@ namespace first.Doctor
             com_doctor.Font = new Font("Tahoma", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
             com_doctor.ForeColor = Color.FromArgb(0, 53, 134);
             com_doctor.FormattingEnabled = true;
-            com_doctor.Location = new Point(1000, 81);
+            com_doctor.Location = new Point(985, 153);
             com_doctor.Name = "com_doctor";
             com_doctor.Size = new Size(423, 43);
             com_doctor.TabIndex = 2;
@@ -855,14 +894,17 @@ namespace first.Doctor
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ((System.ComponentModel.ISupportInitialize)pic_bake_appintment).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgv_appoinments).EndInit();
             tabPage3.ResumeLayout(false);
             tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pic_bake_medical_rec).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgv_medical_rec).EndInit();
             tabPage4.ResumeLayout(false);
             tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgv_get_all_medicalrecords).EndInit();
             ResumeLayout(false);
@@ -899,7 +941,6 @@ namespace first.Doctor
         private Label label14;
         private Button btn_all_appintment;
         private Button btn_uppcoming;
-        private ComboBox com_status;
         private Label label13;
         private PictureBox pictureBox1;
         private Label label7;
@@ -925,5 +966,9 @@ namespace first.Doctor
         private PictureBox pic_confirm_pass;
         private PictureBox pict_new_pass;
         private PictureBox pic_old_pass;
+        private PictureBox pictureBox3;
+        private ComboBox com_status;
+        private PictureBox pictureBox4;
+        private PictureBox pictureBox5;
     }
 }
