@@ -25,8 +25,10 @@ using OfficeOpenXml;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
+
 using first.Admin;
 using first.Login;
+
 
 
 namespace first.Reports
@@ -448,6 +450,7 @@ namespace first.Reports
 
 
 
+
         private void btn_back_Click(object sender, EventArgs e)
         {
             AdminForm adminForm = new AdminForm();
@@ -455,8 +458,12 @@ namespace first.Reports
             this.Hide();
         }
 
+      
+
         private void btn_logout_Click(object sender, EventArgs e)
         {
+
+
             if (MessageBox.Show("Are you sure you want to Log out?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 LoginPage loginPage = new LoginPage();
@@ -464,5 +471,10 @@ namespace first.Reports
                 this.Hide();
             }
         }
+
+
+    
+
+     //   }
     }
 }

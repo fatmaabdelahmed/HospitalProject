@@ -1,5 +1,6 @@
 ﻿using first.Login;
 using first.models;
+using first.Reports;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -8,81 +9,23 @@ namespace first.Admin
 {
     public partial class AdminForm : Form
     {
-        private HOSPITALDbContext db;
-        private int id;
+
 
         public AdminForm()
         {
             InitializeComponent();
-            db = new HOSPITALDbContext();
         }
 
         private void AdminForm_Load(object sender, EventArgs e)
         {
-            LoadUsers();
-            cb_role.DataSource = Enum.GetValues(typeof(UserRole));
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
 
         }
-        private void LoadUsers()
-        {
-            dgv_users.DataSource = db.Users.Select(n => new
-            {
-                n.UserId,
-                n.Username,
-                n.PasswordHash,
-                n.Role
-            }).ToList();
 
-            dgv_doctors.DataSource = db.Doctors.Select(n => new
-            {
-                n.DoctorId,
-                n.Name,
-                n.ContactInfo,
-                n.Specialization,
-                n.Schedule,
-                UsersmemberId = n.UsersmemberId 
-            }).ToList();
-        }
 
-        private void dgv_users_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            id = (int)dgv_users.SelectedRows[0].Cells[0].Value;
-            Usersmember user = db.Users.SingleOrDefault(n => n.UserId == id);
-            if (user != null)
-            {
-                txt_username.Text = user.Username;
-                txt_password.Text = user.PasswordHash;
-                cb_role.SelectedItem = user.Role;
-            }
-        }
 
-        private void btn_add_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txt_username.Text) || string.IsNullOrWhiteSpace(txt_password.Text))
-            {
-                MessageBox.Show("Please fill in all fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
-            if (db.Users.Any(n => n.Username == txt_username.Text))
-            {
-                MessageBox.Show("This username already exists. Please choose a different username.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
-            Usersmember user = new Usersmember()
-            {
-                Username = txt_username.Text,
-                PasswordHash = txt_password.Text,
-                Role = (UserRole)cb_role.SelectedItem
-            };
 
-            db.Users.Add(user);
-            db.SaveChanges();
 
 
             if (user.Role == UserRole.Doctor)
@@ -93,36 +36,13 @@ namespace first.Admin
                     Name = user.Username
                 };
 
-                db.Doctors.Add(doctor);
-                db.SaveChanges();
-            }
-
-            ClearFields();
-            LoadUsers();
-            MessageBox.Show("User added successfully.");
-        }
 
 
 
-        private void btn_update_Click(object sender, EventArgs e)
-        {
-            Usersmember user = db.Users.SingleOrDefault(n => n.UserId == id);
-            if (user == null)
-            {
-                MessageBox.Show("Please select a user to update.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
-            // Check if another user has the same username
-            if (db.Users.Any(n => n.Username == txt_username.Text && n.UserId != id))
-            {
-                MessageBox.Show("This username already exists. Please choose a different username.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
-            user.Username = txt_username.Text;
-            user.PasswordHash = txt_password.Text;
-            user.Role = (UserRole)cb_role.SelectedItem;
+
+
 
             db.Users.Update(user);
             db.SaveChanges();
@@ -189,13 +109,17 @@ namespace first.Admin
         }
 
         private void btn_add_doc_Click(object sender, EventArgs e)
-        {
 
-            if (string.IsNullOrWhiteSpace(txt_name.Text) || string.IsNullOrWhiteSpace(txt_contactInfo.Text))
+        private void btn_logout_Click(object sender, EventArgs e)
+
+        {
+            if (MessageBox.Show("Are you sure you want to Log out?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                MessageBox.Show("Please fill in all fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                LoginPage loginPage = new LoginPage();
+                loginPage.Show();
+                this.Hide();
             }
+
 
 
 
@@ -255,40 +179,31 @@ namespace first.Admin
                 return;
             }
 
-            if (MessageBox.Show("Are you sure you want to delete this user?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                db.Doctors.Remove(doctor);
-                db.SaveChanges();
-                ClearFields();
-                LoadUsers();
-                MessageBox.Show("User deleted successfully.");
-            }
+        }
+
+
+
+
+
+
+        private void btn_reports_Click(object sender, EventArgs e)
+        {
+            reports reports = new reports();
+            reports.Show();
+            this.Hide();
+        }
+
+        private void btn_user_Click(object sender, EventArgs e)
+        {
+            UserManagement userManagement = new UserManagement();
+            userManagement.Show();
+            this.Hide();
 
         }
 
-        private void btn_logout_Click(object sender, EventArgs e)
+        private void btn_doctor_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to Log out?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                LoginPage loginPage = new LoginPage();
-                loginPage.Show();
-                this.Hide();
-            }
-        }
 
-        private void btn_logout2_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Are you sure you want to Log out?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                LoginPage loginPage = new LoginPage();
-                loginPage.Show();
-                this.Hide();
-            }
-
-        }
-
-        private void dgv_doctors_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
 
             id = (int)dgv_doctors.SelectedRows[0].Cells[0].Value;
             first.models.Doctor doctor = db.Doctors.SingleOrDefault(n => n.DoctorId == id);
@@ -301,6 +216,11 @@ namespace first.Admin
 
 
             }
+
+
+            DoctorManagement doctorManagement = new DoctorManagement();
+            doctorManagement.Show();
+            this.Hide();
 
         }
     }

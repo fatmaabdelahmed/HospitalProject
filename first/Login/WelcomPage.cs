@@ -17,10 +17,7 @@ namespace first.Login
             InitializeComponent();
         }
 
-        private void closeLoginLabel_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
+        
 
         private void WelcomPage_Load(object sender, EventArgs e)
         {
@@ -28,10 +25,7 @@ namespace first.Login
 
         }
 
-        private void closeWelcomeLabel_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
+        
 
        
 

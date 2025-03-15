@@ -123,7 +123,7 @@ namespace first.Receptionist
         }
 
         private void btn_sear_pat_Click(object sender, EventArgs e)
-        { 
+        {
 
             string info = txt_serchpat.Text.Trim();
             string name = txt_serchpat.Text.Trim();
@@ -142,6 +142,21 @@ namespace first.Receptionist
             }).ToList();
 
             dgv_patient.DataSource = searchresult;
+        }
+
+        private void btn_qr_Click(object sender, EventArgs e)
+        {
+            if (dgv_patient.SelectedRows.Count > 0)
+            {
+                Reports.QRcode form = new Reports.QRcode(patid);
+
+                form.Show();
+            }
+            else 
+            {
+                MessageBox.Show("plaese select patient to scan !", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
         }
     }
 }

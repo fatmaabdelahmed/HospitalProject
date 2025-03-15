@@ -15,9 +15,12 @@ namespace first.Reports
     public partial class QRcode : Form
     {
         private readonly DbConnection con;
-        int PatientID;
-        public QRcode(int id )
+
+        private int _id;
+        public QRcode(int id)
+
         {
+            _id = id;
             InitializeComponent();
             HOSPITALDbContext db = new HOSPITALDbContext();
             con = db.Database.GetDbConnection();
