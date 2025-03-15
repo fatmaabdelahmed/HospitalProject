@@ -5,7 +5,7 @@ The **Hospital Patient Management System** is a **C# .NET WinForms** desktop app
 
 ## Key Features  
 - **Doctor Management** – Manage doctor records, schedules, and specialization.  
-- **Appointment Scheduling** – Book, update, and cancel patient appointments.  
+- **Appointment Scheduling** – Book, update, and cancel patient appointments, and Send Reminder(Email).  
 - **Medical Records** – Store patient diagnoses, treatments, and prescriptions.  
 - **Billing System** – Generate invoices and process payments.  
 - **Role-Based Access** – Admin, Doctor, Receptionist, Patient, and Billing Staff.  
