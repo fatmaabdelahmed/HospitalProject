@@ -29,6 +29,11 @@ namespace first.Receptionist
             con = new SqlConnection("Server=.;Database=hospitalManageDB;Trusted_Connection=True;TrustServerCertificate=True;");
         }
 
+        public ReceptionistDashbordForm(int userId)
+        {
+            this.userId = userId;
+        }
+
         private void patientload()
         {
             var patientcb = con.Query<Patient>("select PatientId ,Name from Patients").ToList();
@@ -129,6 +134,8 @@ namespace first.Receptionist
 
         }
         int appoint_id;
+        private int userId;
+
         private void dgv_appo_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
 
