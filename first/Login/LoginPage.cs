@@ -52,7 +52,6 @@ namespace first.Login
             if (rec != null)
             {
                 string role = rec.Role.ToString();
-                MessageBox.Show($"Login Success!\nRole: {role}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 clear();
 
                 if (role == "Admin")
@@ -63,6 +62,19 @@ namespace first.Login
                 }
                 else if (role == "Doctor")
                 {
+
+                  Doctor.doctorform doctorForm = new Doctor.doctorform(rec.UserId);
+                    doctorForm.Show();
+                    this.Hide();
+
+                }
+                else if (role == "Receptionist")
+                {
+                    MessageBox.Show($"Login Success!\nRole: {role}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // تمرير الـ UserId إلى الفورم الجديد
+                    Receptionist.ReceptionistDashbordForm receptionistForm = new Receptionist.ReceptionistDashbordForm(rec.UserId,rec.Username);
+
                     string query = @"
                                         SELECT d.DoctorId 
                                         FROM Doctors d 
@@ -89,6 +101,7 @@ namespace first.Login
                 else if (role == "Receptionist")
                 {
                     ReceptionistDashbordForm receptionistForm = new ReceptionistDashbordForm(rec.UserId);
+
                     receptionistForm.Show();
                     this.Hide();
                 }

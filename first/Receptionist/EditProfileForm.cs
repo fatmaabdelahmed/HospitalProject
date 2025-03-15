@@ -13,7 +13,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.VisualBasic.ApplicationServices;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using BCrypt.Net;
+
 
 namespace first.Receptionist
 {
@@ -50,7 +50,7 @@ namespace first.Receptionist
                 new { UserId = user_id });
 
             // التحقق من صحة كلمة المرور باستخدام BCrypt
-            if (!BCrypt.Net.BCrypt.Verify(txt_old.Text, storedHashedPassword))
+            if (txt_old.Text != storedHashedPassword)
             {
                 MessageBox.Show("The current password is incorrect.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -74,7 +74,7 @@ namespace first.Receptionist
             }
 
             // **تشفير كلمة المرور  قبل تخزينها**
-            string hashedNewPassword = BCrypt.Net.BCrypt.HashPassword(txt_new.Text);
+            string hashedNewPassword = txt_new.Text;
 
             var updateQuery = "UPDATE Users SET Username = @Username, PasswordHash = @Password WHERE UserId = @UserId";
             con.Execute(updateQuery, new { Username = txt_username.Text, Password = hashedNewPassword, UserId = user_id });
@@ -82,20 +82,7 @@ namespace first.Receptionist
             MessageBox.Show("Profile updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void testt()
-        {
-
-            string username = "noha";
-            string password = "1234";  // كلمة المرور الأصلية
-            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);  // تشفير كلمة المرور
-            int role = 2;
-
-            string query = "INSERT INTO Users (Username, PasswordHash, Role) VALUES (@Username, @PasswordHash, @Role);";
-
-            con.Execute(query, new { Username = username, PasswordHash = hashedPassword, Role = role });
-
-            Console.WriteLine("✅ تم إدراج المستخدم بنجاح!");
-        }
+       
 
         
 
